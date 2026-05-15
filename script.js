@@ -128,3 +128,82 @@ style.textContent = `
   .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 `;
 document.head.appendChild(style);
+
+// ── Interactive project modal ──
+const projectModal = document.getElementById('project-modal');
+const modalTitle = document.getElementById('modal-title');
+const modalTools = document.getElementById('modal-tools');
+const modalBody = document.getElementById('modal-body');
+
+const projects = {
+  evlv1: {
+    title: 'EV4 — Quadricycle Électrique (EVLV1)',
+    tools: 'CATIA V5',
+    body: `<p>Conception complète en deux phases : cahier des charges et conception détaillée du bras avant.
+      Missions : dimensionnement, choix matériaux (aluminium 2017), système de pivotement à rotules, freins 4 roues.
+      Livraison : prototype fonctionnel, tests dynamiques validés.</p>`
+  },
+  tef: {
+    title: 'Tour en Fosse — Jumeau numérique (TEF)',
+    tools: 'Fusion 360 / SolidWorks',
+    body: `<p>Modélisation CAO intégrale du Tour en Fosse pour créer un jumeau numérique industriel. Relevés terrain, intégration BIM et préparation de rénovation.</p>`
+  },
+  tmax: {
+    title: 'Unité de coupe T-MAX P',
+    tools: 'SolidWorks',
+    body: `<p>Rétro-conception complète de l'unité de coupe et de la plaquette. Simulation des paramètres d'usinage et optimisation de la rupture des copeaux en spirale.</p>`
+  },
+  bogie: {
+    title: 'Bogie TGV M — Assemblage 3D',
+    tools: 'SolidWorks',
+    body: `<p>Assemblage 3D du bogie à partir de plans partiels, respect des gabarits, modélisation des ressorts et du plan de chasse.</p>`
+  },
+  bim: {
+    title: 'BIM & Supervision industrielle',
+    tools: 'Fusion 360 / C++ / Blueprints',
+    body: `<p>Modélisation haut-fidélité et intégration des machines dans la maquette numérique. Animation et liaison avec données de maintenance en temps réel.</p>`
+  },
+  proto: {
+    title: 'Prototypage rapide & impression 3D',
+    tools: 'Fusion 360 / Z-Suite / Cura / Creality Print',
+    body: `<p>Conception et impression de pièces (TPU, PLA) pour maintenance et prototypage sur site. Workflow : demande FabTrack → conception → impression → validation terrain.</p>`
+  }
+};
+
+function openProjectModal(id) {
+  const p = projects[id];
+  if (!p) return;
+  modalTitle.textContent = p.title;
+  modalTools.textContent = `Outils : ${p.tools}`;
+  modalBody.innerHTML = p.body;
+  projectModal.classList.remove('hidden');
+  projectModal.setAttribute('aria-hidden', 'false');
+}
+
+function closeProjectModal() {
+  projectModal.classList.add('hidden');
+  projectModal.setAttribute('aria-hidden', 'true');
+}
+
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('click', (e) => {
+    const id = card.dataset.project;
+    if (id) {
+      e.preventDefault();
+      openProjectModal(id);
+    }
+  });
+});
+
+// Prevent default anchor on EVLV1 detail link and open modal
+document.querySelectorAll('.btn-expand').forEach(btn => btn.addEventListener('click', (e) => {
+  e.preventDefault();
+  const parent = e.target.closest('.project-card');
+  const id = parent ? parent.dataset.project || 'evlv1' : 'evlv1';
+  openProjectModal(id);
+}));
+
+// modal close handlers
+document.querySelectorAll('.modal-close').forEach(b => b.addEventListener('click', closeProjectModal));
+document.querySelectorAll('.project-modal-backdrop').forEach(b => b.addEventListener('click', closeProjectModal));
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeProjectModal(); });

@@ -1010,6 +1010,55 @@ section:nth-child(even) { background: var(--bg-2); }
 .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
 .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-dim); }
 
+/* Software logo grid (replaces level bars) */
+.software-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.logo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: var(--text);
+}
+.logo-item i { color: var(--accent); }
+.logo-initial {
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, rgba(79,110,247,0.12), rgba(124,58,237,0.06));
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 8px; color: var(--accent); font-weight: 900;
+}
+.fablab-note { color: var(--text-muted); font-size: 0.92rem; margin-top: 8px; }
+
+/* Project modal */
+.project-modal.hidden { display: none; }
+.project-modal { position: fixed; inset: 0; z-index: 1200; display: grid; place-items: center; }
+.project-modal-backdrop { position: absolute; inset: 0; background: rgba(5,6,10,0.75); backdrop-filter: blur(6px); }
+.project-modal-panel { position: relative; width: min(1100px, 96%); background: linear-gradient(180deg, rgba(10,10,18,0.96), rgba(18,18,28,0.98)); border-radius: 12px; border: 1px solid var(--border); padding: 28px; box-shadow: var(--shadow-lg); z-index: 1210; }
+.modal-close { position: absolute; top: 14px; right: 14px; background: var(--surface); border: 1px solid var(--border); padding: 8px; border-radius: 8px; color: var(--text-muted); cursor: pointer; }
+.modal-inner h2 { margin-bottom: 8px; }
+.modal-tools { font-weight: 700; color: var(--text-muted); margin-bottom: 12px; }
+.modal-body { color: var(--text-muted); line-height: 1.6; }
+
+/* CAD-style name animation */
+.hero-name { position: relative; display: inline-block; }
+.hero-name::after {
+  content: '';
+  position: absolute; left: 0; top: 50%; height: 2px; width: 0%; background: var(--accent);
+  transform: translateY(-50%);
+  animation: drawName 2s ease forwards 0.6s;
+}
+@keyframes drawName { to { width: 100%; } }
+.hero-name .accent { display: inline-block; transform-origin: left center; animation: extrude 1.6s ease 1s both; }
+@keyframes extrude { 0% { transform: translateY(6px) scaleY(0.9); opacity: 0.2; } 100% { transform: translateY(0) scaleY(1); opacity: 1; } }
+
 .form-success {
   text-align: center;
   color: var(--green);
