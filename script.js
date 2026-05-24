@@ -287,6 +287,9 @@ function openProjectModal(id) {
   modalBody.innerHTML = p.body;
   projectModal.classList.remove('hidden');
   projectModal.setAttribute('aria-hidden', 'false');
+  document.querySelectorAll('#modal-album-grid .modal-album-note').forEach(note => {
+    note.textContent = `Images à placer dans assets/projects/${id}/`;
+  });
 }
 
 function closeProjectModal() {
@@ -304,12 +307,23 @@ document.querySelectorAll('.project-card').forEach(card => {
   });
 });
 
-// Prevent default anchor on EVLV1 detail link and open modal
+document.querySelectorAll('.exp-card').forEach(card => {
+  card.addEventListener('click', (e) => {
+    const expId = card.dataset.experience;
+    if (expId) {
+      e.preventDefault();
+      openExpModal(expId);
+    }
+  });
+});
+
+// Prevent default anchor on project detail links and open the correct modal
 document.querySelectorAll('.btn-expand').forEach(btn => btn.addEventListener('click', (e) => {
   e.preventDefault();
-  const parent = e.target.closest('.project-card');
-  const id = parent ? parent.dataset.project || 'evlv1' : 'evlv1';
-  openProjectModal(id);
+  const projectParent = e.target.closest('.project-card');
+  if (projectParent) {
+    openProjectModal(projectParent.dataset.project || 'evlv1');
+  }
 }));
 
 // modal close handlers
