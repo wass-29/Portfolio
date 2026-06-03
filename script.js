@@ -334,17 +334,7 @@ const projectImages = {
     'assets/projects/bim/bim CAO 3.png',
     'assets/projects/bim/bim CAO 4.png'
   ],
-  proto: [
-    'assets/projects/proto/cone CAO vue en ISO.png',
-    'assets/projects/proto/cone CAO vu en iso légère.png',
-    'assets/projects/proto/cone CAO vu de profil.png',
-    'assets/projects/proto/cone cao vue de dessous.png',
-    'assets/projects/proto/cone tp rangée à sa base.jpg',
-    'assets/projects/proto/contexte pistolet sable dans orifice tgv sans cone tpu (création nuage de poussière de silice).png',
-    'assets/projects/proto/pistolet sable .jpg',
-    "assets/projects/proto/pistolet sable assemblé avec le cone tpu dans l'orifice tu tgv résultat.jpg",
-    'assets/projects/proto/résultat après impression 3D du cone.jpg'
-  ]
+  proto: []
 };
 
 const detailGalleryImages = {
