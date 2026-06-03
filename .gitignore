@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+
+# Build outputs
+dist/
+build/
+
+# LFS (temporary until Git LFS is configured)
+# Uncomment after installing Git LFS:
+# *.obj
+# *.mtl
