@@ -395,22 +395,52 @@ const detailGalleryImages = {
 function renderProjectAlbum(id) {
   const modalGrid = document.getElementById('modal-album-grid');
   const images = projectImages[id] || [];
-  if (images.length === 0) {
+  
+  // Check if project has 3D model
+  if (id === 'proto' || id === 'bim') {
+    const viewerId = `viewer-3d-${id}`;
+    modalGrid.innerHTML = `
+      <div class="modal-album-slot full-width">
+        <div class="album-content">
+          <div id="${viewerId}" class="obj-viewer"></div>
+        </div>
+      </div>
+    `;
+    
+    // Add images after 3D viewer if they exist
+    if (images.length > 0) {
+      images.forEach((src) => {
+        const slot = document.createElement('div');
+        slot.className = 'modal-album-slot';
+        slot.innerHTML = `
+          <div class="album-content">
+            <img src="${src}" alt="Projet ${id}" />
+          </div>
+        `;
+        modalGrid.appendChild(slot);
+      });
+    }
+    
+    // Initialize 3D viewer after DOM is ready
+    setTimeout(() => {
+      init3DViewer(viewerId, id);
+    }, 100);
+  } else if (images.length === 0) {
     modalGrid.innerHTML = `
       <div class="modal-album-slot">
         <div class="album-content">
           <div class="modal-album-note">Aucune image disponible dans assets/projects/${id}/</div>
         </div>
       </div>`;
-    return;
-  }
-  modalGrid.innerHTML = images.map((src) => `
-    <div class="modal-album-slot">
-      <div class="album-content">
-        <img src="${src}" alt="Projet ${id}" />
+  } else {
+    modalGrid.innerHTML = images.map((src) => `
+      <div class="modal-album-slot">
+        <div class="album-content">
+          <img src="${src}" alt="Projet ${id}" />
+        </div>
       </div>
-    </div>
-  `).join('');
+    `).join('');
+  }
 }
 
 function renderDetailGallery(modal) {
@@ -466,6 +496,17 @@ function openEduModal(eduId) {
 }
 
 function closeProjectModal() {
+  // Cleanup 3D viewers
+  Object.keys(objViewers).forEach(key => {
+    const viewer = objViewers[key];
+    if (viewer && viewer.renderer) {
+      viewer.renderer.dispose();
+      const container = document.getElementById(key);
+      if (container) container.innerHTML = '';
+    }
+  });
+  objViewers = {};
+  
   projectModal.classList.add('hidden');
   projectModal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = 'auto';
@@ -613,3 +654,97 @@ document.addEventListener('keydown', (e) => {
     openLightbox(currentModalImages[prevIndex].src, currentModalImages[prevIndex].alt);
   }
 });
+
+/* ═══════════════════════════════════ 3D VIEWER (OBJ) ═══════════════════════════════════ */
+
+const objModels = {
+  proto: {
+    obj: 'assets/projects/proto/Cône Pistolet DV.obj',
+    mtl: null
+  },
+  bim: {
+    obj: 'assets/projects/bim/Assemblage GC V2.obj',
+    mtl: 'assets/projects/bim/Assemblage GC V2.mtl'
+  }
+};
+
+let objViewers = {};
+
+function init3DViewer(containerId, modelKey) {
+  const container = document.getElementById(containerId);
+  if (!container || objViewers[containerId]) return;
+
+  const width = container.clientWidth;
+  const height = container.clientHeight;
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x15152a);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+
+  const light = new THREE.DirectionalLight(0xffffff, 0.8);
+  light.position.set(5, 5, 5);
+  scene.add(light);
+
+  const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+  camera.position.z = 5;
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(width, height);
+  renderer.setPixelRatio(window.devicePixelRatio);
+  container.appendChild(renderer.domElement);
+
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.05;
+  controls.autoRotate = true;
+  controls.autoRotateSpeed = 3;
+
+  const model = objModels[modelKey];
+  if (!model) return;
+
+  const onLoad = (obj) => {
+    obj.scale.set(1, 1, 1);
+    obj.position.set(0, 0, 0);
+    
+    const box = new THREE.Box3().setFromObject(obj);
+    const size = box.getSize(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z);
+    const scale = 5 / maxDim;
+    obj.scale.multiplyScalar(scale);
+    
+    const center = box.getCenter(new THREE.Vector3());
+    obj.position.sub(center.multiplyScalar(scale));
+    
+    scene.add(obj);
+  };
+
+  if (model.mtl) {
+    const mtlLoader = new THREE.MTLLoader();
+    mtlLoader.load(model.mtl, (mtl) => {
+      mtl.preload();
+      const objLoader = new THREE.OBJLoader();
+      objLoader.setMaterials(mtl);
+      objLoader.load(model.obj, onLoad);
+    });
+  } else {
+    const objLoader = new THREE.OBJLoader();
+    objLoader.load(model.obj, onLoad);
+  }
+
+  function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  objViewers[containerId] = { scene, camera, renderer, controls };
+  
+  window.addEventListener('resize', () => {
+    const w = container.clientWidth;
+    const h = container.clientHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+  });
+}

@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@r128/examples/js/loaders/OBJLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@r128/examples/js/loaders/MTLLoader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@r128/examples/js/controls/OrbitControls.js"></script>
 </head>
 <body>
 
@@ -14,16 +18,7 @@
   <nav id="navbar">
     <div class="nav-container">
       <a href="#hero" class="nav-logo" aria-label="Wassim Soussou">
-        <svg width="110" height="28" viewBox="0 0 220 56" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="false">
-          <defs>
-            <linearGradient id="logoGrad" x1="0" x2="1">
-              <stop offset="0" stop-color="#4f6ef7"/>
-              <stop offset="1" stop-color="#7c3aed"/>
-            </linearGradient>
-          </defs>
-          <text x="6" y="40" font-family="Inter, system-ui, sans-serif" font-weight="900" font-size="36" fill="url(#logoGrad)">W</text>
-          <text x="74" y="40" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="28" fill="var(--text)">S</text>
-        </svg>
+        <span>W</span><span>.S</span>
       </a>
       <ul class="nav-links">
         <li><a href="#about">À propos</a></li>
@@ -144,25 +139,14 @@
       </div>
       <div class="skills-grid">
           <div class="software-grid">
-            <!-- 1ère ligne -->
-            <div class="logo-item"><img src="assets/CatiaV5_Icon.png" alt="CATIA V5" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/solidworks-logo-scaled.webp" alt="SolidWorks" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/autodesk-fusion-360-icon.webp" alt="Fusion 360" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/blender-logowebp.webp" alt="Blender" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/hd-python-logo.png" alt="Python" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/power-bi.jpg" alt="Power BI" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/Logo Forger.png" alt="Forger" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/Pix_logo.svg.png" alt="PIX" class="logo-img"></div>
-
-            <!-- 2e ligne -->
-            <div class="logo-item"><img src="assets/logo%20creality%20print.webp" alt="Creality Print" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/Artillery%20logo.webp" alt="Artillery" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/Zortrax%20new_logo.png" alt="Zortrax" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/z-suite-2_basic_feat.png" alt="ZSuite" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/SharePoint-Symbol-scaled.webp" alt="SharePoint" class="logo-img"></div>
-            <div class="logo-item"><div class="logo-initial">PA</div></div>
-            <div class="logo-item"><img src="assets/PackOffice.png" alt="Pack Office" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/logo-INRS-RS.jpg" alt="INRS" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/solidworks-logo-scaled.webp" alt="SolidWorks" class="logo-img"><span>SolidWorks</span></div>
+            <div class="logo-item"><img src="assets/autodesk-fusion-360-icon.webp" alt="Fusion 360" class="logo-img"><span>Fusion 360</span></div>
+            <div class="logo-item"><img src="assets/CatiaV5_Icon.png" alt="CATIA V5" class="logo-img"><span>CATIA V5</span></div>
+            <div class="logo-item"><img src="assets/blender-logowebp.webp" alt="Blender" class="logo-img"><span>Blender</span></div>
+            <div class="logo-item"><img src="assets/hd-python-logo.png" alt="Python" class="logo-img"><span>Python (notions)</span></div>
+            <div class="logo-item"><img src="assets/PackOffice.png" alt="Pack Office" class="logo-img"><span>Pack Office</span></div>
+            <div class="logo-item"><img src="assets/power-bi.jpg" alt="Power BI" class="logo-img"><span>Power BI</span></div>
+            <div class="logo-item"><img src="assets/Pix_logo.svg.png" alt="PIX" class="logo-img"><span>Certification PIX (2025)</span></div>
           </div>
         </div>
       <div class="soft-skills">
@@ -318,42 +302,6 @@
           <a href="#evlv1-detail" class="btn-expand">Voir le détail du projet</a>
         </div>
 
-        <div class="project-card" data-project="tef">
-          <div class="project-icon"><i class="fas fa-industry"></i></div>
-          <h3>Tour en Fosse TEF — Jumeau numérique</h3>
-          <p>
-            Jumeau numérique complet du Tour en Fosse au TEE : relevés terrain, rétro-conception 
-            à partir de plans historiques et intégration des réseaux (électrique, hydraulique, air comprimé).
-          </p>
-          <div class="project-tags">
-            <span>TEF</span><span>BIM</span><span>Jumeau numérique</span>
-          </div>
-        </div>
-
-        <div class="project-card" data-project="tmax">
-          <div class="project-icon"><i class="fas fa-cogs"></i></div>
-          <h3>Unité de coupe T-MAX P — Usinage optimisé</h3>
-          <p>
-            Conception de l'unité de coupe et de la plaquette tournante pour améliorer
-            l'évacuation des copeaux en spiralé. Analyse technologique, simulation et CAO.
-          </p>
-          <div class="project-tags">
-            <span>SolidWorks</span><span>Usinage</span><span>Copeaux</span>
-          </div>
-        </div>
-
-        <div class="project-card" data-project="bogie">
-          <div class="project-icon"><i class="fas fa-train"></i></div>
-          <h3>Bogie TGV M — Assemblage 3D</h3>
-          <p>
-            Reproduction et intégration d'un bogie TGV M à partir de plans partiels.
-            Respect des gabarits, ressorts de suspension et plan de chasse.
-          </p>
-          <div class="project-tags">
-            <span>CATIA/CAO</span><span>TGV M</span><span>Bogies</span>
-          </div>
-        </div>
-
         <div class="project-card" data-project="bim">
           <div class="project-icon"><i class="fas fa-project-diagram"></i></div>
           <h3>BIM & Supervision industrielle</h3>
@@ -376,6 +324,42 @@
           </p>
           <div class="project-tags">
             <span>CAO</span><span>Impression 3D</span><span>Maintenance</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-project="tmax">
+          <div class="project-icon"><i class="fas fa-cogs"></i></div>
+          <h3>Unité de coupe T-MAX P — Usinage optimisé</h3>
+          <p>
+            Conception de l'unité de coupe et de la plaquette tournante pour améliorer
+            l'évacuation des copeaux en spiralé. Analyse technologique, simulation et CAO.
+          </p>
+          <div class="project-tags">
+            <span>SolidWorks</span><span>Usinage</span><span>Copeaux</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-project="tef">
+          <div class="project-icon"><i class="fas fa-industry"></i></div>
+          <h3>Tour en Fosse TEF — Jumeau numérique</h3>
+          <p>
+            Jumeau numérique complet du Tour en Fosse au TEE : relevés terrain, rétro-conception 
+            à partir de plans historiques et intégration des réseaux (électrique, hydraulique, air comprimé).
+          </p>
+          <div class="project-tags">
+            <span>TEF</span><span>BIM</span><span>Jumeau numérique</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-project="bogie">
+          <div class="project-icon"><i class="fas fa-train"></i></div>
+          <h3>Bogie TGV M — Assemblage 3D</h3>
+          <p>
+            Reproduction et intégration d'un bogie TGV M à partir de plans partiels.
+            Respect des gabarits, ressorts de suspension et plan de chasse.
+          </p>
+          <div class="project-tags">
+            <span>CATIA/CAO</span><span>TGV M</span><span>Bogies</span>
           </div>
         </div>
 
