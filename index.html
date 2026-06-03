@@ -13,7 +13,18 @@
   <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
   <nav id="navbar">
     <div class="nav-container">
-      <a href="#hero" class="nav-logo">W<span>.</span>S</a>
+      <a href="#hero" class="nav-logo" aria-label="Wassim Soussou">
+        <svg width="110" height="28" viewBox="0 0 220 56" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="false">
+          <defs>
+            <linearGradient id="logoGrad" x1="0" x2="1">
+              <stop offset="0" stop-color="#4f6ef7"/>
+              <stop offset="1" stop-color="#7c3aed"/>
+            </linearGradient>
+          </defs>
+          <text x="6" y="40" font-family="Inter, system-ui, sans-serif" font-weight="900" font-size="36" fill="url(#logoGrad)">W</text>
+          <text x="74" y="40" font-family="Inter, system-ui, sans-serif" font-weight="700" font-size="28" fill="var(--text)">S</text>
+        </svg>
+      </a>
       <ul class="nav-links">
         <li><a href="#about">À propos</a></li>
         <li><a href="#skills">Compétences</a></li>
@@ -35,7 +46,7 @@
       <div class="hero-glow"></div>
     </div>
     <div class="hero-content">
-      <p class="hero-tag"><span class="dot"></span> Disponible — Alternance</p>
+      <!-- removed 'Disponible — Alternance' per user request -->
       <h1 class="hero-name">
         <svg class="name-svg" viewBox="0 0 900 120" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
           <text x="10" y="86" class="svg-text">Wassim Soussou</text>
@@ -94,8 +105,8 @@
           <div class="about-card">
             <div class="card-icon"><i class="fas fa-location-dot"></i></div>
             <div>
-              <strong>Localisation</strong>
-              <p>Pantin / SNCF TEE — Île-de-France</p>
+                <strong>Localisation</strong>
+                <p>Pantin, Île-de-France</p>
             </div>
           </div>
           <div class="about-card">
@@ -133,18 +144,27 @@
       </div>
       <div class="skills-grid">
           <div class="software-grid">
-            <div class="logo-item"><img src="assets/solidworks-logo-scaled.webp" alt="SolidWorks" class="logo-img"><span>SolidWorks</span></div>
-            <div class="logo-item"><img src="assets/autodesk-fusion-360-icon.webp" alt="Fusion 360" class="logo-img"><span>Fusion 360</span></div>
-            <div class="logo-item"><img src="assets/CatiaV5_Icon.png" alt="CATIA V5" class="logo-img"><span>CATIA V5</span></div>
-            <div class="logo-item"><img src="assets/blender-logo-png-2442x770-11735759275dgvgxeqgqu.webp" alt="Blender" class="logo-img"><span>Blender</span></div>
-            <div class="logo-item"><img src="assets/hd-python-logo-symbol-transparent-png-735811696257415dbkifcuokn.png" alt="Python" class="logo-img"><span>Python (notions)</span></div>
-            <div class="logo-item"><img src="assets/PackOffice.png" alt="Pack Office" class="logo-img"><span>Pack Office</span></div>
-            <div class="logo-item"><img src="assets/power-bi.jpg" alt="Power BI" class="logo-img"><span>Power BI</span></div>
-            <div class="logo-item"><img src="assets/Pix_logo.svg.png" alt="PIX" class="logo-img"><span>Certification PIX (2025)</span></div>
-          </div>
-        <div class="fablab-note">Admin FabTrack — gestion des demandes FabLab et autonomie sur le process de prototypage</div>
-      </div>
+            <!-- 1ère ligne -->
+            <div class="logo-item"><img src="assets/CatiaV5_Icon.png" alt="CATIA V5" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/solidworks-logo-scaled.webp" alt="SolidWorks" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/autodesk-fusion-360-icon.webp" alt="Fusion 360" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/blender-logowebp.webp" alt="Blender" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/hd-python-logo.png" alt="Python" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/power-bi.jpg" alt="Power BI" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/Logo Forger.png" alt="Forger" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/Pix_logo.svg.png" alt="PIX" class="logo-img"></div>
 
+            <!-- 2e ligne -->
+            <div class="logo-item"><img src="assets/logo%20creality%20print.webp" alt="Creality Print" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/Artillery%20logo.webp" alt="Artillery" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/Zortrax%20new_logo.png" alt="Zortrax" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/z-suite-2_basic_feat.png" alt="ZSuite" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/SharePoint-Symbol-scaled.webp" alt="SharePoint" class="logo-img"></div>
+            <div class="logo-item"><div class="logo-initial">PA</div></div>
+            <div class="logo-item"><img src="assets/PackOffice.png" alt="Pack Office" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/logo-INRS-RS.jpg" alt="INRS" class="logo-img"></div>
+          </div>
+        </div>
       <div class="soft-skills">
         <h3>Savoir-être</h3>
         <div class="soft-grid">
@@ -164,50 +184,13 @@
     <div class="container">
       <div class="section-header">
         <span class="section-tag">03 — Expériences</span>
-        <h2>Parcours professionnel</h2>
-      </div>
-      <div class="category-album-grid">
-        <div class="category-album-card exp-card" data-experience="sncf-current" style="cursor: pointer;">
-          <div class="album-preview">Album SNCF TEE</div>
-          <div class="album-content">
-            <div class="album-title">Apprenti Ingénieur — Designer BIM</div>
-            <div class="album-meta">Dossier : assets/experience/sncf-current</div>
-          </div>
-        </div>
-        <div class="category-album-card exp-card" data-experience="sncf-stage" style="cursor: pointer;">
-          <div class="album-preview">Album Usinage</div>
-          <div class="album-content">
-            <div class="album-title">Stage de Conception</div>
-            <div class="album-meta">Dossier : assets/experience/sncf-stage</div>
-          </div>
-        </div>
-        <div class="category-album-card exp-card" data-experience="bafa" style="cursor: pointer;">
-          <div class="album-preview">Album BAFA</div>
-          <div class="album-content">
-            <div class="album-title">Animateur Diplômé</div>
-            <div class="album-meta">Dossier : assets/experience/bafa</div>
-          </div>
-        </div>
-        <div class="category-album-card exp-card" data-experience="serveur" style="cursor: pointer;">
-          <div class="album-preview">Album Service</div>
-          <div class="album-content">
-            <div class="album-title">Serveur</div>
-            <div class="album-meta">Dossier : assets/experience/serveur</div>
-          </div>
-        </div>
-        <div class="category-album-card exp-card" data-experience="aeronautique" style="cursor: pointer;">
-          <div class="album-preview">Album Aéronautique</div>
-          <div class="album-content">
-            <div class="album-title">Stage 3e</div>
-            <div class="album-meta">Dossier : assets/experience/aeronautique</div>
-          </div>
-        </div>
+        <h2 style="color: var(--accent);">Parcours professionnel</h2>
       </div>
       <div class="timeline">
 
         <div class="timeline-item exp-card" data-experience="sncf-current" style="cursor: pointer;">
           <div class="timeline-dot"></div>
-          <div class="timeline-date">Oct. 2024 — Aujourd'hui</div>
+          <div class="timeline-date">Octobre 2025 — Aujourd'hui</div>
           <div class="timeline-content">
             <div class="timeline-header">
               <h3>Apprenti Ingénieur — Designer BIM & Superviseur de Machines</h3>
@@ -339,8 +322,8 @@
           <div class="project-icon"><i class="fas fa-industry"></i></div>
           <h3>Tour en Fosse TEF — Jumeau numérique</h3>
           <p>
-            Modélisation CAO complète du Tour en Fosse pour un jumeau numérique industriel.
-            Relevés terrain, intégration BIM, gestion des réseaux et préparation de rénovation.
+            Jumeau numérique complet du Tour en Fosse au TEE : relevés terrain, rétro-conception 
+            à partir de plans historiques et intégration des réseaux (électrique, hydraulique, air comprimé).
           </p>
           <div class="project-tags">
             <span>TEF</span><span>BIM</span><span>Jumeau numérique</span>
@@ -355,7 +338,7 @@
             l'évacuation des copeaux en spiralé. Analyse technologique, simulation et CAO.
           </p>
           <div class="project-tags">
-            <span>Usinage</span><span>Copeaux</span><span>SolidWorks</span>
+            <span>SolidWorks</span><span>Usinage</span><span>Copeaux</span>
           </div>
         </div>
 
@@ -367,7 +350,7 @@
             Respect des gabarits, ressorts de suspension et plan de chasse.
           </p>
           <div class="project-tags">
-            <span>TGV M</span><span>Bogies</span><span>CATIA/CAO</span>
+            <span>CATIA/CAO</span><span>TGV M</span><span>Bogies</span>
           </div>
         </div>
 
@@ -387,11 +370,12 @@
           <div class="project-icon"><i class="fas fa-robot"></i></div>
           <h3>Prototypage rapide & impression 3D</h3>
           <p>
-            Pièces de maintenance, boîtiers sur mesure et pièces de support en TPU
-            pour besoins urgents du site. Conception, impression et validation terrain.
+            Pièces de maintenance, boîtiers sur mesure et pièces de support imprimées en TPU
+            pour besoins urgents du site. Conception, impression et validation terrain,
+            avec une solution SST intégrée pour limiter l'exposition à la poussière.
           </p>
           <div class="project-tags">
-            <span>Impression 3D</span><span>TPU</span><span>Maintenance</span>
+            <span>CAO</span><span>Impression 3D</span><span>Maintenance</span>
           </div>
         </div>
 
@@ -465,7 +449,6 @@
         <span class="section-tag">Projet Majeur — 3 ans</span>
         <h2>Tour en Fosse (TEF) — Numérisation & Innovation</h2>
       </div>
-      <div class="category-card-note">Clique sur une rubrique TEF pour voir le rapport détaillé et ajouter tes photos dans <code>assets/projects/tef/</code>.</div>
       <div class="tef-grid">
         <div class="tef-card project-card" data-project="tef" style="cursor: pointer;">
           <div class="tef-icon"><i class="fas fa-industry"></i></div>
@@ -575,27 +558,7 @@
         <h3><i class="fas fa-toolbox"></i> Compétences Techniques</h3>
         <p><strong>CATIA V5</strong> · <strong>BIM (Building Information Modeling)</strong> · <strong>FabTrack</strong> · <strong>Impression 3D</strong> · <strong>Usinage</strong></p>
         <div class="modal-album">
-          <h3>Album photos</h3>
-          <div class="modal-album-grid">
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 1</div>
-                <div class="modal-album-note">Ajouter une image terrain, maquette ou capture CAO.</div>
-              </div>
-            </div>
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 2</div>
-                <div class="modal-album-note">Ajouter une image pour illustrer ce sous-projet.</div>
-              </div>
-            </div>
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 3</div>
-                <div class="modal-album-note">Images à placer dans assets/experience/sncf-current/</div>
-              </div>
-            </div>
-          </div>
+          <div class="modal-album-grid"></div>
         </div>
       </div>
     </div>
@@ -629,27 +592,7 @@
         <h3><i class="fas fa-toolbox"></i> Compétences Développées</h3>
         <p><strong>SolidWorks</strong> · <strong>Usinage</strong> · <strong>RDM (Résistance des Matériaux)</strong> · <strong>Méthodologie projet</strong></p>
         <div class="modal-album">
-          <h3>Album photos</h3>
-          <div class="modal-album-grid">
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 1</div>
-                <div class="modal-album-note">Ajouter une image de l’étude d’usinage.</div>
-              </div>
-            </div>
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 2</div>
-                <div class="modal-album-note">Ajouter une capture CAO ou un plan d’outil.</div>
-              </div>
-            </div>
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 3</div>
-                <div class="modal-album-note">Images à placer dans assets/experience/sncf-stage/</div>
-              </div>
-            </div>
-          </div>
+          <div class="modal-album-grid"></div>
         </div>
       </div>
     </div>
@@ -689,27 +632,7 @@
         <h3><i class="fas fa-heart"></i> Apprentissage Personnel</h3>
         <p>Le BAFA m'a appris à diriger avec bienveillance, à écouter vraiment, et à créer un environnement sécurisant et inspirant. Ces compétences restent applicables en tous contextes : management, collaboration en équipe, leadership.</p>
         <div class="modal-album">
-          <h3>Album photos</h3>
-          <div class="modal-album-grid">
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 1</div>
-                <div class="modal-album-note">Ajouter une image d’atelier ou d’activité BAFA.</div>
-              </div>
-            </div>
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 2</div>
-                <div class="modal-album-note">Ajouter une image de groupe ou de formation.</div>
-              </div>
-            </div>
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 3</div>
-                <div class="modal-album-note">Images à placer dans assets/experience/bafa/</div>
-              </div>
-            </div>
-          </div>
+          <div class="modal-album-grid"></div>
         </div>
       </div>
     </div>
@@ -741,27 +664,7 @@
         <h3><i class="fas fa-trophy"></i> Impact Personnel</h3>
         <p>Cet emploi m'a enseigné la valeur du service, l'importance de l'écoute active et la résilience face aux imprévus. Les soft skills acquises sont transférables à tout environnement professionnel, notamment en ingénierie où le travail en équipe est critique.</p>
         <div class="modal-album">
-          <h3>Album photos</h3>
-          <div class="modal-album-grid">
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 1</div>
-                <div class="modal-album-note">Ajouter une image de service client.</div>
-              </div>
-            </div>
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 2</div>
-                <div class="modal-album-note">Ajouter une photo d’équipe ou d’organisation.</div>
-              </div>
-            </div>
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 3</div>
-                <div class="modal-album-note">Images à placer dans assets/experience/serveur/</div>
-              </div>
-            </div>
-          </div>
+          <div class="modal-album-grid"></div>
         </div>
       </div>
     </div>
@@ -794,27 +697,7 @@
         <h3><i class="fas fa-flag-checkered"></i> Impact à Long Terme</h3>
         <p>Ce stage de 3e est probablement l'expérience qui a le plus influencé mon parcours. Chaque décision ultérieure (choix de lycée, spécialité, BTS, école) a été prise en pensant à ce rêve : travailler dans l'aéronautique ou un secteur similaire d'exigence et d'innovation.</p>
         <div class="modal-album">
-          <h3>Album photos</h3>
-          <div class="modal-album-grid">
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 1</div>
-                <div class="modal-album-note">Ajouter une image liée à l’aéronautique.</div>
-              </div>
-            </div>
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 2</div>
-                <div class="modal-album-note">Ajouter une image de site ou de stage.</div>
-              </div>
-            </div>
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 3</div>
-                <div class="modal-album-note">Images à placer dans assets/experience/aeronautique/</div>
-              </div>
-            </div>
-          </div>
+          <div class="modal-album-grid"></div>
         </div>
       </div>
     </div>
@@ -825,12 +708,12 @@
     <div class="container">
       <div class="section-header">
         <span class="section-tag">05 — Formation</span>
-        <h2>Parcours académique</h2>
+        <h2 style="color: var(--accent);">Parcours académique</h2>
       </div>
       <div class="edu-grid">
 
         <div class="edu-card current edu-card-clickable" onclick="openEduModal('edu-cesi')" style="cursor: pointer;">
-          <div class="edu-year">2024 — 2027</div>
+          <div class="edu-year" style="font-size: 0.95rem;">Octobre 2025 — Aujourd'hui</div>
           <div class="edu-header">
             <div class="edu-logo"><i class="fas fa-graduation-cap"></i></div>
             <div>
@@ -844,7 +727,7 @@
         </div>
 
         <div class="edu-card edu-card-clickable" onclick="openEduModal('edu-bts')" style="cursor: pointer;">
-          <div class="edu-year">2023 — 2024</div>
+          <div class="edu-year" style="font-size: 0.95rem;">Septembre 2023 — Juin 2025</div>
           <div class="edu-header">
             <div class="edu-logo"><i class="fas fa-industry"></i></div>
             <div>
@@ -857,7 +740,7 @@
         </div>
 
         <div class="edu-card edu-card-clickable" onclick="openEduModal('edu-bac')" style="cursor: pointer;">
-          <div class="edu-year">2020 — 2023</div>
+          <div class="edu-year" style="font-size: 0.95rem;">Septembre 2020 — Juin 2023</div>
           <div class="edu-header">
             <div class="edu-logo"><i class="fas fa-flask"></i></div>
             <div>
@@ -882,7 +765,7 @@
       <button class="detail-close-btn" onclick="closeEduModal('edu-cesi')"><i class="fas fa-times"></i></button>
       <div class="detail-modal-header">
         <h2>Diplôme d'Ingénieur Généraliste</h2>
-        <span class="detail-modal-tag">CESI Nanterre — 2024 à 2027</span>
+        <span class="detail-modal-tag">CESI Nanterre — Octobre 2025 — Aujourd'hui</span>
       </div>
       <div class="detail-modal-body">
         <h3><i class="fas fa-book"></i> Contexte & Format</h3>
@@ -914,27 +797,7 @@
         <h3><i class="fas fa-compass"></i> Débouchés Visés</h3>
         <p>Ingénieur conception/CAO dans l'aéronautique, ferroviaire, automotive ou secteur industriel de precision. Possible évolution vers management technique ou coordination de projets multisites.</p>
         <div class="modal-album">
-          <h3>Album photos</h3>
-          <div class="modal-album-grid">
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 1</div>
-                <div class="modal-album-note">Ajouter une image de l'école ou du campus.</div>
-              </div>
-            </div>
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 2</div>
-                <div class="modal-album-note">Ajouter une image de projets campus.</div>
-              </div>
-            </div>
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 3</div>
-                <div class="modal-album-note">Images à placer dans assets/education/cesi/</div>
-              </div>
-            </div>
-          </div>
+          <div class="modal-album-grid"></div>
         </div>
       </div>
     </div>
@@ -947,7 +810,7 @@
       <button class="detail-close-btn" onclick="closeEduModal('edu-bts')"><i class="fas fa-times"></i></button>
       <div class="detail-modal-header">
         <h2>BTS Conception de Produits Industriels</h2>
-        <span class="detail-modal-tag">Lycée Voillaume — 2023 à 2024</span>
+        <span class="detail-modal-tag">Lycée Voillaume — Septembre 2023 — Juin 2025</span>
       </div>
       <div class="detail-modal-body">
         <h3><i class="fas fa-fire"></i> Le Déclic Scolaire</h3>
@@ -966,27 +829,7 @@
         <p>Conception sur 12 mois d'un <strong>quadricycle électrique urbain</strong> en réponse à la problématique des trottinettes (640 blessés graves en 2023). Projet d'équipe englobant cahier des charges, conception détaillée, simulation et premiers tests dynamiques.</p>
         <p>C'était 95% du BTS, et j'en suis immensément fier.</p>
         <div class="modal-album">
-          <h3>Album photos</h3>
-          <div class="modal-album-grid">
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 1</div>
-                <div class="modal-album-note">Ajouter une image de la maquette EV4.</div>
-              </div>
-            </div>
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 2</div>
-                <div class="modal-album-note">Ajouter un rendu CAO ou une étude technique.</div>
-              </div>
-            </div>
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Photo 3</div>
-                <div class="modal-album-note">Images à placer dans assets/projects/evlv1/</div>
-              </div>
-            </div>
-          </div>
+          <div class="modal-album-grid"></div>
         </div>
         
         <h3><i class="fas fa-certification"></i> Certifications Obtenues</h3>
@@ -1034,6 +877,10 @@
         
         <h3><i class="fas fa-arrow-right"></i> Après Le Bac</h3>
         <p>Orientation réfléchie vers le <strong>BTS Conception de Produits Industriels</strong>, formation réputée pour son approche concrète et ses débouchés en ingénierie. Décision confirmée par le stage aéronautique de 3e et la passion pour la mécanique.</p>
+        
+        <div class="modal-album">
+          <div class="modal-album-grid"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1097,8 +944,7 @@
   <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
   <footer>
     <div class="container footer-inner">
-      <p>© 2026 Wassim Soussou — Projeteur CAO · Dessinateur 3D</p>
-      <p class="footer-sub">Conçu avec précision et persévérance.</p>
+      <p>© 2026 Wassim Soussou</p>
     </div>
   </footer>
 
@@ -1112,29 +958,18 @@
         <p id="modal-tools" class="modal-tools">Outils utilisés</p>
         <div id="modal-body" class="modal-body">Description détaillée du projet.</div>
         <div class="modal-album">
-          <h3>Album photos</h3>
-          <div id="modal-album-grid" class="modal-album-grid">
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Image 1</div>
-                <div class="modal-album-note">Ajouter une image de projet ici.</div>
-              </div>
-            </div>
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Image 2</div>
-                <div class="modal-album-note">Ajouter un rendu, photo ou schéma.</div>
-              </div>
-            </div>
-            <div class="modal-album-slot">
-              <div class="album-content">
-                <div class="modal-album-title">Image 3</div>
-                <div class="modal-album-note">Images à placer dans assets/projects/[nom-du-projet]/</div>
-              </div>
-            </div>
-          </div>
+          <div id="modal-album-grid" class="modal-album-grid"></div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Lightbox for full-size images -->
+  <div id="lightbox" class="lightbox hidden" aria-hidden="true">
+    <div class="lightbox-backdrop"></div>
+    <div class="lightbox-panel">
+      <button class="lightbox-close" aria-label="Fermer">×</button>
+      <img id="lightbox-img" src="" alt="" />
     </div>
   </div>
 

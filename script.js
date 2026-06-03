@@ -164,22 +164,48 @@ const projects = {
     `
   },
   tef: {
-    title: 'Tour en Fosse — Jumeau numérique (TEF)',
-    tools: 'Fusion 360 / SolidWorks',
+    title: 'Tour en Fosse — Numérisation & Innovation',
+    tools: 'Fusion 360 / SolidWorks / BIM',
     body: `
-      <h3>Mission</h3>
-      <p>Modélisation CAO intégrale du Tour en Fosse (machine historique du Technicentre Est Européen) pour créer un jumeau numérique industriel complet destiné à la supervision et la rénovation.</p>
-      
-      <h3>Étapes Clés</h3>
+      <h3>Contexte</h3>
+      <p>Mission TEF : numérisation du Tour en Fosse, machine de reprofilage des essieux, pour produire une maquette 3D exploitable en rénovation et maintenance.</p>
+
+      <h3>Relevés terrain & documentation</h3>
+      <p>Étude sur site avec plans partiels et sources historiques. Reconstitution CAO à partir de mesures manuelles, photos et retours des agents du technicentre.</p>
+
+      <h3>Intégration BIM</h3>
       <ul>
-        <li><strong>Relevés terrain</strong> : scanner 3D, photogrammétrie, mesures manuelles</li>
-        <li><strong>Rétro-conception</strong> : reconstruction CAO à partir des points nuage</li>
-        <li><strong>Intégration BIM</strong> : environnement de travail, réseaux (électrique, hydraulique, air comprimé)</li>
-        <li><strong>Préparation rénovation</strong> : identification points critiques, démontabilité</li>
+        <li>Modélisation du bâti, des réseaux électriques, hydrauliques et pneumatiques</li>
+        <li>Réintégration des gabarits et dégagements d'accès pour maintenance</li>
+        <li>Gestion des interfaces homme-machine et flux de circulation</li>
       </ul>
-      
-      <h3>Spécificités</h3>
-      <p>Machine de 40+ années d'âge, documentation incomplète ou manquante. <strong>Défi</strong> : recréer fidèlement une machine complexe sans plans d'usine. <strong>Résultat</strong> : maquette numérique 360° prête pour étude de rénovation et futur entretien préventif.</p>
+
+      <h3>Objectif</h3>
+      <p>Fournir un jumeau numérique fiable pour audits de rénovation, études de maintenance préventive et préparation d'interventions sur site.</p>
+
+      <h3>Résultat</h3>
+      <p>Maquette 3D prête à être utilisée pour analyse des points critiques, optimisation d'interventions et gestion des opérations SST sur le TEE.</p>
+    `
+  },
+  sablage: {
+    title: 'Mission SNCF — Sablage SST',
+    tools: 'Fusion 360 / Impression 3D / TPU',
+    body: `
+      <h3>Contexte SNCF</h3>
+      <p>Mission sur site SNCF : réduire l'exposition aux poussières de silice lors du remplissage des sablières de rames TGV en zone de maintenance.</p>
+
+      <h3>Solution proposée</h3>
+      <ul>
+        <li>Conception d'un embout adaptatif pour atelier de sablage</li>
+        <li>Utilisation de TPU pour assurer étanchéité, flexibilité et résistance mécanique</li>
+        <li>Validation d'usage en conditions réelles avec ajustement de la forme et du serrage</li>
+      </ul>
+
+      <h3>Points-clés</h3>
+      <p>Protection des opérateurs, réduction des rejets de poussières, conservation de l'étanchéité pendant le transport du matériau.</p>
+
+      <h3>Résultat</h3>
+      <p>Prototype opérationnel pour le site SNCF avec un dispositif de sécurité renforcé, qui limite les risques SST liés au silice et améliore la fiabilité des opérations de sablage.</p>
     `
   },
   tmax: {
@@ -279,22 +305,170 @@ const projects = {
   }
 };
 
+const projectImages = {
+  evlv1: [
+    'assets/projects/evlv1/Evlv1 1.PNG',
+    'assets/projects/evlv1/Evlv1 2.PNG',
+    'assets/projects/evlv1/Evlv1 3.PNG',
+    'assets/projects/evlv1/Evlv1 vue bras avant.PNG'
+  ],
+  tef: [
+    "assets/projects/tef/ecran de machine de mise en route du profilage des roues d'essieux trains.jpeg"
+  ],
+  tmax: [
+    'assets/projects/tmax/tmac cao isométrie.png',
+    'assets/projects/tmax/tmax cao de profil.png',
+    'assets/projects/tmax/plaquette de tournage.jpeg',
+    'assets/projects/tmax/Tmax sur terrain.jpeg'
+  ],
+  bogie: [
+    'assets/projects/bogie/résulatat bref de la bogie CAO.png',
+    "assets/projects/bogie/préparation du profilage d'essieu (vue de dessous).jpeg",
+    'assets/projects/bogie/zoom essieu usure de la bogie usée.jpeg',
+    'assets/projects/bogie/bogie usée.jpeg'
+  ],
+  bim: [
+    'assets/projects/bim/Bim CAO vue de dessus.png',
+    'assets/projects/bim/bim CAO 1.png',
+    'assets/projects/bim/bim CAO 2.png',
+    'assets/projects/bim/bim CAO 3.png',
+    'assets/projects/bim/bim CAO 4.png'
+  ],
+  proto: [
+    'assets/projects/proto/cone CAO vue en ISO.png',
+    'assets/projects/proto/cone CAO vu en iso légère.png',
+    'assets/projects/proto/cone CAO vu de profil.png',
+    'assets/projects/proto/cone cao vue de dessous.png',
+    'assets/projects/proto/cone tp rangée à sa base.jpg',
+    'assets/projects/proto/contexte pistolet sable dans orifice tgv sans cone tpu (création nuage de poussière de silice).png',
+    'assets/projects/proto/pistolet sable .jpg',
+    "assets/projects/proto/pistolet sable assemblé avec le cone tpu dans l'orifice tu tgv résultat.jpg",
+    'assets/projects/proto/résultat après impression 3D du cone.jpg'
+  ]
+};
+
+const detailGalleryImages = {
+  'exp-sncf-current': [
+    "assets/experience/sncf-current/à l'interrieur du TEE .jpeg",
+    'assets/experience/sncf-current/mon bureau au travail.jpeg'
+  ],
+  'exp-sncf-stage': [
+    'assets/experience/sncf-stage/vue de la voie du tour en fosse.jpeg',
+    "assets/experience/sncf-stage/vue d'un agent qui vérifie les cotes après reprofilage de roues.jpeg",
+    "assets/experience/sncf-stage/vue d'un TGV M (rame d'essai).jpeg",
+    'assets/experience/sncf-stage/amas de copeaux de matière après reprofilage de roues au Tef.jpeg',
+    'assets/experience/sncf-stage/vue sur les rames du techicentre est européen.jpeg'
+  ],
+  'exp-bafa': [
+    'assets/experience/bafa/moi avec les enfant derrière .png',
+    'assets/experience/bafa/moi avec quelques enfants en arrière plan.jpeg',
+    'assets/experience/bafa/vue de la tour eiffeil à la journée de vacance de ouf avec le centre.jpeg'
+  ],
+  'exp-serveur': [
+    'assets/experience/serveur/logo saveur et passion.jpeg',
+    'assets/experience/serveur/vue du marché au centre.jpeg',
+    'assets/experience/serveur/vue du marché côté gauche.jpeg',
+    'assets/experience/serveur/vue du marché côté gauche (entrée).jpeg',
+    'assets/experience/serveur/vue du marché en face.jpeg'
+  ],
+  'exp-aeronautique': [
+    'assets/experience/aeronautique/première impression de CATIA au bureau de BL.PO.jpeg',
+    'assets/experience/aeronautique/moi au commande de l\'A380.jpeg',
+    'assets/experience/aeronautique/A380.jpeg',
+    'assets/experience/aeronautique/reacteur en réparation.jpeg',
+    'assets/experience/aeronautique/vue des réacteur en décompasition.jpeg',
+    'assets/experience/aeronautique/Avion au zephyr.jpeg'
+  ],
+  'edu-cesi': [
+    'assets/education/cesi/cesi vue.jpg',
+    'assets/education/cesi/maquette de grus à plsieurs degrès de liberté du projet 0.jpeg'
+  ],
+  'edu-bts': [
+    'assets/education/bts/Voillaume.jpg'
+  ],
+  'edu-bac': [
+    'assets/education/bac/Encpb 1.jpg',
+    "assets/education/bac/vue du 15e etage du batiment de l'école.jpeg"
+  ]
+};
+
+function renderProjectAlbum(id) {
+  const modalGrid = document.getElementById('modal-album-grid');
+  const images = projectImages[id] || [];
+  if (images.length === 0) {
+    modalGrid.innerHTML = `
+      <div class="modal-album-slot">
+        <div class="album-content">
+          <div class="modal-album-note">Aucune image disponible dans assets/projects/${id}/</div>
+        </div>
+      </div>`;
+    return;
+  }
+  modalGrid.innerHTML = images.map((src) => `
+    <div class="modal-album-slot">
+      <div class="album-content">
+        <img src="${src}" alt="Projet ${id}" />
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderDetailGallery(modal) {
+  const grid = modal.querySelector('.modal-album-grid');
+  if (!grid) return;
+  const images = detailGalleryImages[modal.id] || [];
+  if (images.length === 0) {
+    grid.innerHTML = `
+      <div class="modal-album-slot">
+        <div class="album-content">
+          <div class="modal-album-note">Aucune image disponible pour ${modal.id}.</div>
+        </div>
+      </div>`;
+    return;
+  }
+  grid.innerHTML = images.map((src) => `
+    <div class="modal-album-slot">
+      <div class="album-content">
+        <img src="${src}" alt="${modal.id}" />
+      </div>
+    </div>
+  `).join('');
+}
+
 function openProjectModal(id) {
   const p = projects[id];
   if (!p) return;
   modalTitle.textContent = p.title;
   modalTools.textContent = `Outils : ${p.tools}`;
   modalBody.innerHTML = p.body;
+  renderProjectAlbum(id);
   projectModal.classList.remove('hidden');
   projectModal.setAttribute('aria-hidden', 'false');
-  document.querySelectorAll('#modal-album-grid .modal-album-note').forEach(note => {
-    note.textContent = `Images à placer dans assets/projects/${id}/`;
-  });
+  document.body.style.overflow = 'hidden';
+}
+
+function openExpModal(expId) {
+  const modal = document.getElementById('exp-' + expId);
+  if (modal) {
+    renderDetailGallery(modal);
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function openEduModal(eduId) {
+  const modal = document.getElementById(eduId);
+  if (modal) {
+    renderDetailGallery(modal);
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
 }
 
 function closeProjectModal() {
   projectModal.classList.add('hidden');
   projectModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = 'auto';
 }
 
 document.querySelectorAll('.project-card').forEach(card => {
@@ -331,37 +505,6 @@ document.querySelectorAll('.modal-close').forEach(b => b.addEventListener('click
 document.querySelectorAll('.project-modal-backdrop').forEach(b => b.addEventListener('click', closeProjectModal));
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeProjectModal(); });
 
-// ════════════════════════════════════════════════════
-// Experience Modal Functions
-// ════════════════════════════════════════════════════
-
-function openExpModal(expId) {
-  const modal = document.getElementById('exp-' + expId);
-  if (modal) {
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-}
-
-function closeExpModal(modalId) {
-  const modal = document.getElementById(modalId);
-  if (modal) {
-    modal.classList.remove('active');
-    document.body.style.overflow = 'auto';
-  }
-}
-
-// Experience card click handlers
-document.querySelectorAll('.exp-card').forEach(card => {
-  card.addEventListener('click', (e) => {
-    if (e.target.closest('.btn-expand')) {
-      e.preventDefault();
-      const expId = card.dataset.experience;
-      openExpModal(expId);
-    }
-  });
-});
-
 // Experience modal close handlers
 document.querySelectorAll('.detail-modal').forEach(modal => {
   const backdrop = modal.querySelector('.detail-modal-backdrop');
@@ -383,16 +526,8 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ════════════════════════════════════════════════════
-// Education Modal Functions
+// Education Modal Close
 // ════════════════════════════════════════════════════
-
-function openEduModal(eduId) {
-  const modal = document.getElementById(eduId);
-  if (modal) {
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-}
 
 function closeEduModal(modalId) {
   const modal = document.getElementById(modalId);
@@ -401,3 +536,80 @@ function closeEduModal(modalId) {
     document.body.style.overflow = 'auto';
   }
 }
+
+// Ensure detail-modal close buttons always close the modal (robust handler)
+document.querySelectorAll('.detail-close-btn').forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const modal = btn.closest('.detail-modal');
+    if (modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  });
+});
+
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const lightboxClose = document.querySelector('.lightbox-close');
+let currentModalImages = []; // Track images from current modal only
+
+function openLightbox(src, alt) {
+  if (!lightbox || !lightboxImg) return;
+  lightboxImg.src = src;
+  lightboxImg.alt = alt || '';
+  lightbox.classList.remove('hidden');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  if (!lightbox) return;
+  lightbox.classList.add('hidden');
+  lightbox.setAttribute('aria-hidden', 'true');
+  lightboxImg.src = '';
+  document.body.style.overflow = 'auto';
+}
+
+// Delegate clicks on modal album grids
+document.addEventListener('click', (e) => {
+  const img = e.target.closest('.modal-album-slot img');
+  if (img) {
+    // Capture all images from the same modal/album grid
+    const albumGrid = img.closest('.modal-album-grid');
+    if (albumGrid) {
+      currentModalImages = Array.from(albumGrid.querySelectorAll('img'));
+    }
+    openLightbox(img.src, img.alt);
+  }
+});
+
+// Lightbox handlers
+document.querySelectorAll('.lightbox-backdrop, .lightbox-close').forEach(el => {
+  el.addEventListener('click', closeLightbox);
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeLightbox();
+    return;
+  }
+  
+  // Keyboard navigation for lightbox: left/right arrows (only modal images)
+  if (!lightbox || lightbox.classList.contains('hidden')) return;
+  if (currentModalImages.length === 0) return;
+  
+  let currentIndex = -1;
+  currentModalImages.forEach((img, idx) => {
+    if (img.src === lightboxImg.src) currentIndex = idx;
+  });
+  
+  if (e.key === 'ArrowRight') {
+    e.preventDefault();
+    const nextIndex = (currentIndex + 1) % currentModalImages.length;
+    openLightbox(currentModalImages[nextIndex].src, currentModalImages[nextIndex].alt);
+  } else if (e.key === 'ArrowLeft') {
+    e.preventDefault();
+    const prevIndex = (currentIndex - 1 + currentModalImages.length) % currentModalImages.length;
+    openLightbox(currentModalImages[prevIndex].src, currentModalImages[prevIndex].alt);
+  }
+});
