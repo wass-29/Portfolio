@@ -18,10 +18,10 @@ if (bubbleCanvas) {
     let height = window.innerHeight;
 
     function createParticle() {
-      const alpha = Math.random() * 0.35 + 0.16;
+      const alpha = Math.random() * 0.45 + 0.22;
       const color = Math.random() > 0.7
         ? `rgba(255, 255, 255, ${alpha})`
-        : `rgba(180, 200, 255, ${alpha})`;
+        : `rgba(170, 190, 255, ${alpha})`;
 
       const hero = document.getElementById('hero');
       const heroRect = hero ? hero.getBoundingClientRect() : null;
