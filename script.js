@@ -27,7 +27,7 @@ if (bubbleCanvas) {
         x: Math.random() * width,
         y: Math.random() * height,
         radius: Math.random() * 4 + 2,
-        speed: Math.random() * 1.2 + 0.3,
+        speed: Math.random() * 1.35 + 0.35,
         opacity: alpha,
         color
       };
