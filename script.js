@@ -18,23 +18,25 @@ if (bubbleCanvas) {
     let height = window.innerHeight;
 
     function createParticle() {
-      const isLarge = Math.random() > 0.92;
+      const alpha = Math.random() * 0.4 + 0.1;
+      const color = Math.random() > 0.7
+        ? `rgba(255, 255, 255, ${alpha})`
+        : `rgba(180, 200, 255, ${alpha})`;
+
       return {
         x: Math.random() * width,
         y: Math.random() * height,
-        radius: isLarge ? Math.random() * 2.3 + 1.2 : Math.random() * 1.5 + 0.3,
-        vx: (Math.random() - 0.5) * 0.18,
-        vy: (Math.random() - 0.5) * 0.18,
-        alpha: Math.random() * 0.28 + 0.08,
-        phase: Math.random() * Math.PI * 2
+        radius: Math.random() * 4 + 2,
+        speed: Math.random() * 1.2 + 0.3,
+        opacity: alpha,
+        color
       };
     }
 
     function resizeCanvas() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
-      const density = Math.min(260, Math.max(170, Math.floor((width * height) / 14000)));
-      particles = Array.from({ length: density }, createParticle);
+      particles = Array.from({ length: 80 }, createParticle);
     }
 
     function drawBubbles() {
@@ -43,18 +45,16 @@ if (bubbleCanvas) {
       ctx.clearRect(0, 0, width, height);
 
       particles.forEach((p) => {
-        p.x += p.vx + Math.sin(p.phase) * 0.008;
-        p.y += p.vy + Math.cos(p.phase * 0.8) * 0.008;
-        p.phase += 0.015;
+        p.y -= p.speed;
 
-        if (p.x < -6) p.x = width + 6;
-        if (p.x > width + 6) p.x = -6;
-        if (p.y < -6) p.y = height + 6;
-        if (p.y > height + 6) p.y = -6;
+        if (p.y < -p.radius) {
+          p.y = height + p.radius;
+          p.x = Math.random() * width;
+        }
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(183, 198, 255, ${p.alpha})`;
+        ctx.fillStyle = p.color;
         ctx.fill();
       });
 
