@@ -18,35 +18,25 @@ if (bubbleCanvas) {
     let height = window.innerHeight;
 
     function createParticle() {
-      const alpha = Math.random() * 0.65 + 0.35;
+      const alpha = Math.random() * 0.4 + 0.1;
       const color = Math.random() > 0.7
         ? `rgba(255, 255, 255, ${alpha})`
-        : `rgba(150, 175, 255, ${alpha})`;
-
-      const hero = document.getElementById('hero');
-      const heroRect = hero ? hero.getBoundingClientRect() : null;
-      const useHeroArea = heroRect && Math.random() > 0.2;
-      const centerX = heroRect ? heroRect.left + heroRect.width / 2 : width / 2;
-      const centerY = heroRect ? heroRect.top + heroRect.height / 2 : height / 2;
-      const spreadX = heroRect ? heroRect.width * 0.4 : width * 0.3;
-      const spreadY = heroRect ? heroRect.height * 0.42 : height * 0.3;
+        : `rgba(180, 200, 255, ${alpha})`;
 
       return {
-        x: useHeroArea ? centerX + (Math.random() - 0.5) * spreadX : Math.random() * width,
-        y: useHeroArea ? centerY + (Math.random() - 0.5) * spreadY : Math.random() * height,
-        radius: Math.random() * 4.4 + 2.8,
-        speed: Math.random() * 1.4 + 0.38,
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 4 + 2,
+        speed: Math.random() * 1.2 + 0.3,
         opacity: alpha,
-        color,
-        phase: Math.random() * Math.PI * 2,
-        drift: Math.random() * 0.035 + 0.015
+        color
       };
     }
 
     function resizeCanvas() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
-      particles = Array.from({ length: 95 }, createParticle);
+      particles = Array.from({ length: 80 }, createParticle);
     }
 
     function drawBubbles() {
@@ -55,21 +45,11 @@ if (bubbleCanvas) {
       ctx.clearRect(0, 0, width, height);
 
       particles.forEach((p) => {
-        p.x += Math.sin(p.phase) * p.drift;
         p.y -= p.speed;
-        p.phase += 0.025;
 
         if (p.y < -p.radius) {
           p.y = height + p.radius;
-          const hero = document.getElementById('hero');
-          const heroRect = hero ? hero.getBoundingClientRect() : null;
-          const useHeroArea = heroRect && Math.random() > 0.2;
-          const centerX = heroRect ? heroRect.left + heroRect.width / 2 : width / 2;
-          const centerY = heroRect ? heroRect.top + heroRect.height / 2 : height / 2;
-          const spreadX = heroRect ? heroRect.width * 0.4 : width * 0.3;
-          const spreadY = heroRect ? heroRect.height * 0.42 : height * 0.3;
-          p.x = useHeroArea ? centerX + (Math.random() - 0.5) * spreadX : Math.random() * width;
-          p.y = useHeroArea ? centerY + (Math.random() - 0.5) * spreadY : height + p.radius;
+          p.x = Math.random() * width;
         }
 
         ctx.beginPath();
