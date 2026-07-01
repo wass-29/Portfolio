@@ -14,6 +14,7 @@
 </head>
 <body>
   <div class="site-pattern" aria-hidden="true"></div>
+  <canvas id="bubble-canvas" aria-hidden="true"></canvas>
 
   <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
   <nav id="navbar">
@@ -181,6 +182,7 @@
         <h2 style="color: var(--accent);">Parcours professionnel</h2>
       </div>
       <div class="timeline">
+        <div class="timeline-progress" id="timeline-progress"></div>
 
         <div class="timeline-item exp-card" data-experience="sncf-current" style="cursor: pointer;">
           <div class="timeline-dot"></div>
@@ -224,7 +226,7 @@
 
         <div class="timeline-item exp-card" data-experience="bafa" style="cursor: pointer;">
           <div class="timeline-dot"></div>
-          <div class="timeline-date">2023 — 2024</div>
+          <div class="timeline-date">Septembre 2023 — Juin 2025</div>
           <div class="timeline-content">
             <div class="timeline-header">
               <h3>Animateur Diplômé (BAFA)</h3>
@@ -911,20 +913,20 @@
           <div class="form-row">
             <div class="form-group">
               <label for="name">Nom</label>
-              <input type="text" id="name" placeholder="Votre nom" required />
+              <input type="text" id="name" name="name" placeholder="Votre nom" required />
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" id="email" placeholder="votre@email.com" required />
+              <input type="email" id="email" name="email" placeholder="votre@email.com" required />
             </div>
           </div>
           <div class="form-group">
             <label for="subject">Sujet</label>
-            <input type="text" id="subject" placeholder="Objet du message" required />
+            <input type="text" id="subject" name="subject" placeholder="Objet du message" required />
           </div>
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" rows="5" placeholder="Votre message..." required></textarea>
+            <textarea id="message" name="message" rows="5" placeholder="Votre message..." required></textarea>
           </div>
           <button type="submit" class="btn btn-primary btn-full">
             <i class="fas fa-paper-plane"></i> Envoyer le message

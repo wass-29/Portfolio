@@ -2,6 +2,94 @@
    WASSIM SOUSSOU — Portfolio Script
    ══════════════════════════════════════════ */
 
+/* ═══════════════════════════════ BUBBLE CANVAS BACKGROUND ═══════════════════════════════ */
+
+const canvas = document.getElementById('bubble-canvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const particles = [];
+const particleCount = 80;
+
+// Initialize particles
+for (let i = 0; i < particleCount; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    radius: Math.random() * 4 + 2,
+    speed: Math.random() * 1.2 + 0.3,
+    opacity: Math.random() * 0.3 + 0.1,
+    color: Math.random() > 0.8 ? `rgba(79, 110, 247, ${Math.random() * 0.3 + 0.1})` : `rgba(255, 255, 255, ${Math.random() * 0.3 + 0.1})`,
+    time: Math.random() * Math.PI * 2,
+    waveAmplitude: Math.random() * 0.5 + 0.2
+  });
+}
+
+function drawBubbles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  particles.forEach((p) => {
+    p.y -= p.speed;
+    p.time += 0.02;
+    p.x += Math.sin(p.time) * p.waveAmplitude;
+    
+    // Reset particle if it goes above the screen
+    if (p.y < -p.radius) {
+      p.y = canvas.height + p.radius;
+      p.x = Math.random() * canvas.width;
+    }
+    
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  
+  requestAnimationFrame(drawBubbles);
+}
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+
+window.addEventListener('resize', resizeCanvas);
+drawBubbles();
+
+// ── Timeline scroll progress ──
+const timelineProgress = document.getElementById('timeline-progress');
+const timelineContainer = document.querySelector('.timeline');
+const timelineItems = document.querySelectorAll('.timeline-item');
+
+function updateTimelineProgress() {
+  if (!timelineContainer || !timelineProgress) return;
+
+  const timelineRect = timelineContainer.getBoundingClientRect();
+  const viewportCenter = window.innerHeight / 2;
+  
+  // Calculate how much of the timeline is above the center of the viewport
+  const scrollHeight = Math.max(0, viewportCenter - timelineRect.top);
+  timelineProgress.style.height = Math.max(0, scrollHeight) + 'px';
+  
+  // Update active timeline items
+  timelineItems.forEach((item) => {
+    const itemRect = item.getBoundingClientRect();
+    const itemCenter = itemRect.top + itemRect.height / 2;
+    
+    if (itemCenter < viewportCenter) {
+      item.classList.add('active');
+    } else {
+      item.classList.remove('active');
+    }
+  });
+}
+
+window.addEventListener('scroll', updateTimelineProgress);
+window.addEventListener('resize', updateTimelineProgress);
+updateTimelineProgress();
+
 // ── Navbar scroll effect ──
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
@@ -77,17 +165,45 @@ if (skillsSection) skillObserver.observe(skillsSection);
 // ── Contact form ──
 function handleSubmit(e) {
   e.preventDefault();
-  const btn = e.target.querySelector('button[type="submit"]');
+  const form = e.target;
+  const btn = form.querySelector('button[type="submit"]');
   const success = document.getElementById('form-success');
+  const formData = new FormData(form);
 
   btn.disabled = true;
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours…';
 
-  setTimeout(() => {
-    btn.style.display = 'none';
-    success.classList.remove('hidden');
-    e.target.reset();
-  }, 1200);
+  // Submit to Formspree
+  fetch('https://formspree.io/f/xyzgwvlr', {
+    method: 'POST',
+    body: formData,
+    headers: {
+      'Accept': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      btn.style.display = 'none';
+      success.classList.remove('hidden');
+      form.reset();
+      setTimeout(() => {
+        btn.style.display = '';
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer le message';
+        btn.disabled = false;
+        success.classList.add('hidden');
+      }, 4000);
+    } else {
+      throw new Error('Erreur lors de l\'envoi');
+    }
+  })
+  .catch(error => {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Erreur d\'envoi';
+    console.error('Erreur:', error);
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer le message';
+    }, 3000);
+  });
 }
 
 // ── Smooth scroll for Safari fallback ──
@@ -649,7 +765,7 @@ document.addEventListener('keydown', (e) => {
 
 const objModels = {
   proto: {
-    obj: 'assets/projects/proto/Cône Pistolet DV.obj',
+    obj: 'assets/projects/proto/Cone Pistolet DV.obj',
     mtl: null
   },
   bim: {
@@ -708,17 +824,27 @@ function init3DViewer(containerId, modelKey) {
     scene.add(obj);
   };
 
+  const onError = (error) => {
+    console.error(`3D model load error for ${modelKey}:`, error);
+    const errorMsg = document.createElement('div');
+    errorMsg.style.color = '#ff7a7a';
+    errorMsg.style.padding = '16px';
+    errorMsg.textContent = `Impossible de charger le modèle 3D ${model.obj}. Vérifie le fichier et le chemin.`;
+    container.innerHTML = '';
+    container.appendChild(errorMsg);
+  };
+
   if (model.mtl) {
     const mtlLoader = new THREE.MTLLoader();
     mtlLoader.load(model.mtl, (mtl) => {
       mtl.preload();
       const objLoader = new THREE.OBJLoader();
       objLoader.setMaterials(mtl);
-      objLoader.load(model.obj, onLoad);
-    });
+      objLoader.load(model.obj, onLoad, undefined, onError);
+    }, undefined, onError);
   } else {
     const objLoader = new THREE.OBJLoader();
-    objLoader.load(model.obj, onLoad);
+    objLoader.load(model.obj, onLoad, undefined, onError);
   }
 
   function animate() {
