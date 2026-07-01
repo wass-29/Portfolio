@@ -4,59 +4,69 @@
 
 /* ═══════════════════════════════ BUBBLE CANVAS BACKGROUND ═══════════════════════════════ */
 
-const canvas = document.getElementById('bubble-canvas');
-const ctx = canvas.getContext('2d');
+const bubbleCanvas = document.getElementById('bubble-canvas');
+let canvas = null;
+let ctx = null;
+let particles = [];
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+if (bubbleCanvas) {
+  canvas = bubbleCanvas;
+  ctx = canvas.getContext('2d');
 
-const particles = [];
-const particleCount = 80;
+  if (ctx) {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-// Initialize particles
-for (let i = 0; i < particleCount; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    radius: Math.random() * 4 + 2,
-    speed: Math.random() * 1.2 + 0.3,
-    opacity: Math.random() * 0.3 + 0.1,
-    color: Math.random() > 0.8 ? `rgba(79, 110, 247, ${Math.random() * 0.3 + 0.1})` : `rgba(255, 255, 255, ${Math.random() * 0.3 + 0.1})`,
-    time: Math.random() * Math.PI * 2,
-    waveAmplitude: Math.random() * 0.5 + 0.2
-  });
-}
+    const particleCount = 80;
 
-function drawBubbles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  
-  particles.forEach((p) => {
-    p.y -= p.speed;
-    p.time += 0.02;
-    p.x += Math.sin(p.time) * p.waveAmplitude;
-    
-    // Reset particle if it goes above the screen
-    if (p.y < -p.radius) {
-      p.y = canvas.height + p.radius;
-      p.x = Math.random() * canvas.width;
+    // Initialize particles
+    for (let i = 0; i < particleCount; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 4 + 2,
+        speed: Math.random() * 1.2 + 0.3,
+        opacity: Math.random() * 0.3 + 0.1,
+        color: Math.random() > 0.8 ? `rgba(79, 110, 247, ${Math.random() * 0.3 + 0.1})` : `rgba(255, 255, 255, ${Math.random() * 0.3 + 0.1})`,
+        time: Math.random() * Math.PI * 2,
+        waveAmplitude: Math.random() * 0.5 + 0.2
+      });
     }
-    
-    ctx.fillStyle = p.color;
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-    ctx.fill();
-  });
-  
-  requestAnimationFrame(drawBubbles);
-}
 
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
+    function drawBubbles() {
+      if (!ctx || !canvas) return;
 
-window.addEventListener('resize', resizeCanvas);
-drawBubbles();
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach((p) => {
+        p.y -= p.speed;
+        p.time += 0.02;
+        p.x += Math.sin(p.time) * p.waveAmplitude;
+
+        if (p.y < -p.radius) {
+          p.y = canvas.height + p.radius;
+          p.x = Math.random() * canvas.width;
+        }
+
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      requestAnimationFrame(drawBubbles);
+    }
+
+    function resizeCanvas() {
+      if (!canvas) return;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    drawBubbles();
+  }
+}
 
 // ── Timeline scroll progress ──
 const timelineProgress = document.getElementById('timeline-progress');
