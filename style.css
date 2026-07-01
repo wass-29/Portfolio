@@ -33,7 +33,7 @@
 html { scroll-behavior: smooth; }
 
 body {
-  background: linear-gradient(135deg, #0d1117 0%, #0f1123 50%, #11141f 100%);
+  background: linear-gradient(135deg, #060913 0%, #0a1020 50%, #0b1328 100%);
   color: var(--text);
   font-family: var(--font);
   font-size: 16px;
@@ -115,9 +115,9 @@ section:nth-child(even) { background: rgba(10, 12, 20, 0.72); }
   transition: background var(--transition), box-shadow var(--transition);
 }
 #navbar.scrolled {
-  background: rgba(4, 8, 16, 0.82);
+  background: rgba(4, 8, 16, 0.84);
   backdrop-filter: blur(18px);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+  box-shadow: 0 1px 0 rgba(79,110,247,0.14);
 }
 .nav-container {
   max-width: 1160px;
@@ -134,7 +134,7 @@ section:nth-child(even) { background: rgba(10, 12, 20, 0.72); }
   letter-spacing: -0.03em;
   color: #f7f9ff;
 }
-.nav-logo span { color: #8b5cf6; }
+.nav-logo span { color: #4f6ef7; }
 
 .nav-links {
   display: flex;
@@ -154,13 +154,13 @@ section:nth-child(even) { background: rgba(10, 12, 20, 0.72); }
 .nav-links a.active { color: #fff; }
 
 .nav-cta {
-  background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%) !important;
+  background: linear-gradient(135deg, #4f6ef7 0%, #3653c8 100%) !important;
   color: #fff !important;
   font-weight: 600 !important;
   padding: 10px 16px !important;
-  box-shadow: 0 10px 30px rgba(124,58,237,0.25);
+  box-shadow: 0 10px 30px rgba(79,110,247,0.25);
 }
-.nav-cta:hover { opacity: 0.95; background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%) !important; }
+.nav-cta:hover { opacity: 0.95; background: linear-gradient(135deg, #5b7cf9 0%, #4464dd 100%) !important; }
 
 .hamburger {
   display: none;
@@ -189,8 +189,8 @@ section:nth-child(even) { background: rgba(10, 12, 20, 0.72); }
   overflow: hidden;
   padding: 120px 24px 80px;
   background:
-    radial-gradient(circle at 20% 20%, rgba(120, 140, 255, 0.12), transparent 24%),
-    linear-gradient(180deg, rgba(13, 17, 23, 0.96) 0%, rgba(15, 17, 35, 0.98) 100%);
+    radial-gradient(circle at 20% 20%, rgba(79, 110, 247, 0.16), transparent 24%),
+    linear-gradient(180deg, rgba(4, 7, 16, 0.97) 0%, rgba(8, 12, 24, 0.98) 100%);
 }
 
 .hero-bg {
@@ -201,7 +201,7 @@ section:nth-child(even) { background: rgba(10, 12, 20, 0.72); }
 .hero-grid {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(124, 58, 237, 0.12), transparent 55%);
+  background: radial-gradient(circle at center, rgba(79, 110, 247, 0.12), transparent 55%);
   opacity: 0.8;
 }
 .hero-glow {
@@ -209,7 +209,7 @@ section:nth-child(even) { background: rgba(10, 12, 20, 0.72); }
   top: 24%; left: 50%;
   transform: translate(-50%, -50%);
   width: 720px; height: 500px;
-  background: radial-gradient(circle, rgba(124, 58, 237, 0.16), transparent 62%);
+  background: radial-gradient(circle, rgba(79, 110, 247, 0.16), transparent 62%);
   filter: blur(14px);
 }
 
@@ -228,7 +228,6 @@ section:nth-child(even) { background: rgba(10, 12, 20, 0.72); }
   color: #f7f9ff;
   text-shadow: 0 0 24px rgba(255,255,255,0.04);
 }
-.hero-name .accent { color: #8b5cf6; }
 
 #hero h2 {
   font-size: clamp(1rem, 2.3vw, 1.2rem);
@@ -265,7 +264,7 @@ section:nth-child(even) { background: rgba(10, 12, 20, 0.72); }
   display: block;
   font-size: 1.7rem;
   font-weight: 800;
-  color: #8b5cf6;
+  color: #4f6ef7;
   letter-spacing: -0.03em;
 }
 .stat-label {
@@ -306,13 +305,13 @@ section:nth-child(even) { background: rgba(10, 12, 20, 0.72); }
   border: none;
 }
 .btn-primary {
-  background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
+  background: linear-gradient(135deg, #4f6ef7 0%, #3653c8 100%);
   color: #fff;
-  box-shadow: 0 12px 30px rgba(124,58,237,0.26);
+  box-shadow: 0 12px 30px rgba(79,110,247,0.26);
 }
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 34px rgba(124,58,237,0.32);
+  box-shadow: 0 16px 34px rgba(79,110,247,0.32);
 }
 .btn-outline {
   background: transparent;
@@ -1335,13 +1334,13 @@ section:nth-child(even) { background: rgba(10, 12, 20, 0.72); }
   font-family: 'Inter', system-ui, sans-serif;
   font-size: clamp(72px, 8vw, 140px);
   fill: transparent;
-  stroke: var(--accent);
+  stroke: #4f6ef7;
   stroke-width: 1.8px;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-dasharray: 1600;
   stroke-dashoffset: 1600;
-  animation: drawText 10s ease-in-out infinite, textGlow 4s ease 4s infinite alternate;
+  animation: drawText 4s ease-in-out infinite, textGlow 4s ease 0s infinite alternate;
 }
 @keyframes drawText {
   0% {
