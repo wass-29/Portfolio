@@ -18,10 +18,10 @@ if (bubbleCanvas) {
     let height = window.innerHeight;
 
     function createParticle() {
-      const alpha = Math.random() * 0.45 + 0.22;
+      const alpha = Math.random() * 0.65 + 0.35;
       const color = Math.random() > 0.7
         ? `rgba(255, 255, 255, ${alpha})`
-        : `rgba(170, 190, 255, ${alpha})`;
+        : `rgba(150, 175, 255, ${alpha})`;
 
       const hero = document.getElementById('hero');
       const heroRect = hero ? hero.getBoundingClientRect() : null;
@@ -34,7 +34,7 @@ if (bubbleCanvas) {
       return {
         x: useHeroArea ? centerX + (Math.random() - 0.5) * spreadX : Math.random() * width,
         y: useHeroArea ? centerY + (Math.random() - 0.5) * spreadY : Math.random() * height,
-        radius: Math.random() * 3.2 + 2.2,
+        radius: Math.random() * 4.4 + 2.8,
         speed: Math.random() * 1.4 + 0.38,
         opacity: alpha,
         color,
