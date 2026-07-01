@@ -14,56 +14,55 @@ if (bubbleCanvas) {
   ctx = canvas.getContext('2d');
 
   if (ctx) {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
 
-    const particleCount = 80;
+    function createParticle() {
+      const isLarge = Math.random() > 0.92;
+      return {
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: isLarge ? Math.random() * 2.3 + 1.2 : Math.random() * 1.5 + 0.3,
+        vx: (Math.random() - 0.5) * 0.18,
+        vy: (Math.random() - 0.5) * 0.18,
+        alpha: Math.random() * 0.28 + 0.08,
+        phase: Math.random() * Math.PI * 2
+      };
+    }
 
-    // Initialize particles
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        radius: Math.random() * 4 + 2,
-        speed: Math.random() * 1.2 + 0.3,
-        opacity: Math.random() * 0.3 + 0.1,
-        color: Math.random() > 0.8 ? `rgba(79, 110, 247, ${Math.random() * 0.3 + 0.1})` : `rgba(255, 255, 255, ${Math.random() * 0.3 + 0.1})`,
-        time: Math.random() * Math.PI * 2,
-        waveAmplitude: Math.random() * 0.5 + 0.2
-      });
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      const density = Math.min(260, Math.max(170, Math.floor((width * height) / 14000)));
+      particles = Array.from({ length: density }, createParticle);
     }
 
     function drawBubbles() {
       if (!ctx || !canvas) return;
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, width, height);
 
       particles.forEach((p) => {
-        p.y -= p.speed;
-        p.time += 0.02;
-        p.x += Math.sin(p.time) * p.waveAmplitude;
+        p.x += p.vx + Math.sin(p.phase) * 0.008;
+        p.y += p.vy + Math.cos(p.phase * 0.8) * 0.008;
+        p.phase += 0.015;
 
-        if (p.y < -p.radius) {
-          p.y = canvas.height + p.radius;
-          p.x = Math.random() * canvas.width;
-        }
+        if (p.x < -6) p.x = width + 6;
+        if (p.x > width + 6) p.x = -6;
+        if (p.y < -6) p.y = height + 6;
+        if (p.y > height + 6) p.y = -6;
 
-        ctx.fillStyle = p.color;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(183, 198, 255, ${p.alpha})`;
         ctx.fill();
       });
 
       requestAnimationFrame(drawBubbles);
     }
 
-    function resizeCanvas() {
-      if (!canvas) return;
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-
     window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
     drawBubbles();
   }
 }

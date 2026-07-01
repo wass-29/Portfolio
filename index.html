@@ -7,19 +7,14 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@r128/examples/js/loaders/OBJLoader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@r128/examples/js/loaders/MTLLoader.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/three@r128/examples/js/controls/OrbitControls.js"></script>
 </head>
 <body>
-  <div class="site-pattern" aria-hidden="true"></div>
   <canvas id="bubble-canvas" aria-hidden="true"></canvas>
 
   <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
   <nav id="navbar">
     <div class="nav-container">
-      <a href="#hero" class="nav-logo" aria-label="Accueil"></a>
+      <a href="#hero" class="nav-logo">W<span>.</span>S</a>
       <ul class="nav-links">
         <li><a href="#about">À propos</a></li>
         <li><a href="#skills">Compétences</a></li>
@@ -42,13 +37,8 @@
     </div>
     <div class="hero-content">
       <!-- removed 'Disponible — Alternance' per user request -->
-      <h1 class="hero-name">
-        <svg class="name-svg" viewBox="0 0 900 120" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <text x="10" y="86" class="svg-text">Wassim Soussou</text>
-        </svg>
-      </h1>
+      <h1 class="hero-name">Wassim <span class="accent">Soussou</span></h1>
       <h2 class="hero-role">Projeteur CAO — Dessinateur 3D</h2>
-      <p class="hero-desc">SolidWorks · Fusion 360 · CATIA V5</p>
       <div class="hero-actions">
         <a href="#projects" class="btn btn-primary">Voir mes projets</a>
         <a href="#contact" class="btn btn-outline">Me contacter</a>
@@ -139,25 +129,22 @@
       </div>
       <div class="skills-grid">
           <div class="software-grid">
-            <!-- 1ère ligne (user order) -->
-            <div class="logo-item"><img src="assets/CatiaV5_Icon.png" alt="CATIA V5" class="logo-img"></div>
             <div class="logo-item"><img src="assets/solidworks-logo-scaled.webp" alt="SolidWorks" class="logo-img"></div>
             <div class="logo-item"><img src="assets/autodesk-fusion-360-icon.webp" alt="Fusion 360" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/CatiaV5_Icon.png" alt="CATIA V5" class="logo-img"></div>
             <div class="logo-item"><img src="assets/blender-logowebp.webp" alt="Blender" class="logo-img"></div>
             <div class="logo-item"><img src="assets/hd-python-logo.png" alt="Python" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/power-bi.jpg" alt="Power BI" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/Logo Forger.png" alt="Forger" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/Pix_logo.svg.png" alt="PIX" class="logo-img"></div>
-
-            <!-- 2e ligne (user order) -->
-            <div class="logo-item"><img src="assets/logo%20creality%20print.webp" alt="Creality Print" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/Artillery%20logo.webp" alt="Artillery" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/Zortrax%20new_logo.png" alt="Zortrax" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/z-suite-2_basic_feat.png" alt="ZSuite" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/SharePoint-Symbol-scaled.webp" alt="SharePoint" class="logo-img"></div>
-            <div class="logo-item"><img src="assets/FabTrack logo.webp" alt="Power Apps" class="logo-img"></div>
             <div class="logo-item"><img src="assets/PackOffice.png" alt="Pack Office" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/power-bi.jpg" alt="Power BI" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/Pix_logo.svg.png" alt="PIX" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/Artillery%20logo.webp" alt="Artillery" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/FabTrack%20logo.webp" alt="FabTrack" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/SharePoint-Symbol-scaled.webp" alt="SharePoint" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/Zortrax%20new_logo.png" alt="Zortrax" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/Logo Forger.png" alt="Forger" class="logo-img"></div>
             <div class="logo-item"><img src="assets/logo-INRS-RS.jpg" alt="INRS" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/logo%20creality%20print.webp" alt="Creality Print" class="logo-img"></div>
+            <div class="logo-item"><img src="assets/z-suite-2_basic_feat.png" alt="ZSuite" class="logo-img"></div>
           </div>
         </div>
       <div class="soft-skills">
@@ -182,7 +169,6 @@
         <h2 style="color: var(--accent);">Parcours professionnel</h2>
       </div>
       <div class="timeline">
-        <div class="timeline-progress" id="timeline-progress"></div>
 
         <div class="timeline-item exp-card" data-experience="sncf-current" style="cursor: pointer;">
           <div class="timeline-dot"></div>
@@ -226,7 +212,7 @@
 
         <div class="timeline-item exp-card" data-experience="bafa" style="cursor: pointer;">
           <div class="timeline-dot"></div>
-          <div class="timeline-date">Septembre 2023 — Juin 2025</div>
+          <div class="timeline-date">2023 — 2024</div>
           <div class="timeline-content">
             <div class="timeline-header">
               <h3>Animateur Diplômé (BAFA)</h3>
@@ -314,6 +300,42 @@
           <a href="#evlv1-detail" class="btn-expand">Voir le détail du projet</a>
         </div>
 
+        <div class="project-card" data-project="tef">
+          <div class="project-icon"><i class="fas fa-industry"></i></div>
+          <h3>Tour en Fosse TEF — Jumeau numérique</h3>
+          <p>
+            Jumeau numérique complet du Tour en Fosse au TEE : relevés terrain, rétro-conception 
+            à partir de plans historiques et intégration des réseaux (électrique, hydraulique, air comprimé).
+          </p>
+          <div class="project-tags">
+            <span>TEF</span><span>BIM</span><span>Jumeau numérique</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-project="tmax">
+          <div class="project-icon"><i class="fas fa-cogs"></i></div>
+          <h3>Unité de coupe T-MAX P — Usinage optimisé</h3>
+          <p>
+            Conception de l'unité de coupe et de la plaquette tournante pour améliorer
+            l'évacuation des copeaux en spiralé. Analyse technologique, simulation et CAO.
+          </p>
+          <div class="project-tags">
+            <span>SolidWorks</span><span>Usinage</span><span>Copeaux</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-project="bogie">
+          <div class="project-icon"><i class="fas fa-train"></i></div>
+          <h3>Bogie TGV M — Assemblage 3D</h3>
+          <p>
+            Reproduction et intégration d'un bogie TGV M à partir de plans partiels.
+            Respect des gabarits, ressorts de suspension et plan de chasse.
+          </p>
+          <div class="project-tags">
+            <span>CATIA/CAO</span><span>TGV M</span><span>Bogies</span>
+          </div>
+        </div>
+
         <div class="project-card" data-project="bim">
           <div class="project-icon"><i class="fas fa-project-diagram"></i></div>
           <h3>BIM & Supervision industrielle</h3>
@@ -336,42 +358,6 @@
           </p>
           <div class="project-tags">
             <span>CAO</span><span>Impression 3D</span><span>Maintenance</span>
-          </div>
-        </div>
-
-        <div class="project-card" data-project="tmax">
-          <div class="project-icon"><i class="fas fa-cogs"></i></div>
-          <h3>Unité de coupe T-MAX P — Usinage optimisé</h3>
-          <p>
-            Conception de l'unité de coupe et de la plaquette tournante pour améliorer
-            l'évacuation des copeaux en spiralé. Analyse technologique, simulation et CAO.
-          </p>
-          <div class="project-tags">
-            <span>SolidWorks</span><span>Usinage</span><span>Copeaux</span>
-          </div>
-        </div>
-
-        <div class="project-card" data-project="tef">
-          <div class="project-icon"><i class="fas fa-industry"></i></div>
-          <h3>Tour en Fosse TEF — Jumeau numérique</h3>
-          <p>
-            Jumeau numérique complet du Tour en Fosse au TEE : relevés terrain, rétro-conception 
-            à partir de plans historiques et intégration des réseaux (électrique, hydraulique, air comprimé).
-          </p>
-          <div class="project-tags">
-            <span>TEF</span><span>BIM</span><span>Jumeau numérique</span>
-          </div>
-        </div>
-
-        <div class="project-card" data-project="bogie">
-          <div class="project-icon"><i class="fas fa-train"></i></div>
-          <h3>Bogie TGV M — Assemblage 3D</h3>
-          <p>
-            Reproduction et intégration d'un bogie TGV M à partir de plans partiels.
-            Respect des gabarits, ressorts de suspension et plan de chasse.
-          </p>
-          <div class="project-tags">
-            <span>CATIA/CAO</span><span>TGV M</span><span>Bogies</span>
           </div>
         </div>
 
@@ -736,7 +722,7 @@
         </div>
 
         <div class="edu-card edu-card-clickable" onclick="openEduModal('edu-bac')" style="cursor: pointer;">
-          <div class="edu-year" style="font-size: 0.95rem;">Septembre 2020 — Juin 2023</div>
+          <div class="edu-year">Septembre 2020 — Juin 2023</div>
           <div class="edu-header">
             <div class="edu-logo"><i class="fas fa-flask"></i></div>
             <div>
@@ -761,7 +747,7 @@
       <button class="detail-close-btn" onclick="closeEduModal('edu-cesi')"><i class="fas fa-times"></i></button>
       <div class="detail-modal-header">
         <h2>Diplôme d'Ingénieur Généraliste</h2>
-        <span class="detail-modal-tag">CESI Nanterre — Octobre 2025 — Aujourd'hui</span>
+        <span class="detail-modal-tag">CESI Nanterre — 2024 à 2027</span>
       </div>
       <div class="detail-modal-body">
         <h3><i class="fas fa-book"></i> Contexte & Format</h3>
@@ -806,7 +792,7 @@
       <button class="detail-close-btn" onclick="closeEduModal('edu-bts')"><i class="fas fa-times"></i></button>
       <div class="detail-modal-header">
         <h2>BTS Conception de Produits Industriels</h2>
-        <span class="detail-modal-tag">Lycée Voillaume — Septembre 2023 — Juin 2025</span>
+        <span class="detail-modal-tag">Lycée Voillaume — 2023 à 2024</span>
       </div>
       <div class="detail-modal-body">
         <h3><i class="fas fa-fire"></i> Le Déclic Scolaire</h3>
@@ -913,20 +899,20 @@
           <div class="form-row">
             <div class="form-group">
               <label for="name">Nom</label>
-              <input type="text" id="name" name="name" placeholder="Votre nom" required />
+              <input type="text" id="name" placeholder="Votre nom" required />
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="votre@email.com" required />
+              <input type="email" id="email" placeholder="votre@email.com" required />
             </div>
           </div>
           <div class="form-group">
             <label for="subject">Sujet</label>
-            <input type="text" id="subject" name="subject" placeholder="Objet du message" required />
+            <input type="text" id="subject" placeholder="Objet du message" required />
           </div>
           <div class="form-group">
             <label for="message">Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Votre message..." required></textarea>
+            <textarea id="message" rows="5" placeholder="Votre message..." required></textarea>
           </div>
           <button type="submit" class="btn btn-primary btn-full">
             <i class="fas fa-paper-plane"></i> Envoyer le message
@@ -940,7 +926,8 @@
   <!-- ═══════════════════════════════ FOOTER ═══════════════════════════════ -->
   <footer>
     <div class="container footer-inner">
-      <p>© 2026 Wassim Soussou</p>
+      <p>© 2026 Wassim Soussou — Projeteur CAO · Dessinateur 3D</p>
+      <p class="footer-sub">Conçu avec précision et persévérance.</p>
     </div>
   </footer>
 
