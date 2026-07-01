@@ -25,11 +25,11 @@ if (bubbleCanvas) {
 
       const hero = document.getElementById('hero');
       const heroRect = hero ? hero.getBoundingClientRect() : null;
-      const useHeroArea = heroRect && Math.random() > 0.3;
+      const useHeroArea = heroRect && Math.random() > 0.2;
       const centerX = heroRect ? heroRect.left + heroRect.width / 2 : width / 2;
       const centerY = heroRect ? heroRect.top + heroRect.height / 2 : height / 2;
-      const spreadX = heroRect ? heroRect.width * 0.32 : width * 0.3;
-      const spreadY = heroRect ? heroRect.height * 0.32 : height * 0.3;
+      const spreadX = heroRect ? heroRect.width * 0.4 : width * 0.3;
+      const spreadY = heroRect ? heroRect.height * 0.42 : height * 0.3;
 
       return {
         x: useHeroArea ? centerX + (Math.random() - 0.5) * spreadX : Math.random() * width,
@@ -63,11 +63,11 @@ if (bubbleCanvas) {
           p.y = height + p.radius;
           const hero = document.getElementById('hero');
           const heroRect = hero ? hero.getBoundingClientRect() : null;
-          const useHeroArea = heroRect && Math.random() > 0.3;
+          const useHeroArea = heroRect && Math.random() > 0.2;
           const centerX = heroRect ? heroRect.left + heroRect.width / 2 : width / 2;
           const centerY = heroRect ? heroRect.top + heroRect.height / 2 : height / 2;
-          const spreadX = heroRect ? heroRect.width * 0.32 : width * 0.3;
-          const spreadY = heroRect ? heroRect.height * 0.32 : height * 0.3;
+          const spreadX = heroRect ? heroRect.width * 0.4 : width * 0.3;
+          const spreadY = heroRect ? heroRect.height * 0.42 : height * 0.3;
           p.x = useHeroArea ? centerX + (Math.random() - 0.5) * spreadX : Math.random() * width;
           p.y = useHeroArea ? centerY + (Math.random() - 0.5) * spreadY : height + p.radius;
         }
