@@ -68,38 +68,6 @@ if (bubbleCanvas) {
   }
 }
 
-// ── Timeline scroll progress ──
-const timelineProgress = document.getElementById('timeline-progress');
-const timelineContainer = document.querySelector('.timeline');
-const timelineItems = document.querySelectorAll('.timeline-item');
-
-function updateTimelineProgress() {
-  if (!timelineContainer || !timelineProgress) return;
-
-  const timelineRect = timelineContainer.getBoundingClientRect();
-  const viewportCenter = window.innerHeight / 2;
-  
-  // Calculate how much of the timeline is above the center of the viewport
-  const scrollHeight = Math.max(0, viewportCenter - timelineRect.top);
-  timelineProgress.style.height = Math.max(0, scrollHeight) + 'px';
-  
-  // Update active timeline items
-  timelineItems.forEach((item) => {
-    const itemRect = item.getBoundingClientRect();
-    const itemCenter = itemRect.top + itemRect.height / 2;
-    
-    if (itemCenter < viewportCenter) {
-      item.classList.add('active');
-    } else {
-      item.classList.remove('active');
-    }
-  });
-}
-
-window.addEventListener('scroll', updateTimelineProgress);
-window.addEventListener('resize', updateTimelineProgress);
-updateTimelineProgress();
-
 // ── Navbar scroll effect ──
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
@@ -140,7 +108,7 @@ navLinks.forEach(a => a.addEventListener('click', () => {
 // ── Reveal on scroll ──
 const revealEls = document.querySelectorAll(
   '.about-card, .skill-category, .soft-item, .soft-skills, ' +
-  '.timeline-item, .project-card, .bts-card, .edu-card, ' +
+  '.project-card, .bts-card, .edu-card, ' +
   '.contact-text, .contact-form'
 );
 
