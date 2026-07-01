@@ -1340,7 +1340,7 @@ section:nth-child(even) { background: rgba(10, 12, 20, 0.72); }
   stroke-linejoin: round;
   stroke-dasharray: 1600;
   stroke-dashoffset: 1600;
-  animation: drawText 4.4s ease-in-out infinite, textGlow 4.4s ease 0s infinite alternate;
+  animation: drawText 5.2s ease-in-out infinite, textGlow 5.2s ease 0s infinite alternate;
 }
 @keyframes drawText {
   0% {
