@@ -350,6 +350,10 @@
           <div class="project-tags">
             <span>BIM</span><span>C++</span><span>Blueprints</span>
           </div>
+          <div class="model-viewer-card">
+            <div id="viewer-bim" class="model-viewer"></div>
+            <p class="viewer-hint">💡 Faites glisser pour tourner le modèle et zoomer avec la molette.</p>
+          </div>
         </div>
 
         <div class="project-card" data-project="proto">
@@ -362,6 +366,10 @@
           </p>
           <div class="project-tags">
             <span>CAO</span><span>Impression 3D</span><span>Maintenance</span>
+          </div>
+          <div class="model-viewer-card">
+            <div id="viewer-proto" class="model-viewer"></div>
+            <p class="viewer-hint">💡 Manipulez la vue 3D directement depuis la page.</p>
           </div>
         </div>
 
@@ -959,6 +967,7 @@
     </div>
   </div>
 
+  <script type="module" src="3d-viewers.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
