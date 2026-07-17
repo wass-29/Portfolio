@@ -18,46 +18,78 @@ if (bubbleCanvas) {
     let height = window.innerHeight;
 
     function createParticle() {
-      const alpha = Math.random() * 0.4 + 0.1;
-      const color = Math.random() > 0.7
+      const alpha = Math.random() * 0.5 + 0.28;
+      const color = Math.random() > 0.65
         ? `rgba(255, 255, 255, ${alpha})`
-        : `rgba(180, 200, 255, ${alpha})`;
+        : Math.random() > 0.5
+          ? `rgba(132, 158, 255, ${alpha})`
+          : `rgba(110, 90, 255, ${alpha})`;
 
       return {
         x: Math.random() * width,
         y: Math.random() * height,
-        radius: Math.random() * 4 + 2,
-        speed: Math.random() * 1.2 + 0.3,
+        radius: Math.random() * 6.2 + 3.3,
+        speedX: (Math.random() - 0.5) * 0.95,
+        speedY: (Math.random() * 0.7 + 0.25) * (Math.random() > 0.5 ? -1 : 1),
         opacity: alpha,
-        color
+        color,
+        drift: Math.random() * 0.02 + 0.01,
+        phase: Math.random() * Math.PI * 2,
+        wobble: Math.random() * 0.9 + 0.45
       };
     }
 
     function resizeCanvas() {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
-      particles = Array.from({ length: 80 }, createParticle);
+      particles = Array.from({ length: window.innerWidth < 900 ? 140 : 190 }, createParticle);
     }
 
-    function drawBubbles() {
+    function drawBubbles(timestamp = 0) {
       if (!ctx || !canvas) return;
 
+      const t = timestamp * 0.001;
       ctx.clearRect(0, 0, width, height);
+      ctx.save();
+      ctx.globalCompositeOperation = 'screen';
+      ctx.shadowBlur = 16;
+      ctx.shadowColor = 'rgba(255, 255, 255, 0.6)';
 
-      particles.forEach((p) => {
-        p.y -= p.speed;
+      particles.forEach((p, index) => {
+        const sway = Math.sin(t * p.wobble + p.phase) * (p.radius * 0.55);
+        const drift = Math.cos(t * (0.45 + p.drift) + p.phase) * (p.radius * 0.25);
 
-        if (p.y < -p.radius) {
-          p.y = height + p.radius;
+        p.x += p.speedX + drift * 0.01;
+        p.y += p.speedY + Math.sin(t * 0.7 + p.phase) * 0.15;
+
+        if (p.x > width + p.radius * 2) p.x = -p.radius * 2;
+        if (p.x < -p.radius * 2) p.x = width + p.radius * 2;
+        if (p.y > height + p.radius * 2) {
+          p.y = -p.radius * 2;
+          p.x = Math.random() * width;
+        }
+        if (p.y < -p.radius * 2) {
+          p.y = height + p.radius * 2;
           p.x = Math.random() * width;
         }
 
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.arc(p.x + sway * 0.04, p.y, p.radius, 0, Math.PI * 2);
         ctx.fillStyle = p.color;
         ctx.fill();
+
+        if (index % 3 === 0) {
+          const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 2.6);
+          glow.addColorStop(0, `rgba(255, 255, 255, ${p.opacity * 0.22})`);
+          glow.addColorStop(1, 'rgba(255, 255, 255, 0)');
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius * 2.6, 0, Math.PI * 2);
+          ctx.fillStyle = glow;
+          ctx.fill();
+        }
       });
 
+      ctx.restore();
       requestAnimationFrame(drawBubbles);
     }
 
