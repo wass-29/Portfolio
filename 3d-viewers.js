@@ -22,10 +22,10 @@ function createViewer(container, url, color, label) {
   scene.background = null;
 
   const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
-  camera.position.set(2.8, 2.1, 3.4);
+  camera.position.set(2.4, 1.6, 3.2);
 
-  const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.2));
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.4));
   renderer.setSize(container.clientWidth || 320, container.clientHeight || 260);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   container.appendChild(renderer.domElement);
@@ -38,20 +38,20 @@ function createViewer(container, url, color, label) {
   controls.maxDistance = 9;
   controls.target.set(0, 0.4, 0);
 
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1.15);
   scene.add(ambientLight);
 
-  const keyLight = new THREE.DirectionalLight(0xffffff, 1.35);
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.25);
   keyLight.position.set(4, 6, 4);
   scene.add(keyLight);
 
-  const fillLight = new THREE.DirectionalLight(0x7dd3fc, 0.7);
+  const fillLight = new THREE.DirectionalLight(0x7dd3fc, 0.65);
   fillLight.position.set(-3, 2, -4);
   scene.add(fillLight);
 
   const floor = new THREE.Mesh(
-    new THREE.CircleGeometry(2.2, 64),
-    new THREE.MeshStandardMaterial({ color: 0x0e1426, metalness: 0.1, roughness: 0.8 })
+    new THREE.CircleGeometry(2.4, 64),
+    new THREE.MeshStandardMaterial({ color: 0x111827, metalness: 0.1, roughness: 0.9 })
   );
   floor.rotation.x = -Math.PI / 2;
   floor.position.y = -1.1;
@@ -74,7 +74,7 @@ function createViewer(container, url, color, label) {
             metalness: 0.25,
             roughness: 0.45,
             emissive: 0x07111f,
-            emissiveIntensity: 0.15
+            emissiveIntensity: 0.16
           });
           child.castShadow = true;
           child.receiveShadow = true;
@@ -90,6 +90,84 @@ function createViewer(container, url, color, label) {
       object.position.sub(center);
       object.scale.setScalar(scale);
       object.rotation.set(0, 0, 0);
+      scene.add(object);
+
+      if (loadingLabel) loadingLabel.remove();
+      animate();
+    },
+    undefined,
+    (error) => {
+      console.error(`Impossible de charger ${url}`, error);
+      if (loadingLabel) {
+        loadingLabel.textContent = 'Le modèle n’a pas pu être chargé.';
+      }
+    }
+  );
+
+  function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  }
+
+  function resizeRenderer() {
+    const width = container.clientWidth || 320;
+    const height = container.clientHeight || 260;
+    renderer.setSize(width, height);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+  }
+
+  window.addEventListener('resize', resizeRenderer);
+  new ResizeObserver(resizeRenderer).observe(container);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const container = entry.target;
+      const config = viewerConfigs.find(({ containerId }) => containerId === container.id);
+      if (config) {
+        createViewer(container, config.url, config.color, config.label);
+        obs.unobserve(container);
+      }
+    });
+  }, { rootMargin: '160px 0px' });
+
+  viewerConfigs.forEach(({ containerId }) => {
+    const container = document.getElementById(containerId);
+    if (container) observer.observe(container);
+  });
+});
+      object.traverse((child) => {
+        if (child.isMesh) {
+          child.material = new THREE.MeshStandardMaterial({
+            color,
+            metalness: 0.2,
+            roughness: 0.45,
+            emissive: 0x07111f,
+            emissiveIntensity: 0.16,
+            flatShading: false
+          });
+          child.castShadow = true;
+          child.receiveShadow = true;
+        }
+      });
+
+      const fallback = document.createElement('div');
+      fallback.className = 'viewer-fallback';
+      fallback.textContent = 'Vue 3D prête — faites glisser pour la manipuler';
+      container.appendChild(fallback);
+
+      const box = new THREE.Box3().setFromObject(object);
+      const center = box.getCenter(new THREE.Vector3());
+      const size = box.getSize(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z) || 1;
+      const scale = 2.2 / maxDim;
+
+      object.position.sub(center);
+      object.scale.setScalar(scale);
       scene.add(object);
 
       if (loadingLabel) loadingLabel.remove();
