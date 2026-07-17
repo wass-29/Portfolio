@@ -24,8 +24,8 @@ function createViewer(container, url, color, label) {
   const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
   camera.position.set(2.8, 2.1, 3.4);
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.2));
   renderer.setSize(container.clientWidth || 320, container.clientHeight || 260);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   container.appendChild(renderer.domElement);
@@ -123,10 +123,20 @@ function createViewer(container, url, color, label) {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  viewerConfigs.forEach(({ containerId, url, color, label }) => {
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const container = entry.target;
+      const config = viewerConfigs.find(({ containerId }) => containerId === container.id);
+      if (config) {
+        createViewer(container, config.url, config.color, config.label);
+        obs.unobserve(container);
+      }
+    });
+  }, { rootMargin: '160px 0px' });
+
+  viewerConfigs.forEach(({ containerId }) => {
     const container = document.getElementById(containerId);
-    if (container) {
-      createViewer(container, url, color, label);
-    }
+    if (container) observer.observe(container);
   });
 });

@@ -8,24 +8,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
-<body>
-  <canvas id="bubble-canvas" aria-hidden="true"></canvas>
-
+<body data-theme="dark">
   <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
   <nav id="navbar">
     <div class="nav-container">
       <a href="#hero" class="nav-logo" aria-label="Accueil"></a>
-      <ul class="nav-links">
-        <li><a href="#about">À propos</a></li>
-        <li><a href="#skills">Compétences</a></li>
-        <li><a href="#experience">Expériences</a></li>
-        <li><a href="#projects">Projets</a></li>
-        <li><a href="#education">Formation</a></li>
-        <li><a href="#contact" class="nav-cta">Contact</a></li>
-      </ul>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+      <div class="nav-actions">
+        <button class="theme-switch" id="theme-toggle" type="button" aria-label="Changer le thème" aria-pressed="false">
+          <span class="theme-switch__icon"><i class="fas fa-sun"></i></span>
+          <span class="theme-switch__knob"></span>
+          <span class="theme-switch__icon"><i class="fas fa-moon"></i></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="#about">À propos</a></li>
+          <li><a href="#skills">Compétences</a></li>
+          <li><a href="#experience">Expériences</a></li>
+          <li><a href="#projects">Projets</a></li>
+          <li><a href="#education">Formation</a></li>
+          <li><a href="#contact" class="nav-cta">Contact</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 

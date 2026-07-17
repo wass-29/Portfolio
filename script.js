@@ -2,102 +2,26 @@
    WASSIM SOUSSOU — Portfolio Script
    ══════════════════════════════════════════ */
 
-/* ═══════════════════════════════ BUBBLE CANVAS BACKGROUND ═══════════════════════════════ */
+// ── Theme toggle ──
+const body = document.body;
+const themeToggle = document.getElementById('theme-toggle');
 
-const bubbleCanvas = document.getElementById('bubble-canvas');
-let canvas = null;
-let ctx = null;
-let particles = [];
-
-if (bubbleCanvas) {
-  canvas = bubbleCanvas;
-  ctx = canvas.getContext('2d');
-
-  if (ctx) {
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-
-    function createParticle() {
-      const alpha = Math.random() * 0.5 + 0.28;
-      const color = Math.random() > 0.65
-        ? `rgba(255, 255, 255, ${alpha})`
-        : Math.random() > 0.5
-          ? `rgba(132, 158, 255, ${alpha})`
-          : `rgba(110, 90, 255, ${alpha})`;
-
-      return {
-        x: Math.random() * width,
-        y: Math.random() * height,
-        radius: Math.random() * 6.2 + 3.3,
-        speedX: (Math.random() - 0.5) * 0.95,
-        speedY: (Math.random() * 0.7 + 0.25) * (Math.random() > 0.5 ? -1 : 1),
-        opacity: alpha,
-        color,
-        drift: Math.random() * 0.02 + 0.01,
-        phase: Math.random() * Math.PI * 2,
-        wobble: Math.random() * 0.9 + 0.45
-      };
-    }
-
-    function resizeCanvas() {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-      particles = Array.from({ length: window.innerWidth < 900 ? 140 : 190 }, createParticle);
-    }
-
-    function drawBubbles(timestamp = 0) {
-      if (!ctx || !canvas) return;
-
-      const t = timestamp * 0.001;
-      ctx.clearRect(0, 0, width, height);
-      ctx.save();
-      ctx.globalCompositeOperation = 'screen';
-      ctx.shadowBlur = 16;
-      ctx.shadowColor = 'rgba(255, 255, 255, 0.6)';
-
-      particles.forEach((p, index) => {
-        const sway = Math.sin(t * p.wobble + p.phase) * (p.radius * 0.55);
-        const drift = Math.cos(t * (0.45 + p.drift) + p.phase) * (p.radius * 0.25);
-
-        p.x += p.speedX + drift * 0.01;
-        p.y += p.speedY + Math.sin(t * 0.7 + p.phase) * 0.15;
-
-        if (p.x > width + p.radius * 2) p.x = -p.radius * 2;
-        if (p.x < -p.radius * 2) p.x = width + p.radius * 2;
-        if (p.y > height + p.radius * 2) {
-          p.y = -p.radius * 2;
-          p.x = Math.random() * width;
-        }
-        if (p.y < -p.radius * 2) {
-          p.y = height + p.radius * 2;
-          p.x = Math.random() * width;
-        }
-
-        ctx.beginPath();
-        ctx.arc(p.x + sway * 0.04, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.fill();
-
-        if (index % 3 === 0) {
-          const glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 2.6);
-          glow.addColorStop(0, `rgba(255, 255, 255, ${p.opacity * 0.22})`);
-          glow.addColorStop(1, 'rgba(255, 255, 255, 0)');
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.radius * 2.6, 0, Math.PI * 2);
-          ctx.fillStyle = glow;
-          ctx.fill();
-        }
-      });
-
-      ctx.restore();
-      requestAnimationFrame(drawBubbles);
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-    drawBubbles();
+function applyTheme(theme) {
+  body.setAttribute('data-theme', theme);
+  if (themeToggle) {
+    themeToggle.setAttribute('data-active', theme === 'light' ? 'light' : 'dark');
+    themeToggle.setAttribute('aria-pressed', String(theme === 'light'));
   }
 }
+
+const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+applyTheme(savedTheme);
+
+themeToggle?.addEventListener('click', () => {
+  const nextTheme = body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  applyTheme(nextTheme);
+  localStorage.setItem('portfolio-theme', nextTheme);
+});
 
 // ── Navbar scroll effect ──
 const navbar = document.getElementById('navbar');
