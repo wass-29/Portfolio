@@ -1,6 +1,7 @@
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js';
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/controls/OrbitControls.js';
 import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/loaders/OBJLoader.js';
+import { MTLLoader } from 'https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/loaders/MTLLoader.js';
 
 const viewerConfigs = [
   {
@@ -12,12 +13,13 @@ const viewerConfigs = [
   {
     containerId: 'viewer-bim',
     url: 'assets/projects/bim/Assemblage GC V2.obj',
+    mtlUrl: 'assets/projects/bim/Assemblage GC V2.mtl',
     color: 0x8b5cf6,
     label: 'Assemblage BIM'
   }
 ];
 
-function createViewer(container, url, color, label) {
+function createViewer(container, url, color, label, mtlUrl) {
   const scene = new THREE.Scene();
   scene.background = null;
 
@@ -28,18 +30,23 @@ function createViewer(container, url, color, label) {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.4));
   renderer.setSize(container.clientWidth || 320, container.clientHeight || 260);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.domElement.style.width = '100%';
+  renderer.domElement.style.height = '100%';
+  renderer.domElement.style.display = 'block';
+  renderer.domElement.style.touchAction = 'none';
   container.appendChild(renderer.domElement);
 
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
-  controls.enablePan = true;
+  controls.enablePan = false;
+  controls.enableZoom = true;
+  controls.zoomSpeed = 1.1;
   controls.autoRotate = false;
-  controls.minDistance = 1.4;
-  controls.maxDistance = 9;
-  controls.target.set(0, 0.4, 0);
+  controls.minDistance = 0.8;
+  controls.maxDistance = 12;
+  controls.target.set(0, 0.15, 0);
 
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.15);
-  scene.add(ambientLight);
+  scene.add(new THREE.AmbientLight(0xffffff, 1.15));
 
   const keyLight = new THREE.DirectionalLight(0xffffff, 1.25);
   keyLight.position.set(4, 6, 4);
@@ -59,162 +66,103 @@ function createViewer(container, url, color, label) {
   scene.add(floor);
 
   const loader = new OBJLoader();
+  const mtlLoader = new MTLLoader();
   const loadingLabel = document.createElement('div');
   loadingLabel.className = 'viewer-loading';
   loadingLabel.textContent = `Chargement du modèle ${label}…`;
   container.appendChild(loadingLabel);
 
-  loader.load(
-    url,
-    (object) => {
-      object.traverse((child) => {
-        if (child.isMesh) {
-          child.material = new THREE.MeshStandardMaterial({
-            color,
-            metalness: 0.25,
-            roughness: 0.45,
-            emissive: 0x07111f,
-            emissiveIntensity: 0.16
-          });
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-      });
+  const resolvedUrl = encodeURI(url);
+  const resolvedMtlUrl = mtlUrl ? encodeURI(mtlUrl) : null;
 
-      const box = new THREE.Box3().setFromObject(object);
-      const center = box.getCenter(new THREE.Vector3());
-      const size = box.getSize(new THREE.Vector3());
-      const maxDim = Math.max(size.x, size.y, size.z) || 1;
-      const scale = 2.2 / maxDim;
-
-      object.position.sub(center);
-      object.scale.setScalar(scale);
-      object.rotation.set(0, 0, 0);
-      scene.add(object);
-
-      if (loadingLabel) loadingLabel.remove();
-      animate();
-    },
-    undefined,
-    (error) => {
-      console.error(`Impossible de charger ${url}`, error);
-      if (loadingLabel) {
-        loadingLabel.textContent = 'Le modèle n’a pas pu être chargé.';
-      }
-    }
-  );
-
-  function animate() {
+  const animate = () => {
     requestAnimationFrame(animate);
     controls.update();
     renderer.render(scene, camera);
-  }
+  };
 
-  function resizeRenderer() {
+  const resizeRenderer = () => {
     const width = container.clientWidth || 320;
     const height = container.clientHeight || 260;
     renderer.setSize(width, height);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
+  };
+
+  const handleModel = (object) => {
+    object.traverse((child) => {
+      if (child.isMesh) {
+        child.material = new THREE.MeshStandardMaterial({
+          color,
+          metalness: 0.25,
+          roughness: 0.45,
+          emissive: 0x07111f,
+          emissiveIntensity: 0.16,
+          flatShading: false
+        });
+        child.castShadow = true;
+        child.receiveShadow = true;
+      }
+    });
+
+    const fallback = document.createElement('div');
+    fallback.className = 'viewer-fallback';
+    fallback.textContent = 'Vue 3D prête — faites glisser pour la manipuler';
+    container.appendChild(fallback);
+
+    const box = new THREE.Box3().setFromObject(object);
+    const center = box.getCenter(new THREE.Vector3());
+    const size = box.getSize(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z) || 1;
+
+    object.position.sub(center);
+    object.scale.setScalar(2.2 / maxDim);
+    scene.add(object);
+
+    loadingLabel.remove();
+    animate();
+  };
+
+  const handleError = (error) => {
+    console.error(`Impossible de charger ${url}`, error);
+    loadingLabel.textContent = 'Le modèle n’a pas pu être chargé.';
+  };
+
+  const loadObject = () => {
+    loader.load(resolvedUrl, handleModel, undefined, handleError);
+  };
+
+  if (resolvedMtlUrl) {
+    mtlLoader.load(
+      resolvedMtlUrl,
+      (materials) => {
+        materials.preload();
+        loader.setMaterials(materials);
+        loadObject();
+      },
+      undefined,
+      loadObject
+    );
+  } else {
+    loadObject();
   }
 
   window.addEventListener('resize', resizeRenderer);
   new ResizeObserver(resizeRenderer).observe(container);
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      const container = entry.target;
-      const config = viewerConfigs.find(({ containerId }) => containerId === container.id);
-      if (config) {
-        createViewer(container, config.url, config.color, config.label);
-        obs.unobserve(container);
-      }
-    });
-  }, { rootMargin: '160px 0px' });
-
+function initViewers() {
   viewerConfigs.forEach(({ containerId }) => {
     const container = document.getElementById(containerId);
-    if (container) observer.observe(container);
-  });
-});
-      object.traverse((child) => {
-        if (child.isMesh) {
-          child.material = new THREE.MeshStandardMaterial({
-            color,
-            metalness: 0.2,
-            roughness: 0.45,
-            emissive: 0x07111f,
-            emissiveIntensity: 0.16,
-            flatShading: false
-          });
-          child.castShadow = true;
-          child.receiveShadow = true;
-        }
-      });
-
-      const fallback = document.createElement('div');
-      fallback.className = 'viewer-fallback';
-      fallback.textContent = 'Vue 3D prête — faites glisser pour la manipuler';
-      container.appendChild(fallback);
-
-      const box = new THREE.Box3().setFromObject(object);
-      const center = box.getCenter(new THREE.Vector3());
-      const size = box.getSize(new THREE.Vector3());
-      const maxDim = Math.max(size.x, size.y, size.z) || 1;
-      const scale = 2.2 / maxDim;
-
-      object.position.sub(center);
-      object.scale.setScalar(scale);
-      scene.add(object);
-
-      if (loadingLabel) loadingLabel.remove();
-      animate();
-    },
-    undefined,
-    (error) => {
-      console.error(`Impossible de charger ${url}`, error);
-      if (loadingLabel) {
-        loadingLabel.textContent = 'Le modèle n’a pas pu être chargé.';
-      }
+    const config = viewerConfigs.find((entry) => entry.containerId === containerId);
+    if (container && config) {
+      createViewer(container, config.url, config.color, config.label, config.mtlUrl);
     }
-  );
-
-  function animate() {
-    requestAnimationFrame(animate);
-    controls.update();
-    renderer.render(scene, camera);
-  }
-
-  function resizeRenderer() {
-    const width = container.clientWidth || 320;
-    const height = container.clientHeight || 260;
-    renderer.setSize(width, height);
-    camera.aspect = width / height;
-    camera.updateProjectionMatrix();
-  }
-
-  window.addEventListener('resize', resizeRenderer);
-  new ResizeObserver(resizeRenderer).observe(container);
+  });
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      const container = entry.target;
-      const config = viewerConfigs.find(({ containerId }) => containerId === container.id);
-      if (config) {
-        createViewer(container, config.url, config.color, config.label);
-        obs.unobserve(container);
-      }
-    });
-  }, { rootMargin: '160px 0px' });
-
-  viewerConfigs.forEach(({ containerId }) => {
-    const container = document.getElementById(containerId);
-    if (container) observer.observe(container);
-  });
-});
+if (document.readyState === 'loading') {
+  window.addEventListener('DOMContentLoaded', initViewers, { once: true });
+} else {
+  initViewers();
+}
