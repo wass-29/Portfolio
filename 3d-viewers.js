@@ -1,7 +1,9 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js';
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/controls/OrbitControls.js';
-import { OBJLoader } from 'https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/loaders/OBJLoader.js';
-import { MTLLoader } from 'https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/loaders/MTLLoader.js';
+import * as THREE from './vendor/three/build/three.module.js';
+import { OrbitControls } from './vendor/three/examples/jsm/controls/OrbitControls.js';
+import { OBJLoader } from './vendor/three/examples/jsm/loaders/OBJLoader.js';
+import { MTLLoader } from './vendor/three/examples/jsm/loaders/MTLLoader.js';
+
+window.PORTFOLIO_THREE = { THREE, OrbitControls, OBJLoader, MTLLoader };
 
 const viewerConfigs = [
   {
@@ -57,14 +59,6 @@ function createViewer(container, url, color, label, mtlUrl) {
   scene.add(fillLight);
 
   const floor = new THREE.Mesh(
-    new THREE.CircleGeometry(2.4, 64),
-    new THREE.MeshStandardMaterial({ color: 0x111827, metalness: 0.1, roughness: 0.9 })
-  );
-  floor.rotation.x = -Math.PI / 2;
-  floor.position.y = -1.1;
-  floor.receiveShadow = true;
-  scene.add(floor);
-
   const loader = new OBJLoader();
   const mtlLoader = new MTLLoader();
   const loadingLabel = document.createElement('div');
@@ -116,8 +110,14 @@ function createViewer(container, url, color, label, mtlUrl) {
     const maxDim = Math.max(size.x, size.y, size.z) || 1;
 
     object.position.sub(center);
-    object.scale.setScalar(2.2 / maxDim);
+    object.scale.setScalar(2.0 / maxDim);
     scene.add(object);
+
+    const fitDistance = 2.0 / Math.tan((camera.fov * Math.PI) / 360) * 1.15;
+    camera.position.set(fitDistance * 0.25, fitDistance * 0.12, fitDistance);
+    controls.target.set(0, 0, 0);
+    controls.minDistance = fitDistance * 0.45;
+    controls.maxDistance = fitDistance * 5;
 
     loadingLabel.remove();
     animate();

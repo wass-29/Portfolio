@@ -32,18 +32,27 @@ window.addEventListener('scroll', () => {
 // ── Active nav link on scroll ──
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
+function updateActiveSection() {
+  const marker = window.innerHeight * 0.38;
+  let activeSection = sections[0];
 
-const observeSection = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      navLinks.forEach(a => a.classList.remove('active'));
-      const active = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
-      if (active) active.classList.add('active');
+  sections.forEach((section) => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= marker && rect.bottom > marker) {
+      activeSection = section;
     }
   });
-}, { threshold: 0.4 });
 
-sections.forEach(s => observeSection.observe(s));
+  navLinks.forEach(a => a.classList.remove('active'));
+  const active = activeSection
+    ? document.querySelector(`.nav-links a[href="#${activeSection.id}"]`)
+    : null;
+  if (active) active.classList.add('active');
+}
+
+window.addEventListener('scroll', updateActiveSection, { passive: true });
+window.addEventListener('resize', updateActiveSection);
+updateActiveSection();
 
 // ── Hamburger menu ──
 const hamburger = document.getElementById('hamburger');
@@ -364,6 +373,13 @@ const projectImages = {
   tef: [
     "assets/projects/tef/ecran de machine de mise en route du profilage des roues d'essieux trains.jpeg"
   ],
+  proto: [
+    'assets/projects/proto/cone tp rangée à sa base.jpg',
+    'assets/projects/proto/pistolet sable .jpg',
+    'assets/projects/proto/résultat après impression 3D du cone.jpg',
+    "assets/projects/proto/pistolet sable assemblé avec le cone tpu dans l'orifice tu tgv résultat.jpg",
+    'assets/projects/proto/contexte pistolet sable dans orifice tgv sans cone tpu (création nuage de poussière de silice).png'
+  ],
   tmax: [
     'assets/projects/tmax/tmac cao isométrie.png',
     'assets/projects/tmax/tmax cao de profil.png',
@@ -382,8 +398,7 @@ const projectImages = {
     'assets/projects/bim/bim CAO 2.png',
     'assets/projects/bim/bim CAO 3.png',
     'assets/projects/bim/bim CAO 4.png'
-  ],
-  proto: []
+  ]
 };
 
 const detailGalleryImages = {
@@ -453,7 +468,7 @@ function renderProjectAlbum(id) {
         slot.className = 'modal-album-slot';
         slot.innerHTML = `
           <div class="album-content">
-            <img src="${src}" alt="Projet ${id}" />
+            <img src="${encodeURI(src)}" alt="Projet ${id}" />
           </div>
         `;
         modalGrid.appendChild(slot);
@@ -475,7 +490,7 @@ function renderProjectAlbum(id) {
     modalGrid.innerHTML = images.map((src) => `
       <div class="modal-album-slot">
         <div class="album-content">
-          <img src="${src}" alt="Projet ${id}" />
+          <img src="${encodeURI(src)}" alt="Projet ${id}" />
         </div>
       </div>
     `).join('');
@@ -498,7 +513,7 @@ function renderDetailGallery(modal) {
   grid.innerHTML = images.map((src) => `
     <div class="modal-album-slot">
       <div class="album-content">
-        <img src="${src}" alt="${modal.id}" />
+        <img src="${encodeURI(src)}" alt="${modal.id}" />
       </div>
     </div>
   `).join('');
@@ -708,31 +723,82 @@ const objModels = {
 };
 
 let objViewers = {};
+const viewerModal = document.getElementById('viewer-modal');
+const viewerModalSlot = document.getElementById('viewer-modal-slot');
+const viewerModalClose = document.querySelector('.viewer-modal-close');
+const viewerModalBackdrop = document.querySelector('.viewer-modal-backdrop');
+const fullscreenViewerCards = document.querySelectorAll('.model-viewer-card');
+let activeViewerCard = null;
+let activeViewerPlaceholder = null;
+
+function openViewerModal(card) {
+  if (!viewerModal || !viewerModalSlot || !card || viewerModalSlot.contains(card)) return;
+  activeViewerCard = card;
+  activeViewerPlaceholder = document.createComment('viewer-placeholder');
+  card.parentNode.insertBefore(activeViewerPlaceholder, card);
+  viewerModalSlot.appendChild(card);
+  viewerModal.classList.remove('hidden');
+  viewerModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  window.dispatchEvent(new Event('resize'));
+}
+
+function closeViewerModal() {
+  if (!viewerModal || !activeViewerCard || !activeViewerPlaceholder) return;
+  activeViewerPlaceholder.parentNode.insertBefore(activeViewerCard, activeViewerPlaceholder);
+  activeViewerPlaceholder.remove();
+  activeViewerPlaceholder = null;
+  viewerModal.classList.add('hidden');
+  viewerModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = 'auto';
+  activeViewerCard = null;
+  window.dispatchEvent(new Event('resize'));
+}
+
+fullscreenViewerCards.forEach((card) => {
+  card.addEventListener('click', () => openViewerModal(card));
+  card.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openViewerModal(card);
+    }
+  });
+});
+
+viewerModalClose?.addEventListener('click', closeViewerModal);
+viewerModalBackdrop?.addEventListener('click', closeViewerModal);
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeViewerModal();
+});
 
 function init3DViewer(containerId, modelKey) {
   const container = document.getElementById(containerId);
   if (!container || objViewers[containerId]) return;
 
+  const threeApi = window.PORTFOLIO_THREE;
+  if (!threeApi) return;
+  const { THREE: Three, OrbitControls, OBJLoader, MTLLoader } = threeApi;
+
   const width = container.clientWidth;
   const height = container.clientHeight;
 
-  const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x15152a);
-  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+  const scene = new Three.Scene();
+  scene.background = new Three.Color(0x15152a);
+  scene.add(new Three.AmbientLight(0xffffff, 0.6));
 
-  const light = new THREE.DirectionalLight(0xffffff, 0.8);
+  const light = new Three.DirectionalLight(0xffffff, 0.8);
   light.position.set(5, 5, 5);
   scene.add(light);
 
-  const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
+  const camera = new Three.PerspectiveCamera(75, width / height, 0.1, 1000);
   camera.position.z = 5;
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  const renderer = new Three.WebGLRenderer({ antialias: true });
   renderer.setSize(width, height);
   renderer.setPixelRatio(window.devicePixelRatio);
   container.appendChild(renderer.domElement);
 
-  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
   controls.dampingFactor = 0.05;
   controls.autoRotate = true;
@@ -741,20 +807,29 @@ function init3DViewer(containerId, modelKey) {
   const model = objModels[modelKey];
   if (!model) return;
 
+  const resolvedObjUrl = encodeURI(model.obj);
+  const resolvedMtlUrl = model.mtl ? encodeURI(model.mtl) : null;
+
   const onLoad = (obj) => {
     obj.scale.set(1, 1, 1);
     obj.position.set(0, 0, 0);
     
-    const box = new THREE.Box3().setFromObject(obj);
-    const size = box.getSize(new THREE.Vector3());
+    const box = new Three.Box3().setFromObject(obj);
+    const size = box.getSize(new Three.Vector3());
     const maxDim = Math.max(size.x, size.y, size.z);
-    const scale = 5 / maxDim;
+    const scale = 2.0 / maxDim;
     obj.scale.multiplyScalar(scale);
     
-    const center = box.getCenter(new THREE.Vector3());
+    const center = box.getCenter(new Three.Vector3());
     obj.position.sub(center.multiplyScalar(scale));
     
     scene.add(obj);
+
+    const fitDistance = 2.0 / Math.tan((camera.fov * Math.PI) / 360) * 1.15;
+    camera.position.set(fitDistance * 0.25, fitDistance * 0.12, fitDistance);
+    controls.target.set(0, 0, 0);
+    controls.minDistance = fitDistance * 0.45;
+    controls.maxDistance = fitDistance * 5;
   };
 
   const onError = (error) => {
@@ -768,16 +843,16 @@ function init3DViewer(containerId, modelKey) {
   };
 
   if (model.mtl) {
-    const mtlLoader = new THREE.MTLLoader();
-    mtlLoader.load(model.mtl, (mtl) => {
+    const mtlLoader = new MTLLoader();
+    mtlLoader.load(resolvedMtlUrl, (mtl) => {
       mtl.preload();
-      const objLoader = new THREE.OBJLoader();
+      const objLoader = new OBJLoader();
       objLoader.setMaterials(mtl);
-      objLoader.load(model.obj, onLoad, undefined, onError);
+      objLoader.load(resolvedObjUrl, onLoad, undefined, onError);
     }, undefined, onError);
   } else {
-    const objLoader = new THREE.OBJLoader();
-    objLoader.load(model.obj, onLoad, undefined, onError);
+    const objLoader = new OBJLoader();
+    objLoader.load(resolvedObjUrl, onLoad, undefined, onError);
   }
 
   function animate() {
@@ -797,3 +872,6 @@ function init3DViewer(containerId, modelKey) {
     renderer.setSize(w, h);
   });
 }
+
+window.closeExpModal = closeExpModal;
+window.closeEduModal = closeEduModal;

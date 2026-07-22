@@ -4,13 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wassim Soussou — Ingénieur en devenir</title>
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js"
-      }
-    }
-  </script>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -362,7 +355,7 @@
           <div class="project-tags">
             <span>BIM</span><span>C++</span><span>Blueprints</span>
           </div>
-          <div class="model-viewer-card">
+          <div class="model-viewer-card" role="button" tabindex="0" aria-label="Agrandir la vue 3D du projet BIM">
             <div id="viewer-bim" class="model-viewer"></div>
             <p class="viewer-hint">💡 Faites glisser pour tourner le modèle et zoomer avec la molette.</p>
           </div>
@@ -379,7 +372,7 @@
           <div class="project-tags">
             <span>CAO</span><span>Impression 3D</span><span>Maintenance</span>
           </div>
-          <div class="model-viewer-card">
+          <div class="model-viewer-card" role="button" tabindex="0" aria-label="Agrandir la vue 3D du projet de prototypage">
             <div id="viewer-proto" class="model-viewer"></div>
             <p class="viewer-hint">💡 Manipulez la vue 3D directement depuis la page.</p>
           </div>
@@ -976,6 +969,15 @@
     <div class="lightbox-panel">
       <button class="lightbox-close" aria-label="Fermer">×</button>
       <img id="lightbox-img" src="" alt="" />
+    </div>
+  </div>
+
+  <!-- Fullscreen 3D viewer modal -->
+  <div id="viewer-modal" class="viewer-modal hidden" aria-hidden="true">
+    <div class="viewer-modal-backdrop"></div>
+    <div class="viewer-modal-panel" role="dialog" aria-modal="true">
+      <button class="viewer-modal-close" aria-label="Fermer"><i class="fas fa-times"></i></button>
+      <div id="viewer-modal-slot" class="viewer-modal-slot"></div>
     </div>
   </div>
 
