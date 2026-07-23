@@ -404,14 +404,14 @@ const projectImages = {
 
 const detailGalleryImages = {
   'exp-sncf-current': [
-    "assets/experience/sncf-current/à l'interrieur du TEE .jpeg",
+    "assets/experience/sncf-current/à l'interrieur du TEE .jpeg",
     'assets/experience/sncf-current/mon bureau au travail.jpeg'
   ],
   'exp-sncf-stage': [
     'assets/experience/sncf-stage/vue de la voie du tour en fosse.jpeg',
-    "assets/experience/sncf-stage/vue d'un agent qui vérifie les cotes après reprofilage de roues.jpeg",
+    "assets/experience/sncf-stage/vue d'un agent qui vérifie les cotes après reprofilage de roues.jpeg",
     "assets/experience/sncf-stage/vue d'un TGV M (rame d'essai).jpeg",
-    'assets/experience/sncf-stage/amas de copeaux de matière après reprofilage de roues au Tef.jpeg',
+    'assets/experience/sncf-stage/amas de copeaux de matière après reprofilage de roues au Tef.jpeg',
     'assets/experience/sncf-stage/vue sur les rames du techicentre est européen.jpeg'
   ],
   'exp-bafa': [
@@ -421,17 +421,17 @@ const detailGalleryImages = {
   ],
   'exp-serveur': [
     'assets/experience/serveur/logo saveur et passion.jpeg',
-    'assets/experience/serveur/vue du marché au centre.jpeg',
-    'assets/experience/serveur/vue du marché côté gauche.jpeg',
-    'assets/experience/serveur/vue du marché côté gauche (entrée).jpeg',
-    'assets/experience/serveur/vue du marché en face.jpeg'
+    'assets/experience/serveur/vue du marché au centre.jpeg',
+    'assets/experience/serveur/vue du marché côté gauche.jpeg',
+    'assets/experience/serveur/vue du marché côté gauche (entrée).jpeg',
+    'assets/experience/serveur/vue du marché en face.jpeg'
   ],
   'exp-aeronautique': [
-    'assets/experience/aeronautique/première impression de CATIA au bureau de BL.PO.jpeg',
+    'assets/experience/aeronautique/première impression de CATIA au bureau de BL.PO.jpeg',
     'assets/experience/aeronautique/moi au commande de l\'A380.jpeg',
     'assets/experience/aeronautique/A380.jpeg',
-    'assets/experience/aeronautique/reacteur en réparation.jpeg',
-    'assets/experience/aeronautique/vue des réacteur en décompasition.jpeg',
+    'assets/experience/aeronautique/reacteur en réparation.jpeg',
+    'assets/experience/aeronautique/vue des réacteur en décompasition.jpeg',
     'assets/experience/aeronautique/Avion au zephyr.jpeg'
   ],
   'edu-cesi': [
