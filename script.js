@@ -10,6 +10,7 @@ function applyTheme(theme) {
   body.setAttribute('data-theme', theme);
   if (themeToggle) {
     themeToggle.setAttribute('data-active', theme === 'light' ? 'light' : 'dark');
+    themeToggle.classList.toggle('active', theme === 'light');
     themeToggle.setAttribute('aria-pressed', String(theme === 'light'));
   }
 }
@@ -451,7 +452,7 @@ function renderProjectAlbum(id) {
   const images = projectImages[id] || [];
   
   // Check if project has 3D model
-  if (id === 'proto' || id === 'bim') {
+  if (id === 'proto') {
     const viewerId = `viewer-3d-${id}`;
     modalGrid.innerHTML = `
       <div class="modal-album-slot full-width">
@@ -715,10 +716,6 @@ const objModels = {
   proto: {
     obj: 'assets/projects/proto/Cone Pistolet DV.obj',
     mtl: null
-  },
-  bim: {
-    obj: 'assets/projects/bim/Assemblage GC V2.obj',
-    mtl: 'assets/projects/bim/Assemblage GC V2.mtl'
   }
 };
 

@@ -7,6 +7,13 @@
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three/build/three.module.js"
+      }
+    }
+  </script>
 </head>
 <body data-theme="dark">
   <!-- ═══════════════════════════════ NAV ═══════════════════════════════ -->
@@ -342,22 +349,6 @@
           </p>
           <div class="project-tags">
             <span>CATIA/CAO</span><span>TGV M</span><span>Bogies</span>
-          </div>
-        </div>
-
-        <div class="project-card" data-project="bim">
-          <div class="project-icon"><i class="fas fa-project-diagram"></i></div>
-          <h3>BIM & Supervision industrielle</h3>
-          <p>
-            Modélisation haut-fidélité des machines du TEE, intégration dans une maquette
-            numérique et animation de données de maintenance en temps réel.
-          </p>
-          <div class="project-tags">
-            <span>BIM</span><span>C++</span><span>Blueprints</span>
-          </div>
-          <div class="model-viewer-card" role="button" tabindex="0" aria-label="Agrandir la vue 3D du projet BIM">
-            <div id="viewer-bim" class="model-viewer"></div>
-            <p class="viewer-hint">💡 Faites glisser pour tourner le modèle et zoomer avec la molette.</p>
           </div>
         </div>
 
