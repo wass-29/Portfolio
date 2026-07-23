@@ -388,10 +388,10 @@ const projectImages = {
     'assets/projects/tmax/Tmax sur terrain.jpeg'
   ],
   bogie: [
-    'assets/projects/bogie/résulatat bref de la bogie CAO.png',
-    "assets/projects/bogie/préparation du profilage d'essieu (vue de dessous).jpeg",
-    'assets/projects/bogie/zoom essieu usure de la bogie usée.jpeg',
-    'assets/projects/bogie/bogie usée.jpeg'
+    'assets/projects/bogie/résulatat bref de la bogie CAO.png',
+    "assets/projects/bogie/préparation du profilage d'essieu (vue de dessous).jpeg",
+    'assets/projects/bogie/zoom essieu usure de la bogie usée.jpeg',
+    'assets/projects/bogie/bogie usée.jpeg'
   ],
   bim: [
     'assets/projects/bim/Bim CAO vue de dessus.png',
