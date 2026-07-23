@@ -25,7 +25,9 @@ Ajouter de vrais logos logiciels
 - Dans `index.html`, les items utilisent `<img src="assets/logo-xxxxx.svg" class="logo-img">`.
 
 Déploiement
-- Le dépôt GitHub est déjà configuré; pour publier via GitHub Pages activez Pages dans les settings du repo et choisissez la branche `main`.
+- Prévisualisation locale: http://127.0.0.1:8000/index.html
+- Site public GitHub Pages: https://wass-29.github.io/Portfolio/
+- Le dépôt GitHub est déjà configuré; pour publier via GitHub Pages activez Pages dans les settings du repo et choisissez la branche `gh-pages`.
 
 Si tu veux, je peux:
 - intégrer tes vraies images (envoie-les ici ou indique où les récupérer),
