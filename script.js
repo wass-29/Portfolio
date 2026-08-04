@@ -550,6 +550,14 @@ function openEduModal(eduId) {
   }
 }
 
+function closeExpModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+  }
+}
+
 function closeProjectModal() {
   // Cleanup 3D viewers
   Object.keys(objViewers).forEach(key => {
