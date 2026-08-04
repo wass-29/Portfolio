@@ -375,11 +375,11 @@ const projectImages = {
     "assets/projects/tef/ecran de machine de mise en route du profilage des roues d'essieux trains.jpeg"
   ],
   proto: [
-    'assets/projects/proto/cone tp rangée à sa base.jpg',
+    'assets/projects/proto/cone tp rangée à sa base.jpg',
     'assets/projects/proto/pistolet sable .jpg',
-    'assets/projects/proto/résultat après impression 3D du cone.jpg',
-    "assets/projects/proto/pistolet sable assemblé avec le cone tpu dans l'orifice tu tgv résultat.jpg",
-    'assets/projects/proto/contexte pistolet sable dans orifice tgv sans cone tpu (création nuage de poussière de silice).png'
+    'assets/projects/proto/résultat après impression 3D du cone.jpg',
+    "assets/projects/proto/pistolet sable assemblé avec le cone tpu dans l'orifice tu tgv résultat.jpg",
+    'assets/projects/proto/contexte pistolet sable dans orifice tgv sans cone tpu (création nuage de poussière de silice).png'
   ],
   tmax: [
     'assets/projects/tmax/tmac cao isométrie.png',
