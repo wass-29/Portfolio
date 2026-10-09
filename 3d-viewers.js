@@ -60,6 +60,7 @@ function createViewer(container, url, color, label) {
   container.appendChild(loadingLabel);
 
   const resolvedUrl = encodeURI(url);
+  let animationStarted = false;
 
   const animate = () => {
     requestAnimationFrame(animate);
@@ -124,7 +125,6 @@ function createViewer(container, url, color, label) {
     controls.update();
 
     loadingLabel.remove();
-    animate();
   };
 
   const handleError = (error) => {
@@ -133,6 +133,11 @@ function createViewer(container, url, color, label) {
   };
 
   loader.load(resolvedUrl, handleModel, undefined, handleError);
+
+  if (!animationStarted) {
+    animationStarted = true;
+    animate();
+  }
 
   window.addEventListener('resize', resizeRenderer);
   new ResizeObserver(resizeRenderer).observe(container);

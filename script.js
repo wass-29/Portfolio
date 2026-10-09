@@ -12,6 +12,13 @@ function applyTheme(theme) {
     themeToggle.setAttribute('data-active', theme === 'light' ? 'light' : 'dark');
     themeToggle.classList.toggle('active', theme === 'light');
     themeToggle.setAttribute('aria-pressed', String(theme === 'light'));
+    themeToggle.querySelector('.theme-switch__knob').style.setProperty(
+      'left',
+      theme === 'light' ? '3px' : '43px',
+      'important'
+    );
+    themeToggle.querySelector('.theme-switch__sun').style.setProperty('opacity', theme === 'light' ? '1' : '0', 'important');
+    themeToggle.querySelector('.theme-switch__moon').style.setProperty('opacity', theme === 'light' ? '0' : '1', 'important');
   }
 }
 
@@ -222,28 +229,79 @@ const projects = {
       <p><strong>Livrable</strong> : prototype fonctionnel construit et testé sur piste. <strong>Validation</strong> : tests dynamiques conformes cahier des charges, prêt pour phase production.</p>
     `
   },
-  tef: {
-    title: 'Tour en Fosse — Numérisation & Innovation',
-    tools: 'Fusion 360 / SolidWorks / BIM',
+  'tef-context': {
+    title: 'Contexte & Enjeu',
+    tools: 'Gestion de projet, Analyse de l’existant',
     body: `
       <h3>Contexte</h3>
-      <p>Mission TEF : numérisation du Tour en Fosse, machine de reprofilage des essieux, pour produire une maquette 3D exploitable en rénovation et maintenance.</p>
-
-      <h3>Relevés terrain & documentation</h3>
-      <p>Étude sur site avec plans partiels et sources historiques. Reconstitution CAO à partir de mesures manuelles, photos et retours des agents du technicentre.</p>
-
-      <h3>Intégration BIM</h3>
-      <ul>
-        <li>Modélisation du bâti, des réseaux électriques, hydrauliques et pneumatiques</li>
-        <li>Réintégration des gabarits et dégagements d'accès pour maintenance</li>
-        <li>Gestion des interfaces homme-machine et flux de circulation</li>
-      </ul>
-
+      <p>Le Technicentre Est Européen (TEE) de la SNCF est une infrastructure vitale pour la maintenance lourde des rames TGV. Au cœur de ce dispositif se trouve le Tour en Fosse (TEF), une machine permettant le reprofilage des roues d'essieux sans avoir à démonter la rame, un gain de temps et d'argent crucial.</p>
+      <h3>Problématique</h3>
+      <p>Les installations vieillissent et les plans historiques ne correspondent plus toujours à la réalité du terrain. Pour préparer les futures rénovations et intégrer de nouvelles technologies, une mise à jour totale de la documentation technique est impérative.</p>
       <h3>Objectif</h3>
-      <p>Fournir un jumeau numérique fiable pour audits de rénovation, études de maintenance préventive et préparation d'interventions sur site.</p>
-
+      <p>Lancer un chantier de numérisation massif pour obtenir un jumeau numérique complet (Digital Twin) de l'installation, permettant de simuler et de valider les futures opérations de maintenance en toute sécurité.</p>
+    `
+  },
+  'tef-mission': {
+    title: 'Mission Principale',
+    tools: 'SolidWorks, Fusion 360, Lecture de plans 2D complexes',
+    body: `
+      <h3>Contexte</h3>
+      <p>La création d'un jumeau numérique exige une base de données fiable. Les anciens plans topographiques (plus de 17 documents) devaient être décryptés, recoupés et transformés en modèles 3D intelligents.</p>
+      <h3>La Mission</h3>
+      <p>Piloter la modélisation intégrale du TEF. Il a fallu reconstruire virtuellement la fosse, la machine de reprofilage, et surtout concevoir de nouvelles infrastructures capables d'accueillir la modernisation des réseaux (câbles, data) sans perturber le fonctionnement existant.</p>
       <h3>Résultat</h3>
-      <p>Maquette 3D prête à être utilisée pour analyse des points critiques, optimisation d'interventions et gestion des opérations SST sur le TEE.</p>
+      <p>Une maquette CAO de haute précision, devenue la référence pour l'équipe du TEE. Elle permet de valider les encombrements avant toute fabrication réelle, évitant les erreurs coûteuses sur le terrain.</p>
+    `
+  },
+  'tef-releves': {
+    title: 'Relevés & Mesures Terrain',
+    tools: 'Instruments de métrologie, EPI, Relevés manuels',
+    body: `
+      <h3>Contexte</h3>
+      <p>L'environnement industriel est rude et les plans théoriques diffèrent souvent de la réalité après des années d'exploitation et de petites modifications non documentées.</p>
+      <h3>Action sur le terrain</h3>
+      <p>Descentes régulières directement sur les voies et dans la fosse pour effectuer des campagnes de mesures minutieuses. Confrontation stricte entre l'existant physique et les modèles CAO en cours de création. Prise en compte des contraintes d'accès pour les techniciens (SST).</p>
+      <h3>Résultat</h3>
+      <p>Ajustement millimétrique du modèle 3D. Cette étape a garanti que chaque pièce modélisée ou conçue s'insère parfaitement dans la fosse sans aucun conflit d'interférence avec les tuyauteries ou le câblage existant.</p>
+    `
+  },
+  'tef-reseau': {
+    title: 'Infrastructure Réseau',
+    tools: 'SolidWorks (Mécano-soudure), Calculs de structure',
+    body: `
+      <h3>Contexte</h3>
+      <p>Pour moderniser le TEF, de nouveaux flux réseaux (data et câbles de puissance) doivent traverser la fosse de maintenance. Ils doivent être totalement protégés des chutes d'outils et des copeaux de métal, tout en assurant une surface de marche sécurisée pour les opérateurs.</p>
+      <h3>Conception et Ingénierie</h3>
+      <p>Modélisation d'une armature métallique de 12 m² spécifiquement pensée pour s'adapter à la fosse. La structure a été divisée en 4 sous-ensembles pour faciliter le montage. Utilisation de tubes carrés en acier de 50x50 mm pour la robustesse, recouverts de dalles amovibles de 1 m² garantissant un accès rapide aux conduits en-dessous.</p>
+      <h3>Résultat</h3>
+      <p>Un plancher technique surélevé et modulaire qui valide toutes les normes de Santé et Sécurité au Travail (SST) et pérennise l'installation des nouveaux réseaux du TEE.</p>
+    `
+  },
+  'tef-bim': {
+    title: 'Bim Digital & Twin',
+    tools: 'SolidWorks (Assemblages complexes), Concepts BIM',
+    body: `
+      <h3>Contexte</h3>
+      <p>L'industrie ferroviaire bascule vers l'industrie 4.0. Le modèle 3D ne doit pas être qu'un simple dessin, mais une maquette intelligente intégrant les réseaux, les machines animées et les flux de circulation.</p>
+      <h3>Intégration</h3>
+      <p>Gestion de la complexité géométrique avec des assemblages multi-niveaux. Réintégration des gabarits et des dégagements d'accès pour s'assurer que les opérations de maintenance futures se feront de manière ergonomique.</p>
+      <h3>Objectif</h3>
+      <p>Fournir un jumeau numérique fiable qui sert de socle pour la future supervision en temps réel des capteurs du TEF. C'est un outil d'aide à la décision stratégique pour le technicentre.</p>
+    `
+  },
+  'tef-competences': {
+    title: 'Compétences Valorisées',
+    tools: 'Rigueur professionnelle, SolidWorks, Fusion 360',
+    body: `
+      <h3>Contexte</h3>
+      <p>Ce projet majeur, étalé sur 3 ans, exige une progression constante, de la conception basique à l'intégration de systèmes complexes en milieu industriel exigeant.</p>
+      <h3>Compétences Techniques</h3>
+      <p>Expertise avancée sur SolidWorks et Fusion 360. Maîtrise des modules de mécano-soudure, des assemblages massifs et de la mise en plan industrielle respectant les normes ISO.</p>
+      <h3>Savoir-être (Soft Skills)</h3>
+      <ul>
+        <li><strong>Méthodologie :</strong> Capacité à synthétiser des données brutes (plans 2D, relevés) en un système 3D cohérent.</li>
+        <li><strong>Autonomie :</strong> Gestion des priorités, communication directe avec les agents de maîtrise et respect des délais dans un projet de longue haleine.</li>
+      </ul>
     `
   },
   sablage: {
@@ -337,7 +395,7 @@ const projects = {
     `
   },
   proto: {
-    title: 'Prototypage rapide & impression 3D',
+    title: 'Quadricycle EV4 & Impression 3D',
     tools: 'Fusion 360 / Z-Suite / Cura / Creality Print',
     body: `
       <h3>Rôle</h3>
@@ -374,6 +432,29 @@ const projectImages = {
   tef: [
     "assets/projects/tef/ecran de machine de mise en route du profilage des roues d'essieux trains.jpeg"
   ],
+  'tef-context': [
+    'assets/tef/contexte & enjeu/IMG_1076.jpeg',
+    'assets/tef/contexte & enjeu/Pasted Graphic 6.png'
+  ],
+  'tef-mission': [
+    'assets/tef/Mission Principale/Pasted Graphic 2.png',
+    'assets/tef/Mission Principale/Pasted Graphic 3.png'
+  ],
+  'tef-releves': [
+    'assets/tef/Relevés et Mesure de Trains/Pasted Graphic 12.png',
+    'assets/tef/Relevés et Mesure de Trains/Pasted Graphic 13.png'
+  ],
+  'tef-reseau': [
+    'assets/tef/Infrastructure Réseau/Pasted Graphic 8.png',
+    "assets/tef/Infrastructure Réseau/Vue d'ensemble du plancher.png"
+  ],
+  'tef-bim': [
+    'assets/tef/Bim Digital & Twin/Pasted Graphic 5.png',
+    'assets/tef/Bim Digital & Twin/Pasted Graphic 7.png'
+  ],
+  'tef-competences': [
+    'assets/tef/Compétences Valorisées/Pasted Graphic 9.png'
+  ],
   proto: [
     'assets/projects/proto/cone tp rangée à sa base.jpg',
     'assets/projects/proto/pistolet sable .jpg',
@@ -382,12 +463,14 @@ const projectImages = {
     'assets/projects/proto/contexte pistolet sable dans orifice tgv sans cone tpu (création nuage de poussière de silice).png'
   ],
   tmax: [
+    'assets/projects/Image page de garde bogie et TMAX/page de garde TMAX.png',
     'assets/projects/tmax/tmac cao isométrie.png',
     'assets/projects/tmax/tmax cao de profil.png',
     'assets/projects/tmax/plaquette de tournage.jpeg',
     'assets/projects/tmax/Tmax sur terrain.jpeg'
   ],
   bogie: [
+    'assets/projects/Image page de garde bogie et TMAX/page de garde bogie.png',
     'assets/projects/bogie/résulatat bref de la bogie CAO.png',
     "assets/projects/bogie/préparation du profilage d'essieu (vue de dessous).jpeg",
     'assets/projects/bogie/zoom essieu usure de la bogie usée.jpeg',
@@ -400,6 +483,15 @@ const projectImages = {
     'assets/projects/bim/bim CAO 3.png',
     'assets/projects/bim/bim CAO 4.png'
   ]
+};
+
+const projectImageFolders = {
+  'tef-context': 'assets/tef/contexte & enjeu/',
+  'tef-mission': 'assets/tef/Mission Principale/',
+  'tef-releves': 'assets/tef/Relevés et Mesure de Trains/',
+  'tef-reseau': 'assets/tef/Infrastructure Réseau/',
+  'tef-bim': 'assets/tef/Bim Digital & Twin/',
+  'tef-competences': 'assets/tef/Compétences Valorisées/'
 };
 
 const detailGalleryImages = {
@@ -447,6 +539,10 @@ const detailGalleryImages = {
   ]
 };
 
+function encodeAssetPath(path) {
+  return encodeURI(path.normalize('NFC'));
+}
+
 function renderProjectAlbum(id) {
   const modalGrid = document.getElementById('modal-album-grid');
   const images = projectImages[id] || [];
@@ -469,7 +565,7 @@ function renderProjectAlbum(id) {
         slot.className = 'modal-album-slot';
         slot.innerHTML = `
           <div class="album-content">
-            <img src="${encodeURI(src)}" alt="Projet ${id}" />
+            <img src="${encodeAssetPath(src)}" alt="Projet ${id}" />
           </div>
         `;
         modalGrid.appendChild(slot);
@@ -484,14 +580,14 @@ function renderProjectAlbum(id) {
     modalGrid.innerHTML = `
       <div class="modal-album-slot">
         <div class="album-content">
-          <div class="modal-album-note">Aucune image disponible dans assets/projects/${id}/</div>
+          <div class="modal-album-note">Ajoutez vos images dans ${projectImageFolders[id] || `assets/projects/${id}/`}</div>
         </div>
       </div>`;
   } else {
     modalGrid.innerHTML = images.map((src) => `
       <div class="modal-album-slot">
         <div class="album-content">
-          <img src="${encodeURI(src)}" alt="Projet ${id}" />
+          <img src="${encodeAssetPath(src)}" alt="Projet ${id}" />
         </div>
       </div>
     `).join('');
@@ -514,7 +610,7 @@ function renderDetailGallery(modal) {
   grid.innerHTML = images.map((src) => `
     <div class="modal-album-slot">
       <div class="album-content">
-        <img src="${encodeURI(src)}" alt="${modal.id}" />
+        <img src="${encodeAssetPath(src)}" alt="${modal.id}" />
       </div>
     </div>
   `).join('');
@@ -577,6 +673,7 @@ function closeProjectModal() {
 
 document.querySelectorAll('.project-card').forEach(card => {
   card.addEventListener('click', (e) => {
+    if (e.target.closest('.model-viewer-card')) return;
     const id = card.dataset.project;
     if (id) {
       e.preventDefault();
@@ -737,35 +834,31 @@ let activeViewerCard = null;
 let activeViewerPlaceholder = null;
 
 function openViewerModal(card) {
-  if (!viewerModal || !viewerModalSlot || !card || viewerModalSlot.contains(card)) return;
+  if (!viewerModal || !viewerModalSlot || !card) return;
   activeViewerCard = card;
-  activeViewerPlaceholder = document.createComment('viewer-placeholder');
-  card.parentNode.insertBefore(activeViewerPlaceholder, card);
-  viewerModalSlot.appendChild(card);
   viewerModal.classList.remove('hidden');
   viewerModal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
-  window.dispatchEvent(new Event('resize'));
 }
 
 function closeViewerModal() {
-  if (!viewerModal || !activeViewerCard || !activeViewerPlaceholder) return;
-  activeViewerPlaceholder.parentNode.insertBefore(activeViewerCard, activeViewerPlaceholder);
-  activeViewerPlaceholder.remove();
-  activeViewerPlaceholder = null;
+  if (!viewerModal) return;
   viewerModal.classList.add('hidden');
   viewerModal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = 'auto';
   activeViewerCard = null;
-  window.dispatchEvent(new Event('resize'));
 }
 
 fullscreenViewerCards.forEach((card) => {
-  card.addEventListener('click', () => openViewerModal(card));
+  card.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+  card.addEventListener('pointerdown', (e) => e.stopPropagation());
+  card.addEventListener('pointermove', (e) => e.stopPropagation());
+  card.addEventListener('pointerup', (e) => e.stopPropagation());
   card.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      openViewerModal(card);
     }
   });
 });
@@ -812,8 +905,8 @@ function init3DViewer(containerId, modelKey) {
   const model = objModels[modelKey];
   if (!model) return;
 
-  const resolvedObjUrl = encodeURI(model.obj);
-  const resolvedMtlUrl = model.mtl ? encodeURI(model.mtl) : null;
+  const resolvedObjUrl = encodeAssetPath(model.obj);
+  const resolvedMtlUrl = model.mtl ? encodeAssetPath(model.mtl) : null;
 
   const onLoad = (obj) => {
     obj.scale.set(1, 1, 1);
