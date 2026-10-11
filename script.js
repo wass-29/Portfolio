@@ -395,7 +395,7 @@ const projects = {
     `
   },
   proto: {
-    title: 'Quadricycle EV4 & Impression 3D',
+    title: 'Prototypage rapide & impression 3D',
     tools: 'Fusion 360 / Z-Suite / Cura / Creality Print',
     body: `
       <h3>Rôle</h3>
@@ -881,12 +881,15 @@ function init3DViewer(containerId, modelKey) {
   const height = container.clientHeight;
 
   const scene = new Three.Scene();
-  scene.background = new Three.Color(0x15152a);
-  scene.add(new Three.AmbientLight(0xffffff, 0.6));
+  scene.background = new Three.Color(0x1a2638);
+  scene.add(new Three.AmbientLight(0xffffff, 1.15));
 
   const light = new Three.DirectionalLight(0xffffff, 0.8);
-  light.position.set(5, 5, 5);
+  light.position.set(4, 6, 4);
   scene.add(light);
+  const fillLight = new Three.DirectionalLight(0x7dd3fc, 0.65);
+  fillLight.position.set(-3, 2, -4);
+  scene.add(fillLight);
 
   const camera = new Three.PerspectiveCamera(75, width / height, 0.1, 1000);
   camera.position.z = 5;
@@ -909,6 +912,20 @@ function init3DViewer(containerId, modelKey) {
   const resolvedMtlUrl = model.mtl ? encodeAssetPath(model.mtl) : null;
 
   const onLoad = (obj) => {
+    obj.traverse((child) => {
+      if (child.isMesh) {
+        child.material = new Three.MeshStandardMaterial({
+          color: 0xffffff,
+          side: Three.DoubleSide,
+          roughness: 0.68,
+          metalness: 0.12
+        });
+        child.add(new Three.LineSegments(
+          new Three.EdgesGeometry(child.geometry, 18),
+          new Three.LineBasicMaterial({ color: 0x102033, transparent: true, opacity: 0.9 })
+        ));
+      }
+    });
     obj.scale.set(1, 1, 1);
     obj.position.set(0, 0, 0);
     

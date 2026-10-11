@@ -15,7 +15,7 @@ const viewerConfigs = [
 
 function createViewer(container, url, color, label) {
   const scene = new THREE.Scene();
-  scene.background = null;
+  scene.background = new THREE.Color(0x1a2638);
 
   const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
   camera.position.set(2.6, 1.8, 4.2);
@@ -41,9 +41,6 @@ function createViewer(container, url, color, label) {
   controls.target.set(0, 0, 0);
 
   scene.add(new THREE.AmbientLight(0xffffff, 1.15));
-
-  scene.add(new THREE.AxesHelper(1.25));
-  scene.add(new THREE.GridHelper(4, 8, 0x93c5fd, 0xcbd5e1));
 
   const keyLight = new THREE.DirectionalLight(0xffffff, 1.25);
   keyLight.position.set(4, 6, 4);
@@ -84,10 +81,17 @@ function createViewer(container, url, color, label) {
           child.geometry.center();
           child.geometry.computeBoundingSphere();
         }
-        child.material = new THREE.MeshBasicMaterial({
-          color: 0x2563eb,
-          side: THREE.DoubleSide
+        child.material = new THREE.MeshStandardMaterial({
+          color: 0xffffff,
+          side: THREE.DoubleSide,
+          roughness: 0.68,
+          metalness: 0.12
         });
+        const edges = new THREE.LineSegments(
+          new THREE.EdgesGeometry(child.geometry, 18),
+          new THREE.LineBasicMaterial({ color: 0x102033, transparent: true, opacity: 0.9 })
+        );
+        child.add(edges);
         child.castShadow = true;
         child.receiveShadow = true;
       }
@@ -107,9 +111,6 @@ function createViewer(container, url, color, label) {
     object.scale.setScalar(scale);
     object.position.set(0, 0, 0);
     scene.add(object);
-
-    const helper = new THREE.BoxHelper(object, 0x4f6ef7);
-    scene.add(helper);
 
     const framedBox = new THREE.Box3().setFromObject(object);
     const framedCenter = framedBox.getCenter(new THREE.Vector3());
