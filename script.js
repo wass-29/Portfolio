@@ -774,10 +774,6 @@ function applyStaticDetailLanguage(language) {
     }
     modal.innerHTML = language === 'en' ? `${html}${modal.dataset.galleryHtml}` : modal.dataset.originalHtml;
   });
-  Object.entries(detailedEnglishContent).forEach(([id, html]) => {
-    const modal = document.querySelector(`#project-modal .modal-body`);
-    if (modal && modal.dataset.tefId === id) modal.innerHTML = html;
-  });
 }
 
 function applyTefLanguage(language) {
@@ -794,6 +790,13 @@ function applyTefLanguage(language) {
   });
   section.querySelector('.highlight-text h4').textContent = content.impactTitle;
   section.querySelector('.highlight-text p').textContent = content.impactBody;
+}
+
+function renderAcademicGallery(modal) {
+  const grid = modal.querySelector('.modal-album-grid');
+  if (!grid) return;
+  const images = detailGalleryImages[modal.id] || [];
+  grid.innerHTML = images.map(src => `<div class="modal-album-slot"><div class="album-content"><img src="${encodeAssetPath(src)}" alt="${modal.id}" /></div></div>`).join('');
 }
 
 function applyTheme(theme) {
