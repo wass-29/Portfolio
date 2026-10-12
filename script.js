@@ -700,6 +700,14 @@ function applyLanguage(language) {
   translateElement(document.body, currentLanguage);
   applyTefLanguage(currentLanguage);
   applyStaticDetailLanguage(currentLanguage);
+  const marketCompany = currentLanguage === 'en' ? 'Saveur et Passions Market' : 'Saveur et Passions';
+  document.querySelectorAll('.timeline-company').forEach(company => {
+    if (company.textContent.includes('Saveur et Passions')) company.textContent = marketCompany;
+  });
+  const marketTag = document.querySelector('#exp-serveur .detail-modal-tag');
+  if (marketTag) marketTag.textContent = currentLanguage === 'en'
+    ? 'Saveur et Passions Market — 2021 to Today'
+    : "Saveur et Passions — 2021 à Aujourd'hui";
   if (languageToggle) {
     window.dispatchEvent(new Event('languagechange'));
     languageToggle.textContent = currentLanguage === 'en' ? 'FR' : 'EN';
