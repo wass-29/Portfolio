@@ -5,6 +5,501 @@
 // ── Theme toggle ──
 const body = document.body;
 const themeToggle = document.getElementById('theme-toggle');
+const languageToggle = document.getElementById('language-toggle');
+
+const languagePairs = {
+  'Wassim Soussou — Ingénieur en devenir': 'Wassim Soussou — Aspiring Engineer',
+  'Changer le thème': 'Change theme',
+  'À propos': 'About',
+  'Compétences': 'Skills',
+  'Expériences': 'Experience',
+  'Projets': 'Projects',
+  'Formation': 'Education',
+  'Menu': 'Menu',
+  'Projeteur CAO — Dessinateur 3D': 'CAD Designer — 3D Modeler',
+  'Voir mes projets': 'View my projects',
+  'Me contacter': 'Contact me',
+  'Défiler vers le bas': 'Scroll down',
+  'À propos de moi': 'About me',
+  'Localisation': 'Location',
+  'Mobilité': 'Mobility',
+  'Permis B — Véhiculé': 'Driving licence — Mobile',
+  'Entreprise': 'Company',
+  'École': 'School',
+  'Ingénieur Généraliste': 'General Engineer',
+  'Jumeau numérique': 'Digital Twin',
+  'Projet ferroviaire': 'Railway Project',
+  'Mon stack technique': 'My technical stack',
+  'Savoir-être': 'Soft Skills',
+  'Persévérance': 'Perseverance',
+  'Curiosité technique': 'Technical curiosity',
+  'Travail en équipe': 'Teamwork',
+  'Adaptabilité': 'Adaptability',
+  'Parcours professionnel': 'Professional experience',
+  'Apprenti Ingénieur — Designer BIM & Superviseur de Machines': 'Engineering Apprentice — BIM Designer & Machine Supervisor',
+  'Stage de Conception — Bureau d’Études': 'Design Internship — Engineering Department',
+  "Stage de Conception — Bureau d'Études": 'Design Internship — Engineering Department',
+  'Animateur Diplômé (BAFA)': 'Certified Youth Leader (BAFA)',
+  'Serveur': 'Restaurant Server',
+  'Stage de 3e — Découverte Aéronautique': 'Year 10 Internship — Aerospace Discovery',
+  'Voir en détail →': 'View details →',
+  'Réalisations marquantes': 'Selected projects',
+  'Projet EVLV1': 'EVLV1 Project',
+  'Voir le détail du projet': 'View project details',
+  'Voir en détail le projet': 'View project details',
+  'Quadricycle électrique EV4 — Phase 1 & 2': 'EV4 Electric Quadricycle — Phases 1 & 2',
+  'Unité de coupe T-MAX P — Usinage optimisé': 'T-MAX P Cutting Unit — Optimized Machining',
+  'Bogie TGV M — Assemblage 3D': 'TGV M Bogie — 3D Assembly',
+  'Prototypage rapide & impression 3D': 'Rapid Prototyping & 3D Printing',
+  'Tour en Fosse (TEF) — Numérisation & Innovation': 'Wheel Lathe (TEF) — Digitization & Innovation',
+  'Contexte & Enjeux': 'Context & Challenges',
+  'Mission Principale': 'Main Mission',
+  'Relevés & Mesures Terrain': 'Field Surveys & Measurements',
+  'Infrastructure Réseau': 'Network Infrastructure',
+  'BIM & Digital Twin': 'BIM & Digital Twin',
+  'Compétences Valorisées': 'Valued Skills',
+  'Parcours académique': 'Academic background',
+  'Diplôme d’Ingénieur Généraliste': 'General Engineering Degree',
+  "Diplôme d'Ingénieur Généraliste": 'General Engineering Degree',
+  'Baccalauréat Général': 'General Baccalaureate',
+  'En cours': 'In progress',
+  'Travaillons ensemble': 'Let’s work together',
+  'Nom': 'Name',
+  'Votre nom': 'Your name',
+  'Sujet': 'Subject',
+  'Objet du message': 'Message subject',
+  'Message': 'Message',
+  'Votre message...': 'Your message...',
+  'Envoyer le message': 'Send message',
+  'Message envoyé ! Je vous réponds rapidement.': 'Message sent! I will reply shortly.',
+  'Fermer': 'Close',
+  'Titre du projet': 'Project title',
+  'Outils utilisés': 'Tools used',
+  'Description détaillée du projet.': 'Detailed project description.',
+  'Outils :': 'Tools:',
+  'Contexte': 'Context',
+  'Problématique': 'Challenge',
+  'Objectif': 'Objective',
+  'Résultat': 'Result',
+  'Résultats': 'Results',
+  'La Mission': 'The Mission',
+  'Conception et Ingénierie': 'Design & Engineering',
+  'Intégration': 'Integration',
+  'Compétences Techniques': 'Technical Skills',
+  'Savoir-être (Soft Skills)': 'Soft Skills',
+  'Compétences Développées': 'Skills Developed',
+  'Responsabilités': 'Responsibilities',
+  'Impact Personnel': 'Personal Impact',
+  'Contexte & Mission': 'Context & Mission',
+  'Projet Technique': 'Technical Project',
+  'Le Déclic': 'The Turning Point',
+  'Impact à Long Terme': 'Long-Term Impact',
+  'Parcours de Formation': 'Training Path',
+  'Apprentissage Personnel': 'Personal Learning',
+  'Spécialités Choisies': 'Chosen Specializations',
+  'Enseignements Complémentaires': 'Additional Subjects',
+  'Certifications Obtenues': 'Certifications Earned',
+  'Le Déclic Scolaire': 'The Academic Turning Point',
+  'Compétences Techniques Maîtrisées': 'Mastered Technical Skills',
+  'Méthodologie': 'Methodology',
+  'Autonomie': 'Autonomy',
+  'Chargement du modèle': 'Loading model',
+  'Vue 3D prête — faites glisser pour la manipuler': '3D view ready — drag to rotate',
+  'Le modèle n’a pas pu être chargé.': 'The model could not be loaded.',
+  'Impossible de charger le modèle 3D': 'Unable to load 3D model',
+  'Ajoutez vos images dans': 'Add your images to',
+  'Aucune image disponible pour': 'No images available for',
+  'Aucune image disponible dans': 'No images available in'
+};
+
+Object.assign(languagePairs, {
+  'Unité de coupe T-MAX P': 'T-MAX P Cutting Unit',
+  'Bogie TGV M — Assemblage 3D': 'TGV M Bogie — 3D Assembly',
+  'Quadricycle EV4 & Impression 3D': 'EV4 Quadricycle & 3D Printing',
+  'Prototypage rapide & impression 3D': 'Rapid Prototyping & 3D Printing',
+  'À propos': 'About',
+  'Compétences': 'Skills',
+  'Expériences': 'Experience',
+  'Projets': 'Projects',
+  'Formation': 'Education',
+  '01 — Introduction': '01 — Introduction',
+  '02 — Compétences': '02 — Skills',
+  '03 — Expériences': '03 — Experience',
+  '04 — Projets': '04 — Projects',
+  '05 — Formation': '05 — Education',
+  '06 — Contact': '06 — Contact',
+  'À propos de moi': 'About me',
+  'Mon stack technique': 'My technical stack',
+  'Parcours professionnel': 'Professional experience',
+  'Réalisations marquantes': 'Selected projects',
+  'Parcours académique': 'Academic background',
+  'Travaillons ensemble': 'Let’s work together',
+  'Je suis dessinateur 3D et projeteur CAO, spécialisé dans les systèmes industriels et la modélisation de machines lourdes. Mon terrain : le Technicentre Est Européen de la SNCF, où je transforme des plans 2D en jumeaux numériques précis.': 'I am a 3D designer and CAD draftsman specializing in industrial systems and heavy-machine modeling. My field is SNCF’s Technicentre Est Européen, where I transform 2D drawings into accurate digital twins.',
+  "Mon objectif est clair : concevoir des solutions mécaniques réalistes, robustes et prêtes à être fabriquées. J'aime quand le visuel raconte déjà la fonction.": 'My goal is clear: to design realistic, robust mechanical solutions ready for manufacturing. I like visuals that already explain their function.',
+  "Je poursuis actuellement mon cursus d'ingénieur généraliste au CESI Nanterre tout en apportant de la valeur sur le terrain comme Concepteur 3D / Designer BIM à la SNCF.": 'I am currently completing my general engineering degree at CESI Nanterre while contributing on the ground as a 3D Designer / BIM Designer at SNCF.',
+  'Projets industriels': 'Industrial projects',
+  "Ans d'alternance": 'Years of work-study training',
+  'Innovation SNCF soumise': 'SNCF innovation submitted',
+  'Localisation': 'Location',
+  'Mobilité': 'Mobility',
+  'Permis B — Véhiculé': 'Driving licence — Mobile',
+  'Entreprise': 'Company',
+  'École': 'School',
+  'Savoir-être': 'Soft Skills',
+  'Persévérance': 'Perseverance',
+  'Curiosité technique': 'Technical curiosity',
+  'Travail en équipe': 'Teamwork',
+  'Autonomie': 'Autonomy',
+  'Communication': 'Communication',
+  'Adaptabilité': 'Adaptability',
+  "Modélisation 3D de l'intégralité des machines du TEE pour constitution d'un jumeau numérique complet. Collaboration étroite avec un autre alternant pour l'intégration des modèles dans le TEE virtuel. Gestion autonome du FabLab via FabTrack : réception et traitement des demandes de prototypage.": '3D modeling of all TEE machines to create a complete digital twin. Close collaboration with another apprentice to integrate the models into the virtual TEE. Independent FabLab management through FabTrack, including prototype request intake and processing.',
+  "Optimisation des opérations d'usinage : étude et modélisation pour obtenir des copeaux courts et spiralés. Premier contact concret avec le fonctionnement d'un bureau d'études industriel. Stage déterminant dans la confirmation de ma voie ingénieur.": 'Optimization of machining operations through analysis and modeling to produce short, spiral chips. First practical experience of an industrial engineering department. A defining internship that confirmed my engineering path.',
+  "Obtention du BAFA après trois stages de formation. Encadrement d'enfants, gestion de groupe, prise de responsabilités.": 'Obtained the BAFA after three training sessions. Supervision of children, group management, and responsibility-taking.',
+  "Travail du week-end en parallèle des études. Développement d'une vraie aisance relationnelle, d'un sens de l'organisation et d'une capacité à garder son calme sous pression.": 'Weekend work alongside my studies. Developed strong interpersonal skills, organization, and the ability to stay calm under pressure.',
+  'Serveur': 'Market Restaurant Server',
+  'Saveur et Passions': 'Saveur et Passions Market Restaurant',
+  "Première immersion dans la maintenance aéronautique. Moment fondateur : la certitude de vouloir travailler dans ce secteur d'exigence et de précision.": 'First immersion in aircraft maintenance. A defining experience that confirmed my ambition to work in a demanding, precision-driven industry.',
+  'Aéronautique': 'Aerospace',
+  'Maintenance': 'Maintenance',
+  'Quadricycle électrique EV4 — Phase 1 & 2': 'EV4 Electric Quadricycle — Phases 1 & 2',
+  "Conception du quadricycle urbain EV4 en deux temps : cahier des charges fonctionnel et développement du module de suspension / pivotement de la roue avant. Ce projet allie mobilité, éco-conception et sécurité mécanique.": 'Two-phase design of the EV4 urban quadricycle: functional specifications followed by development of the front-wheel suspension and pivot module. This project combines mobility, eco-design, and mechanical safety.',
+  'Cahier des charges': 'Specifications',
+  'norme urbaine': 'urban standards',
+  'freins hydraulique 4 roues': 'four-wheel hydraulic brakes',
+  'démontabilité et maintenance': 'disassembly and maintenance',
+  'optimisation de la solidité': 'strength optimization',
+  'respect du cahier des charges F0': 'compliance with the F0 specifications',
+  'Unité de coupe T-MAX P — Usinage optimisé': 'T-MAX P Cutting Unit — Optimized Machining',
+  "Conception CAO de l'unité de coupe et de sa plaquette. Objectif : optimiser l'évacuation des copeaux en spirale lors du reprofilage au TEF. Analyse, simulation et modélisation.": 'CAD design of the cutting unit and insert. Objective: optimize spiral chip evacuation during TEF wheel reprofiling. Analysis, simulation, and modeling.',
+  'Bogie TGV M — Assemblage 3D': 'TGV M Bogie — 3D Assembly',
+  "Modélisation intégrale d'un bogie TGV M à partir de plans techniques partiels. Respect strict des nouveaux gabarits réglementaires et de l'entre-roue de 1360 mm.": 'Complete modeling of a TGV M bogie from partial technical drawings. Strict compliance with new regulatory gauges and the 1360 mm wheelbase.',
+  'Prototypage rapide & impression 3D': 'Rapid Prototyping & 3D Printing',
+  "Conception des trains roulants de l'EV4 (direction et pivotement). Calculs de structure et dimensionnement statique. Réalisation de pièces imprimées en 3D (vis d'urgence).": 'Design of the EV4 running gear, including steering and pivoting. Structural calculations and static sizing. Production of 3D-printed parts, including emergency screws.',
+  'Manipulez la vue 3D directement depuis la page.': 'Manipulate the 3D view directly on the page.',
+  'SolidWorks': 'SolidWorks',
+  'Usinage': 'Machining',
+  'Copeaux': 'Chips',
+  'TGV M': 'TGV M',
+  'Bogies': 'Bogies',
+  'Impression 3D': '3D Printing',
+  'Contexte & Enjeux': 'Context & Challenges',
+  'Mission Principale': 'Main Mission',
+  'Relevés & Mesures Terrain': 'Field Surveys & Measurements',
+  'Infrastructure Réseau': 'Network Infrastructure',
+  'Compétences Valorisées': 'Valued Skills',
+  'Projet Majeur — 3 ans': 'Major Project — 3 years',
+  'L’impact humain': 'Human impact',
+  "L'impact humain": 'Human impact',
+  'Certification PIX': 'PIX certification',
+  'Projets BTS CPI': 'BTS CPI Projects',
+  'EV4 — Quadricycle électrique': 'EV4 — Electric Quadricycle',
+  'Vérin Festo': 'Festo Cylinder',
+  'Fauteuil de dentiste': 'Dental Chair',
+  'Cahier des charges électrique': 'Electrical Specifications',
+  'Nom': 'Name',
+  'Votre nom': 'Your name',
+  'Sujet': 'Subject',
+  'Objet du message': 'Message subject',
+  'Votre message...': 'Your message...',
+  'Envoyer le message': 'Send message',
+  'Message envoyé ! Je vous réponds rapidement.': 'Message sent! I will reply shortly.',
+  'Permis B — Véhiculé': 'Driving licence — Mobile'
+});
+
+Object.assign(languagePairs, {
+  "Je poursuis actuellement mon cursus d'ingénieur généraliste au": 'I am currently completing my general engineering degree at',
+  'tout en apportant de la valeur sur le terrain comme': 'while contributing on the ground as',
+  'à la SNCF.': 'at SNCF.',
+  'Phase 1': 'Phase 1',
+  'Phase 2': 'Phase 2',
+  'cahier des charges': 'specifications',
+  'structure aluminium': 'aluminum structure',
+  'batterie 36V': '36V battery',
+  'freins hydraulique 4 roues': 'four-wheel hydraulic brakes',
+  'démontabilité': 'disassembly',
+  'maintenance': 'maintenance',
+  'conception du bras avant droit': 'design of the right front arm',
+  'module de pivotement': 'pivot module',
+  'rotules d10': 'D10 ball joints',
+  'modélisation intégrale': 'complete modeling',
+  'plans techniques partiels': 'partial technical drawings',
+  'gabarits réglementaires': 'regulatory gauges',
+  "entre-roue de 1360 mm": '1360 mm wheelbase',
+  'éco-conception': 'eco-design',
+  'sécurité mécanique': 'mechanical safety',
+  'aujourd’hui': 'today',
+  "Aujourd'hui": 'Today',
+  'Octobre': 'October',
+  'Septembre': 'September',
+  'Juin': 'June',
+  'Juillet': 'July',
+  'Contexte & Enjeu': 'Context & Challenge',
+  'Le Technicentre Est Européen': 'The Technicentre Est Européen',
+  'infrastructure de maintenance ferroviaire': 'railway maintenance infrastructure',
+  'jumeau numérique complet': 'complete digital twin',
+  'Le Tour en Fosse': 'The Wheel Lathe',
+  'reprofilage des roues d’essieux': 'wheelset reprofiling',
+  'reprofilage des roues d’essieux': 'wheelset reprofiling',
+  'plans historiques': 'historical drawings',
+  'réalité terrain': 'field reality',
+  'modèle CAO': 'CAD model',
+  'précision millimétrique': 'millimeter accuracy',
+  'flux réseaux': 'network flows',
+  'câbles de puissance': 'power cables',
+  'surface de marche sécurisée': 'safe walking surface',
+  'plancher technique surélevé': 'raised technical floor',
+  'systèmes de supervision': 'supervision systems',
+  'prise de responsabilités': 'taking responsibility',
+  'gestion de groupe': 'group management',
+  'relations client': 'customer relations',
+  'Service client': 'Customer service',
+  'Gestion du stress': 'Stress management',
+  'Stage de 3e': 'Year 10 internship',
+  'Découverte Aéronautique': 'Aerospace Discovery',
+  'maintenance aéronautique': 'aircraft maintenance',
+  'Conception des trains roulants': 'Running gear design',
+  'direction et pivotement': 'steering and pivoting',
+  'Calculs de structure': 'Structural calculations',
+  'dimensionnement statique': 'static sizing',
+  "pièces imprimées en 3D": '3D-printed parts',
+  "vis d'urgence": 'emergency screws',
+  'outils utilisés': 'tools used',
+  'Détail du projet': 'Project details',
+  'Phase 1 — Cahier des Charges': 'Phase 1 — Specifications',
+  'Phase 2 — Conception Détaillée': 'Phase 2 — Detailed Design',
+  'Points Clés & Apprentissages': 'Key Takeaways & Learning',
+  'Compétences Techniques': 'Technical Skills',
+  'Le Déclic Scolaire': 'The Academic Turning Point',
+  'Après Le Bac': 'After High School',
+  'Spécialités Choisies': 'Chosen Specializations',
+  'Enseignements Complémentaires': 'Additional Subjects',
+  'Certifications Obtenues': 'Certifications Earned',
+  'Avantages de l’Alternance': 'Benefits of Work-Study Training',
+  "Avantages de l'Alternance": 'Benefits of Work-Study Training',
+  'Débouchés Visés': 'Target Career Paths',
+  'Apprentissages Clés': 'Key Learnings',
+  'Rôle': 'Role',
+  'Workflow Typique': 'Typical Workflow',
+  'Matériaux Maîtrisés': 'Mastered Materials',
+  'Gains Opérationnels': 'Operational Gains',
+  'Solution proposée': 'Proposed Solution',
+  'Points-clés': 'Key Points',
+  'Analyse Technologique': 'Technology Analysis',
+  'Simulation & Optimisation': 'Simulation & Optimization',
+  'Livrables': 'Deliverables',
+  'Défis Techniques': 'Technical Challenges',
+  'Méthodologie': 'Methodology',
+  'Résistance des Matériaux': 'Strength of Materials',
+  'Envoi en cours': 'Sending…',
+  'Erreur d’envoi': 'Send error'
+});
+
+Object.assign(languagePairs, {
+  'Concepteur 3D / Designer BIM': '3D Designer / BIM Designer',
+  'rotules d10': 'D10 ball joints',
+  'rotules D10': 'D10 ball joints',
+  'à D10 ball joints': 'with D10 ball joints',
+  'Éco-conception': 'Eco-design',
+  'éco-conception': 'eco-design',
+  'Bureau d’études': 'Engineering department',
+  "Bureau d'études": 'Engineering department',
+  'Stage de Conception': 'Design Internship',
+  'pivot module à D10 ball joints': 'pivot module with D10 ball joints',
+  'pivot module à rotules D10': 'pivot module with D10 ball joints',
+  'strength optimization et compliance with the F0 specifications': 'strength optimization and compliance with the F0 specifications',
+  'Phase 1 : specifications': 'Phase 1: specifications',
+  'Phase 2 : design': 'Phase 2: design'
+});
+
+Object.assign(languagePairs, {
+  "Rétro-conception et optimisation complète de l'unité de coupe pour améliorer l'évacuation des copeaux en formation spiralée et réduire les arrêts machine.": 'Complete reverse engineering and optimization of the cutting unit to improve spiral chip evacuation and reduce machine downtime.',
+  "Reproduction et intégration d'un bogie TGV M (composant critique de roulement) à partir de plans partiels et documentation fragmentée de la SNCF.": 'Reproduction and integration of a TGV M bogie, a critical running component, from partial drawings and fragmented SNCF documentation.',
+  "Reconstitution progressive par sections : châssis → essieu → suspensions → équipements auxiliaires. Chaque assemblage validé contre gabarit dynamique TGV M.": 'Progressive reconstruction by section: frame → axle → suspension → auxiliary equipment. Each assembly was checked against the TGV M dynamic gauge.',
+  'Modèle 3D complet prêt pour simulation dynamique ferroviaire et études de modernisation.': 'Complete 3D model ready for railway dynamics simulation and modernization studies.',
+  "Admin FabLab du Technicentre : conception et production rapide de pièces de maintenance, boîtiers sur mesure et supports d'assemblage pour besoins urgents du site.": 'FabLab administrator at the Technicentre: rapid design and production of maintenance parts, custom enclosures, and assembly supports for urgent site requirements.',
+  'Demande FabTrack': 'FabTrack request',
+  'formulaire numérique depuis équipes maintenance': 'digital form submitted by maintenance teams',
+  'Conception rapide': 'Rapid design',
+  'modèle Fusion 360 en <2h, validation pour impression': 'Fusion 360 model in under 2 hours, validated for printing',
+  'choix matériau': 'material selection',
+  'Validation terrain': 'Field validation',
+  'test en situation, itération si nécessaire': 'in-situ testing and iteration when needed',
+  'pièces souples, joints, amortisseurs': 'flexible parts, seals, dampers',
+  'supports, attaches, guides': 'supports, brackets, guides',
+  'résistance thermique, boîtiers électroniques': 'thermal resistance, electronic enclosures',
+  "Délai <24h vs. plusieurs semaines avant impression 3D. Coût matière négligeable comparé à arrêt machine. Production >150 pièces depuis déploiement FabLab.": 'Lead time under 24 hours versus several weeks before 3D printing. Material cost is negligible compared with machine downtime. More than 150 parts produced since the FabLab launch.',
+  "Projet de BTS CPI portant sur la conception d'un quadricycle urbain électrique (EV4) en deux phases distinctes.": 'BTS CPI project focused on designing an electric urban quadricycle (EV4) in two distinct phases.',
+  'prototype fonctionnel construit et testé sur piste': 'functional prototype built and tested on a track',
+  'tests dynamiques conformes cahier des charges, prêt pour phase production': 'dynamic tests compliant with the specifications and ready for production',
+  'Rétro-conception': 'Reverse engineering',
+  'Analyse Technologique': 'Technology Analysis',
+  'Formation CAO': 'CAD training',
+  'Vision Globale': 'Overall Vision',
+  'Composantes': 'Components',
+  'Technologie': 'Technology',
+  'Impact': 'Impact',
+  'Intégration BIM': 'BIM Integration',
+  'Relevés terrain & documentation': 'Field surveys & documentation',
+  'Objectif': 'Objective',
+  'Fournir un jumeau numérique fiable': 'Provide a reliable digital twin',
+  'maquette 3D prête à être utilisée': '3D model ready to use',
+  'Une maquette CAO de haute précision': 'A high-precision CAD model',
+  'Réduire les arrêts machine': 'Reduce machine downtime',
+  'Décomposition': 'Breakdown',
+  'arête de coupe': 'cutting edge',
+  'géométrie plaquette': 'insert geometry',
+  'porte-outil': 'tool holder',
+  'Paramètres d’usinage': 'Machining parameters',
+  "Paramètres d'usinage": 'Machining parameters',
+  'vitesse, avance, profondeur de passe': 'speed, feed, depth of cut',
+  'Formation copeaux': 'Chip formation',
+  'mécanique de rupture, spirale vs éclatement': 'fracture mechanics, spiral versus breakage',
+  'Modélisation CAO précise des dépouilles et faces de coupe': 'Precise CAD modeling of reliefs and cutting faces',
+  'Étude comparative': 'Comparative study',
+  'géométrie originale vs. modifications proposées': 'original geometry versus proposed modifications',
+  'Validation': 'Validation',
+  'tests usinage avec relevés copeaux': 'machining tests with chip measurements',
+  'Plans détaillés plaquette optimisée, paramètres usinage ajustés, rapport d’essais démontrant réduction temps d’arrêt machine de ~15%.': 'Detailed drawings of the optimized insert, adjusted machining parameters, and test report demonstrating an approximately 15% reduction in machine downtime.',
+  "Plans détaillés plaquette optimisée, paramètres usinage ajustés, rapport d'essais démontrant réduction temps d'arrêt machine de ~15%.": 'Detailed drawings of the optimized insert, adjusted machining parameters, and test report demonstrating an approximately 15% reduction in machine downtime.'
+});
+
+Object.assign(languagePairs, {
+  'Pilotage de la modélisation 3D complète des machines du Technicentre Est Européen pour constitution d’un jumeau numérique industriel.': 'Led the complete 3D modeling of the Technicentre Est Européen machines to create an industrial digital twin.',
+  "Pilotage de la modélisation 3D complète des machines du Technicentre Est Européen pour constitution d'un jumeau numérique industriel.": 'Led the complete 3D modeling of the Technicentre Est Européen machines to create an industrial digital twin.',
+  'Soft Skills Développées': 'Soft Skills Developed',
+  "Stage de 3 mois au bureau d'études du Technicentre Est Européen, dédié à l'optimisation des procédés d'usinage.": 'Three-month internship in the Technicentre Est Européen engineering department, focused on optimizing machining processes.',
+  "Optimisation des opérations d'usinage : étude et modélisation pour obtenir des copeaux courts et spiralés, réduisant ainsi les risques de projection et améliorant la sécurité des opérateurs.": 'Optimization of machining operations through analysis and modeling to produce short, spiral chips, reducing ejection risks and improving operator safety.',
+  "Stage décisif dans ma trajectoire : premier vrai contact avec la réalité d'un bureau d'études industriel. Confirmation définitive de ma volonté de poursuivre une formation d'ingénieur. Compréhension concrète du lien CAO ↔ fabrication.": 'A decisive internship in my career: my first real experience of an industrial engineering department. It definitively confirmed my desire to pursue an engineering degree and gave me a concrete understanding of the link between CAD and manufacturing.',
+  'Poste & Responsabilités': 'Role & Responsibilities',
+  'Travail hebdomadaire (week-ends) en parallèle de mes études. Service client en restaurant, gestion des commandes, entretien des espaces.': 'Weekly weekend work alongside my studies, including customer service, order management, and maintaining the restaurant premises.',
+  "Cet emploi m'a enseigné la valeur du service, l'importance de l'écoute active et la résilience face aux imprévus. Les soft skills acquises sont transférables à tout environnement professionnel, notamment en ingénierie où le travail en équipe est critique.": 'This job taught me the value of service, the importance of active listening, and resilience in the face of unexpected situations. These soft skills are transferable to any professional environment, especially engineering, where teamwork is critical.',
+  'Contexte Fondateur': 'Foundational Context',
+  "Ce Que J'ai Découvert": 'What I Discovered',
+  "Semaine de stage découverte obligatoire au sein d'Air France Industries. Cette expérience a été décisive pour ma trajectoire professionnelle et éducative.": 'A mandatory one-week discovery internship at Air France Industries. This experience was decisive in shaping my educational and professional path.',
+  'BTS Conception de Produits Industriels': 'BTS in Industrial Product Design',
+  'Contexte & Format': 'Context & Format',
+  'Spécialisation Technique': 'Technical Specialization',
+  'Modules & Contenus': 'Modules & Coursework',
+  "Formation d'ingénieur généraliste en alternance : 1 mois école / 1 mois entreprise.": 'A general engineering program in work-study format: one month at school followed by one month in the company.',
+  'Débouchés Visés': 'Target Career Paths',
+  "Ingénieur conception/CAO dans l'aéronautique, ferroviaire, automotive ou secteur industriel de precision. Possible évolution vers management technique ou coordination de projets multisites.": 'Design/CAD engineer in the aerospace, railway, automotive, or wider industrial sector. Potential progression toward technical management or multi-site project coordination.',
+  'Le Déclic Scolaire': 'The Academic Turning Point',
+  'Projet Majeur : EV4 EVLV1': 'Major Project: EV4 EVLV1',
+  'Certifications Obtenues': 'Certifications Earned',
+  "Ce Que Le BTS M'a Appris": 'What the BTS Taught Me',
+  "Formation généraliste au Lycée ENCPB (établissement d'élite parisien, ex Lycée Pierre-Gilles de Gennes) à Saint-Denis.": 'A general academic program at Lycée ENCPB, an elite Parisian school formerly known as Lycée Pierre-Gilles de Gennes, in Saint-Denis.',
+  'Spécialités Choisies': 'Chosen Specializations',
+  'Enseignements Complémentaires': 'Additional Subjects',
+  "Orientation réfléchie vers le BTS Conception de Produits Industriels, formation réputée pour son approche concrète et ses débouchés en ingénierie. Décision confirmée par le stage aéronautique de 3e et la passion pour la mécanique.": 'A deliberate decision to pursue a BTS in Industrial Product Design, known for its hands-on approach and engineering career opportunities. This choice was reinforced by my Year 10 aerospace internship and my passion for mechanics.',
+  'Action sur le terrain': 'Fieldwork',
+  "L'environnement industriel est rude et les plans théoriques diffèrent souvent de la réalité après des années d'exploitation et de petites modifications non documentées.": 'Industrial environments are demanding, and theoretical drawings often differ from reality after years of operation and undocumented modifications.',
+  "Ajustement millimétrique du modèle 3D. Cette étape a garanti que chaque pièce modélisée ou conçue s'insère parfaitement dans la fosse sans aucun conflit d'interférence avec les tuyauteries ou le câblage existant.": 'Millimeter-level adjustment of the 3D model. This step ensured that every modeled or designed part fit perfectly in the pit without interfering with existing piping or cabling.',
+  'Conception et Ingénierie': 'Design & Engineering',
+  "Conception et modélisation d'un système innovant de plancher technique surélevé pour protéger les flux réseaux (câbles, data) tout en garantissant la sécurité des opérateurs. Structure modulaire en tubes carrés 50×50 mm et dalles de recouvrement 1m×1m.": 'Design and modeling of an innovative raised technical floor to protect network infrastructure, including cables and data lines, while ensuring operator safety. The modular structure uses 50×50 mm square tubes and 1×1 m removable floor panels.',
+  "Modélisation BIM hautement sophistiquée : gestion de la complexité géométrique, intégration des machines animées, liaison avec les systèmes de supervision en temps réel pour l'aide à la décision maintenance.": 'Highly advanced BIM modeling involving complex geometry management, integration of animated machines, and connection to real-time supervision systems to support maintenance decision-making.'
+});
+
+Object.assign(languagePairs, {
+  'à Today': 'to Today',
+  'Relation client': 'Customer relations',
+  'écoute, empathie, résolution de conflits': 'active listening, empathy, conflict resolution',
+  'Organisation': 'Organization',
+  'gestion simultanée de multiples tables et commands': 'simultaneous management of multiple tables and orders',
+  'Aisance relationnelle': 'Interpersonal skills',
+  'communication naturelle et bienveillante': 'natural and considerate communication',
+  'Gestion du stress': 'Stress management',
+  'calme et efficacité sous pression': 'calm and efficiency under pressure',
+  'Responsabilité': 'Responsibility',
+  'engagement personnel, respect des horaires': 'personal commitment and punctuality',
+  'Autonomie': 'Autonomy',
+  'initiative sans supervision constante': 'initiative without constant supervision',
+  'Encadrement direct d’enfants et adolescents': 'Direct supervision of children and teenagers',
+  'Conception et animation d’activités pédagogiques': 'Design and facilitation of educational activities',
+  'Gestion de groupes en contexte collectif': 'Group management in a collective setting',
+  'Respect des protocoles de sécurité et bien-être': 'Compliance with safety and well-being protocols',
+  'Communication avec parents et staff': 'Communication with parents and staff',
+  'Leadership': 'Leadership',
+  'Gestion de groupe': 'Group management',
+  'Responsabilité': 'Responsibility',
+  'Créativité': 'Creativity',
+  'Adaptabilité': 'Adaptability',
+  'Résultats': 'Results',
+  'Après trois sessions de formation intensive': 'after three intensive training sessions'
+});
+
+Object.assign(languagePairs, {
+  'Mathématiques': 'Mathematics',
+  'Physique-Chimie': 'Physics-Chemistry',
+  'Français': 'French',
+  'Histoire-Géographie': 'History-Geography',
+  'Langue vivante': 'Modern language',
+  'Anglais': 'English',
+  'Allemand': 'German',
+  'Philosophie': 'Philosophy',
+  'EPS': 'Physical Education',
+  'Obtention de la': 'Obtained the',
+  'après trois sessions de formation intensive.': 'after three intensive training sessions.',
+  'Obtention du': 'Obtained the',
+  'Responsabilités': 'Responsibilities',
+  'Apprentissage Personnel': 'Personal Learning',
+  'Avantages de l’Alternance': 'Benefits of Work-Study Training',
+  "Avantages de l'Alternance": 'Benefits of Work-Study Training',
+  'Contexte & Format': 'Context & Format',
+  'Le Déclic': 'The Turning Point',
+  'Impact à Long Terme': 'Long-Term Impact',
+  'Compétences Développées': 'Skills Developed',
+  'Compétences Techniques Maîtrisées': 'Mastered Technical Skills',
+  'Savoir-être Développées': 'Soft Skills Developed',
+  'Gabarits': 'Gauges',
+  'Usure': 'Wear',
+  'Préparation': 'Preparation',
+  'Résultat': 'Result',
+  'Objectif': 'Objective'
+});
+
+const reverseLanguagePairs = Object.fromEntries(Object.entries(languagePairs).map(([fr, en]) => [en, fr]));
+let currentLanguage = 'en';
+
+function translateValue(value, language) {
+  const pairs = language === 'en' ? languagePairs : reverseLanguagePairs;
+  return Object.entries(pairs)
+    .sort(([a], [b]) => b.length - a.length)
+    .reduce((result, [source, target]) => {
+      const escaped = source.trim().split(/\s+/).map(part => part.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('\\s+');
+      return result.replace(new RegExp(escaped, 'g'), target);
+    }, value);
+}
+
+function translateElement(element, language) {
+  const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+  const textNodes = [];
+  while (walker.nextNode()) textNodes.push(walker.currentNode);
+  textNodes.forEach(node => {
+    if (node.parentElement?.tagName !== 'SCRIPT' && node.parentElement?.tagName !== 'STYLE') {
+      node.nodeValue = translateValue(node.nodeValue, language);
+    }
+  });
+  element.querySelectorAll('[aria-label], [placeholder], [title], [alt]').forEach(node => {
+    ['aria-label', 'placeholder', 'title', 'alt'].forEach(attribute => {
+      if (node.hasAttribute(attribute)) node.setAttribute(attribute, translateValue(node.getAttribute(attribute), language));
+    });
+  });
+}
+
+function applyLanguage(language) {
+  currentLanguage = language === 'fr' ? 'fr' : 'en';
+  document.documentElement.lang = currentLanguage;
+  document.title = currentLanguage === 'en' ? 'Wassim Soussou — Aspiring Engineer' : 'Wassim Soussou — Ingénieur en devenir';
+  translateElement(document.body, currentLanguage);
+  if (languageToggle) {
+    window.dispatchEvent(new Event('languagechange'));
+    languageToggle.textContent = currentLanguage === 'en' ? 'FR' : 'EN';
+    languageToggle.setAttribute('aria-label', currentLanguage === 'en' ? 'Switch to French' : 'Passer à l’anglais');
+  }
+  localStorage.setItem('portfolio-language', currentLanguage);
+}
+
+const savedLanguage = localStorage.getItem('portfolio-language') || 'en';
 
 function applyTheme(theme) {
   body.setAttribute('data-theme', theme);
@@ -24,6 +519,11 @@ function applyTheme(theme) {
 
 const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
 applyTheme(savedTheme);
+applyLanguage(savedLanguage);
+
+languageToggle?.addEventListener('click', () => {
+  applyLanguage(currentLanguage === 'en' ? 'fr' : 'en');
+});
 
 themeToggle?.addEventListener('click', () => {
   const nextTheme = body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
@@ -622,7 +1122,9 @@ function openProjectModal(id) {
   modalTitle.textContent = p.title;
   modalTools.textContent = `Outils : ${p.tools}`;
   modalBody.innerHTML = p.body;
+  translateElement(projectModal, currentLanguage);
   renderProjectAlbum(id);
+  translateElement(projectModal, currentLanguage);
   projectModal.classList.remove('hidden');
   projectModal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';

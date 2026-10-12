@@ -53,7 +53,9 @@ function createViewer(container, url, color, label) {
   const loader = new OBJLoader();
   const loadingLabel = document.createElement('div');
   loadingLabel.className = 'viewer-loading';
-  loadingLabel.textContent = `Chargement du modèle ${label}…`;
+  loadingLabel.textContent = document.documentElement.lang === 'fr'
+    ? `Chargement du modèle ${label}…`
+    : `Loading ${label} model…`;
   container.appendChild(loadingLabel);
 
   const resolvedUrl = encodeURI(url);
@@ -99,7 +101,9 @@ function createViewer(container, url, color, label) {
 
     const fallback = document.createElement('div');
     fallback.className = 'viewer-fallback';
-    fallback.textContent = 'Vue 3D prête — faites glisser pour la manipuler';
+    fallback.textContent = document.documentElement.lang === 'fr'
+      ? 'Vue 3D prête — faites glisser pour la manipuler'
+      : '3D view ready — drag to rotate';
     container.appendChild(fallback);
 
     const box = new THREE.Box3().setFromObject(object);
@@ -130,10 +134,19 @@ function createViewer(container, url, color, label) {
 
   const handleError = (error) => {
     console.error(`Impossible de charger ${url}`, error);
-    loadingLabel.textContent = 'Le modèle n’a pas pu être chargé.';
+    loadingLabel.textContent = document.documentElement.lang === 'fr'
+      ? 'Le modèle n’a pas pu être chargé.'
+      : 'The model could not be loaded.';
   };
 
   loader.load(resolvedUrl, handleModel, undefined, handleError);
+  window.addEventListener('languagechange', () => {
+    if (container.querySelector('.viewer-fallback')) {
+      container.querySelector('.viewer-fallback').textContent = document.documentElement.lang === 'fr'
+        ? 'Vue 3D prête — faites glisser pour la manipuler'
+        : '3D view ready — drag to rotate';
+    }
+  });
 
   if (!animationStarted) {
     animationStarted = true;
