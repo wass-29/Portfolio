@@ -113,6 +113,26 @@ const languagePairs = {
 };
 
 Object.assign(languagePairs, {
+  'et ma formation': 'and my education path',
+  'en gardant cet horizon en tête.': 'with this goal in mind.',
+  "Ce stage m'a donné la": 'This internship gave me the',
+  'certitude absolue': 'absolute certainty',
+  'de vouloir travailler dans ce secteur :': 'that I wanted to work in this sector:',
+  'Obtention du': 'Obtained the',
+  "BAFA (Brevet d'Aptitude aux Fonctions d'Animateur)": 'BAFA (Youth Activity Leader Certificate)',
+  'après trois sessions de formation intensive.': 'after three intensive training sessions.',
+  'Semaine de stage découverte obligatoire au sein d’Air France Industries. Cette expérience a été': 'A mandatory one-week discovery internship at Air France Industries. This experience was',
+  "Semaine de stage découverte obligatoire au sein d'Air France Industries. Cette expérience a été": 'A mandatory one-week discovery internship at Air France Industries. This experience was',
+  'décisive pour ma trajectoire professionnelle et éducative.': 'decisive in shaping my educational and professional path.',
+  'décisive': 'decisive',
+  'L’univers de la maintenance aéronautique': 'The world of aircraft maintenance',
+  "L'univers de la maintenance aéronautique": 'The world of aircraft maintenance',
+  'Les équipes multidisciplinaires et l’importance de la collaboration': 'Multidisciplinary teams and the importance of collaboration',
+  "Les équipes multidisciplinaires et l'importance de la collaboration": 'Multidisciplinary teams and the importance of collaboration',
+  'L’impact direct de chaque personne sur la sécurité aérienne mondiale': 'The direct impact of each person on global aviation safety',
+  "L'impact direct de chaque personne sur la sécurité aérienne mondiale": 'The direct impact of each person on global aviation safety',
+  'L’ambiance d’un grand industriel français': 'The atmosphere of a major French industrial company',
+  "L'ambiance d'un grand industriel français": 'The atmosphere of a major French industrial company',
   'Unité de coupe T-MAX P': 'T-MAX P Cutting Unit',
   'Bogie TGV M — Assemblage 3D': 'TGV M Bogie — 3D Assembly',
   'Quadricycle EV4 & Impression 3D': 'EV4 Quadricycle & 3D Printing',
@@ -455,6 +475,145 @@ Object.assign(languagePairs, {
   'Préparation': 'Preparation',
   'Résultat': 'Result',
   'Objectif': 'Objective'
+});
+
+Object.assign(languagePairs, {
+  'Apprenti Ingénieur — Designer BIM & Superviseur': 'Engineering Apprentice — BIM Designer & Supervisor',
+  'Superviseur de Machines': 'Machine Supervisor',
+  'Apprenti Ingénieur — Designer BIM & Superviseur de Machines': 'Engineering Apprentice — BIM Designer & Machine Supervisor',
+  'Mission Principale': 'Main Mission',
+  'Responsabilités': 'Responsibilities',
+  'Apprentissages Clés': 'Key Learnings',
+  'Compétences Techniques': 'Technical Skills',
+  'Stage de Conception — Bureau d’Études': 'Design Internship — Engineering Department',
+  "Stage de Conception — Bureau d'Études": 'Design Internship — Engineering Department',
+  'Animateur Diplômé (BAFA)': 'Certified Youth Leader (BAFA)',
+  'Parcours de Formation': 'Training Path',
+  'Soft Skills Développées': 'Soft Skills Developed',
+  'Apprentissage Personnel': 'Personal Learning',
+  'Stage de 3e — Découverte Aéronautique': 'Year 10 Internship — Aerospace Discovery',
+  'Contexte Fondateur': 'Foundational Context',
+  "Ce Que J'ai Découvert": 'What I Discovered',
+  'Le Déclic': 'The Turning Point',
+  'Impact à Long Terme': 'Long-Term Impact',
+  'Baccalauréat Général': 'General Baccalaureate',
+  'Diplôme d’Ingénieur Généraliste': 'General Engineering Degree',
+  "Diplôme d'Ingénieur Généraliste": 'General Engineering Degree',
+  'CESI Nanterre — Ingénieur Généraliste': 'CESI Nanterre — General Engineering',
+  'Lycée Voillaume': 'Voillaume High School',
+  'Lycée ENCPB (Pierre-Gilles de Gennes)': 'ENCPB High School (Pierre-Gilles de Gennes)',
+  'Travaillons ensemble': 'Let’s work together',
+  "Je suis ouvert aux échanges, aux opportunités en aéronautique ou mécanique, et à tout projet stimulant. N'hésitez pas à me contacter.": 'I am open to conversations, opportunities in aerospace or mechanical engineering, and any challenging project. Feel free to get in touch.',
+  "Pilotage de la modélisation 3D complète des machines du Technicentre Est Européen pour constitution d'un jumeau numérique industriel.": 'Led the complete 3D modeling of the Technicentre Est Européen machines to create an industrial digital twin.',
+  "Le BAFA m'a appris à diriger avec bienveillance, à écouter vraiment, et à créer un environnement sécurisant et inspirant. Ces compétences restent applicables en tous contextes : management, collaboration en équipe, leadership.": 'The BAFA taught me to lead with empathy, listen attentively, and create a safe and inspiring environment. These skills remain applicable in every context: management, teamwork, and leadership.',
+  "Ce stage m'a donné la certitude absolue de vouloir travailler dans ce secteur : exigence sans compromis, innovation constante, responsabilité collective. J'ai choisi ma spécialisation (mécanique/systèmes industriels) et ma formation (d'abord BTS, puis école d'ingénieur) en gardant cet horizon en tête.": 'This internship gave me the absolute certainty that I wanted to work in this sector, defined by uncompromising standards, constant innovation, and shared responsibility. I chose my specialization (mechanical engineering and industrial systems) and my education path (first a BTS, then engineering school) with this goal in mind.',
+  "Ce stage de 3e est probablement l'expérience qui a le plus influencé mon parcours. Chaque décision ultérieure (choix de lycée, spécialité, BTS, école) a été prise en pensant à ce rêve : travailler dans l'aéronautique ou un secteur similaire d'exigence et d'innovation.": 'This Year 10 internship was probably the experience that influenced my path the most. Every subsequent decision, from my high school and specialization to my BTS and engineering school, was guided by the same ambition: to work in aerospace or another sector driven by high standards and innovation.',
+  "Formation généraliste au Lycée ENCPB (établissement d'élite parisien, ex Lycée Pierre-Gilles de Gennes) à Saint-Denis.": 'A general academic program at Lycée ENCPB, an elite Parisian school formerly known as Lycée Pierre-Gilles de Gennes, in Saint-Denis.',
+  "Orientation réfléchie vers le BTS Conception de Produits Industriels, formation réputée pour son approche concrète et ses débouchés en ingénierie. Décision confirmée par le stage aéronautique de 3e et la passion pour la mécanique.": 'A deliberate decision to pursue a BTS in Industrial Product Design, known for its hands-on approach and engineering career opportunities. This choice was reinforced by my Year 10 aerospace internship and my passion for mechanics.',
+  'L’impact humain': 'Human impact',
+  "L'impact humain": 'Human impact',
+  "Ce projet de fond forge ma capacité à manager la complexité à grande échelle. Chaque centimètre compte : c'est de la précision au service d'une infrastructure qui protège et optimise le travail de centaines de techniciens. C'est l'ingénierie de terrain au service du réel.": 'This long-term project has strengthened my ability to manage complexity at scale. Every centimeter matters: precision serves an infrastructure that protects and improves the work of hundreds of technicians. This is engineering grounded in reality.',
+  'Tour en Fosse (TEF) — Numérisation & Innovation': 'Wheel Lathe (TEF) — Digitization & Innovation',
+  'Field Surveys & Measurements': 'Field Surveys & Measurements',
+  'Network Infrastructure': 'Network Infrastructure',
+  'BIM & Digital Twin': 'BIM & Digital Twin',
+  'Valued Skills': 'Valued Skills',
+  'Bim Digital & Twin': 'BIM Digital Twin'
+});
+
+Object.assign(languagePairs, {
+  'Modélisation haute-fidélité en CATIA V5 des équipements majeurs': 'High-fidelity CATIA V5 modeling of major equipment',
+  'Intégration des modèles 3D dans une maquette BIM complète': 'Integration of 3D models into a complete BIM model',
+  'Collaboration étroite avec un autre alternant pour la synchronisation des données': 'Close collaboration with another apprentice to synchronize data',
+  'Administration du FabLab : gestion des demandes de prototypage via FabTrack': 'FabLab administration: managing prototype requests through FabTrack',
+  'Impression 3D et réalisation de prototypes rapides': '3D printing and rapid prototype production',
+  "Encadrement direct d'enfants et adolescents": 'Direct supervision of children and teenagers',
+  'Encadrement direct d’enfants et adolescents': 'Direct supervision of children and teenagers',
+  "Conception et animation d'activités pédagogiques": 'Design and facilitation of educational activities',
+  'Conception et animation d’activités pédagogiques': 'Design and facilitation of educational activities',
+  'Leadership : capacité à motiver et fédérer un groupe': 'Leadership: ability to motivate and unite a group',
+  'discipline positive, médiation, écoute active': 'positive discipline, mediation, active listening',
+  'Responsabilité : engagement personnel et professionnel': 'Responsibility: personal and professional commitment',
+  'Adaptabilité : ajustement selon l’âge et la personnalité des enfants': 'Adaptability: adjusting to each child’s age and personality',
+  'Créativité : invention d’activités adaptées et engageantes': 'Creativity: inventing suitable and engaging activities',
+  "Créativité : invention d'activités adaptées et engageantes": 'Creativity: inventing suitable and engaging activities',
+  'Mise en pratique immédiate des apprentissages théoriques': 'Immediate application of theoretical learning',
+  'Immersion continue dans l’entreprise': 'Continuous immersion in the company',
+  'Réseau professionnel en construction': 'Growing professional network',
+  'Crédibilité auprès des futurs employeurs': 'Credibility with future employers',
+  'Gestion de projet industriel & Agile': 'Industrial project management & Agile',
+  'Éco-conception & développement durable': 'Eco-design & sustainable development',
+  'Leadership & communication technique': 'Leadership & technical communication',
+  'Anglais technique & certifications': 'Technical English & certifications',
+  'Histoire-Géographie (contexte géopolitique & culture générale)': 'History-Geography (geopolitical context & general knowledge)',
+  'Langue vivante (Anglais, Allemand)': 'Modern language (English, German)',
+  'Philosophie (réflexion critique)': 'Philosophy (critical thinking)',
+  'EPS (activité physique & bien-être)': 'Physical Education (physical activity & well-being)'
+});
+
+Object.assign(languagePairs, {
+  'Formation en alternance (1 mois école / 1 mois entreprise).': 'Work-study program (1 month at school / 1 month in the company).',
+  'Spécialisation technique — mécanique et systèmes industriels.': 'Technical specialization — mechanical and industrial systems.',
+  'Déclic scolaire majeur. Maîtrise de CATIA V5, SolidWorks, RDM, cinématique, CAO.': 'Major academic turning point. Proficiency in CATIA V5, SolidWorks, Strength of Materials, kinematics, and CAD.',
+  'Certification Linguaskill 3 Skills.': 'Linguaskill 3 Skills certification.',
+  'Spécialités : Mathématiques & Physique-Chimie.': 'Specializations: Mathematics & Physics-Chemistry.',
+  'Certification PIX.': 'PIX certification.',
+  'Permis B — Véhiculé': 'Driving licence — Mobile',
+  'Aujourd’hui': 'Today',
+  "Aujourd'hui": 'Today',
+  'Octobre 2025 — Aujourd’hui': 'October 2025 — Today',
+  "Octobre 2025 — Aujourd'hui": 'October 2025 — Today',
+  '2021 — Aujourd’hui': '2021 — Today',
+  "2021 — Aujourd'hui": '2021 — Today'
+});
+
+Object.assign(languagePairs, {
+  'SNCF — Oct. 2024 à Aujourd’hui': 'SNCF — Oct. 2024 to Today',
+  "SNCF — Oct. 2024 à Aujourd'hui": 'SNCF — Oct. 2024 to Today',
+  'SDJES — 2023 à 2024': 'SDJES — 2023 to 2024',
+  'Air France Industries — 2019': 'Air France Industries — 2019',
+  "Gestion de projets CAO complexes à l'échelle industrielle": 'Managing complex CAD projects at industrial scale',
+  "Méthodologie BIM appliquée à l'infrastructure ferroviaire": 'BIM methodology applied to railway infrastructure',
+  'Autonomie et prise de responsabilité sur des équipements critiques': 'Autonomy and responsibility for critical equipment',
+  'Compétences humaines : collaboration cross-team, communication technique': 'People skills: cross-team collaboration and technical communication',
+  "Obtention du BAFA (Brevet d'Aptitude aux Fonctions d'Animateur) après trois sessions de formation intensive.": 'Obtained the BAFA (Youth Activity Leader Certificate) after three intensive training sessions.',
+  'Leadership : capacité à motiver et fédérer un groupe': 'Leadership: ability to motivate and unite a group',
+  "Responsabilité : engagement personnel et professionnel": 'Responsibility: personal and professional commitment',
+  "Adaptabilité : ajustement selon l'âge et la personnalité des enfants": 'Adaptability: adjusting to each child’s age and personality',
+  "Semaine de stage découverte obligatoire au sein d'Air France Industries. Cette expérience a été décisive pour ma trajectoire professionnelle et éducative.": 'A mandatory one-week discovery internship at Air France Industries. This experience was decisive in shaping my educational and professional path.',
+  "L'univers de la maintenance aéronautique : complexité, rigueur, précision": 'The world of aircraft maintenance: complexity, rigor, and precision',
+  "Les équipes multidisciplinaires et l'importance de la collaboration": 'Multidisciplinary teams and the importance of collaboration',
+  "L'impact direct de chaque personne sur la sécurité aérienne mondiale": 'The direct impact of each person on global aviation safety',
+  "L'ambiance d'un grand industriel français": 'The atmosphere of a major French industrial company',
+  "Ce stage m'a donné la certitude absolue de vouloir travailler dans ce secteur : exigence sans compromis, innovation constante, responsabilité collective.": 'This internship gave me absolute certainty that I wanted to work in this sector: uncompromising standards, constant innovation, and shared responsibility.'
+});
+
+Object.assign(languagePairs, {
+  "Obtention du BAFA (Brevet d'Aptitude aux Fonctions d'Animateur) après trois sessions de formation intensive.": 'Obtained the BAFA (Youth Activity Leader Certificate) after three intensive training sessions.',
+  'Obtention du BAFA (Brevet d’Aptitude aux Fonctions d’Animateur) après trois sessions de formation intensive.': 'Obtained the BAFA (Youth Activity Leader Certificate) after three intensive training sessions.',
+  "Semaine de stage découverte obligatoire au sein d'Air France Industries. Cette expérience a été décisive pour ma trajectoire professionnelle et éducative.": 'A mandatory one-week discovery internship at Air France Industries. This experience was decisive in shaping my educational and professional path.',
+  "Ce stage m'a donné la certitude absolue de vouloir travailler dans ce secteur : exigence sans compromis, innovation constante, responsabilité collective. J'ai choisi ma spécialisation (mécanique/systèmes industriels) et ma formation (d'abord BTS, puis école d'ingénieur) en gardant cet horizon en tête.": 'This internship gave me absolute certainty that I wanted to work in this sector: uncompromising standards, constant innovation, and shared responsibility. I chose my specialization in mechanical engineering and industrial systems and followed an education path from BTS to engineering school with this goal in mind.'
+});
+
+Object.assign(languagePairs, {
+  'pour ma trajectoire professionnelle et éducative.': 'in shaping my educational and professional path.',
+  'capacité à motiver et fédérer un groupe': 'ability to motivate and unite a group',
+  'discipline positive, médiation, écoute active': 'positive discipline, mediation, active listening',
+  'engagement personnel et professionnel': 'personal and professional commitment',
+  "ajustement selon l'âge et la personnalité des enfants": 'adjusting to each child’s age and personality',
+  'invention d’activités adaptées et engageantes': 'inventing suitable and engaging activities',
+  "invention d'activités adaptées et engageantes": 'inventing suitable and engaging activities',
+  "Ce stage m'a donné la certitude absolue de vouloir travailler dans ce secteur": 'This internship gave me absolute certainty that I wanted to work in this sector',
+  'exigence sans compromis, innovation constante, responsabilité collective': 'uncompromising standards, constant innovation, and shared responsibility',
+  "J'ai choisi ma spécialisation": 'I chose my specialization',
+  'mécanique/systèmes industriels': 'mechanical engineering and industrial systems',
+  "d'abord BTS, puis école d'ingénieur": 'from BTS to engineering school',
+  'en gardant cet horizon en tête.': 'with this goal in mind.',
+  "Ce stage de 3e est probablement l'expérience qui a le plus influencé mon parcours.": 'This Year 10 internship was probably the experience that influenced my path the most.',
+  'Chaque décision ultérieure': 'Every subsequent decision',
+  'choix de lycée, spécialité, BTS, école': 'from my high school and specialization to my BTS and engineering school',
+  'a été prise en pensant à ce rêve': 'was guided by the same ambition',
+  "travailler dans l'aéronautique ou un secteur similaire d'exigence et d'innovation.": 'to work in aerospace or another sector driven by high standards and innovation.'
 });
 
 const reverseLanguagePairs = Object.fromEntries(Object.entries(languagePairs).map(([fr, en]) => [en, fr]));
@@ -1134,6 +1293,7 @@ function openExpModal(expId) {
   const modal = document.getElementById('exp-' + expId);
   if (modal) {
     renderDetailGallery(modal);
+    translateElement(modal, currentLanguage);
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -1143,6 +1303,7 @@ function openEduModal(eduId) {
   const modal = document.getElementById(eduId);
   if (modal) {
     renderDetailGallery(modal);
+    translateElement(modal, currentLanguage);
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
