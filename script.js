@@ -113,6 +113,11 @@ const languagePairs = {
 };
 
 Object.assign(languagePairs, {
+  'Mécano-soudure': 'Welded fabrication',
+  'Calculs de structure': 'Structural calculations',
+  'Instruments de métrologie': 'Metrology instruments',
+  'Relevés manuels': 'Manual surveys',
+  'Rigueur professionnelle': 'Professional rigor',
   'et ma formation': 'and my education path',
   'en gardant cet horizon en tête.': 'with this goal in mind.',
   "Ce stage m'a donné la": 'This internship gave me the',
@@ -650,6 +655,7 @@ function applyLanguage(language) {
   document.documentElement.lang = currentLanguage;
   document.title = currentLanguage === 'en' ? 'Wassim Soussou — Aspiring Engineer' : 'Wassim Soussou — Ingénieur en devenir';
   translateElement(document.body, currentLanguage);
+  applyTefLanguage(currentLanguage);
   if (languageToggle) {
     window.dispatchEvent(new Event('languagechange'));
     languageToggle.textContent = currentLanguage === 'en' ? 'FR' : 'EN';
@@ -659,6 +665,78 @@ function applyLanguage(language) {
 }
 
 const savedLanguage = localStorage.getItem('portfolio-language') || 'en';
+
+const tefLanguageContent = {
+  en: {
+    title: 'Wheel Lathe (TEF) — Digitization & Innovation',
+    tag: 'Major Project — 3 years',
+    cards: {
+      'tef-context': {
+        title: 'Context & Challenges',
+        body: 'The Technicentre Est Européen is modernizing its railway maintenance infrastructure by creating a complete digital twin. At its technical core is the Wheel Lathe (TEF), a heavy-duty machine dedicated to reprofiling TGV wheelsets.'
+      },
+      'tef-mission': {
+        title: 'Main Mission',
+        body: 'Lead the creation of the TEF digital twin by modeling the entire installation from more than 17 complex topographic drawings. Integrate network cable conduits, design a technical flooring infrastructure, and ensure millimeter-level accuracy.'
+      },
+      'tef-releves': {
+        title: 'Field Surveys & Measurements',
+        body: 'Direct site visits to the Technicentre tracks to conduct precise measurement campaigns. Historical drawings were compared with field conditions, and the CAD model was adjusted accordingly.'
+      },
+      'tef-reseau': {
+        title: 'Network Infrastructure',
+        body: 'Design and modeling of an innovative raised technical floor to protect network infrastructure, including cables and data lines, while ensuring operator safety. The modular structure uses 50×50 mm square tubes and 1×1 m removable floor panels.'
+      },
+      'tef-bim': {
+        title: 'BIM & Digital Twin',
+        body: 'Highly advanced BIM modeling involving complex geometry management, integration of animated machines, and connection to real-time supervision systems to support maintenance decision-making.'
+      },
+      'tef-competences': {
+        title: 'Valued Skills',
+        body: '<strong>Advanced CAD:</strong> SolidWorks / Fusion 360 for multi-level assemblies.<br/><strong>Methodology:</strong> Ability to transform 2D data into an intelligent 3D model.<br/><strong>Autonomy:</strong> Managed a three-year project with a high degree of measurement accuracy.'
+      }
+    },
+    impactTitle: 'Human impact',
+    impactBody: 'This long-term project has strengthened my ability to manage complexity at scale. Every centimeter matters: precision serves an infrastructure that protects and improves the work of hundreds of technicians. This is field engineering in service of real-world needs.'
+  },
+  fr: {
+    title: 'Tour en Fosse (TEF) — Numérisation & Innovation',
+    tag: 'Projet Majeur — 3 ans',
+    cards: {
+      'tef-context': { title: 'Contexte & Enjeux', body: "Le Technicentre Est Européen cherche à moderniser son infrastructure de maintenance ferroviaire à travers la création d'un jumeau numérique complet. Le Tour en Fosse (TEF) en est le cœur technique : une machine lourde dédiée au reprofilage des roues d'essieux de TGV." },
+      'tef-mission': { title: 'Mission Principale', body: "Piloter la création du jumeau numérique complet du TEF en modélisant l'intégralité de l'installation à partir de plus de 17 plans topographiques complexes. Intégrer les conduits de câbles réseaux, concevoir une infrastructure de plancher technique et garantir une précision millimétrique." },
+      'tef-releves': { title: 'Relevés & Mesures Terrain', body: 'Descentes directes sur les voies du Technicentre pour effectuer des campagnes de mesures précises. Confrontation des plans historiques avec la réalité terrain et ajustement du modèle CAO en conséquence.' },
+      'tef-reseau': { title: 'Infrastructure Réseau', body: "Conception et modélisation d'un système innovant de plancher technique surélevé pour protéger les flux réseaux (câbles, data) tout en garantissant la sécurité des opérateurs. Structure modulaire en tubes carrés 50×50 mm et dalles de recouvrement 1m×1m." },
+      'tef-bim': { title: 'BIM & Digital Twin', body: "Modélisation BIM hautement sophistiquée : gestion de la complexité géométrique, intégration des machines animées, liaison avec les systèmes de supervision en temps réel pour l'aide à la décision maintenance." },
+      'tef-competences': { title: 'Compétences Valorisées', body: '<strong>CAO experte :</strong> SolidWorks / Fusion 360 pour assemblages multi-niveaux.<br/><strong>Méthodologie :</strong> Capacité à transformer des données 2D en maquette 3D intelligente.<br/><strong>Autonomie :</strong> Gestion d’un projet sur 3 ans avec grande précision de mesure.' }
+    },
+    impactTitle: "L'impact humain",
+    impactBody: "Ce projet de fond forge ma capacité à manager la complexité à grande échelle. Chaque centimètre compte : c'est de la précision au service d'une infrastructure qui protège et optimise le travail de centaines de techniciens. C'est l'ingénierie de terrain au service du réel."
+  }
+};
+
+function applyTefLanguage(language) {
+  const content = tefLanguageContent[language];
+  const section = document.querySelector('#tef-section');
+  if (!content || !section) return;
+  section.querySelector('.section-tag').textContent = content.tag;
+  section.querySelector('h2').textContent = content.title;
+  Object.entries(content.cards).forEach(([id, card]) => {
+    const element = section.querySelector(`[data-project="${id}"]`);
+    if (!element) return;
+    element.querySelector('h3').textContent = card.title;
+    element.querySelector('p').innerHTML = card.body;
+  });
+  section.querySelector('.highlight-text h4').textContent = content.impactTitle;
+  section.querySelector('.highlight-text p').textContent = content.impactBody;
+}
+
+function getTefModalBody(id, language) {
+  const content = tefLanguageContent[language]?.cards[id];
+  if (!content) return null;
+  const heading = language === 'en' ? content.title : content.title;
+  return `<h3>${heading}</h3><p>${content.body}</p>`;
+}
 
 function applyTheme(theme) {
   body.setAttribute('data-theme', theme);
@@ -1280,7 +1358,7 @@ function openProjectModal(id) {
   if (!p) return;
   modalTitle.textContent = p.title;
   modalTools.textContent = `Outils : ${p.tools}`;
-  modalBody.innerHTML = p.body;
+  modalBody.innerHTML = getTefModalBody(id, currentLanguage) || p.body;
   translateElement(projectModal, currentLanguage);
   renderProjectAlbum(id);
   translateElement(projectModal, currentLanguage);
