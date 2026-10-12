@@ -1571,7 +1571,8 @@ footer p { font-size: 0.85rem; color: var(--text-dim); }
 @media (max-width: 480px) {
   .bts-grid { grid-template-columns: 1fr 1fr; }
   .hero-actions { flex-direction: column; align-items: center; }
-  .soft-grid { grid-template-columns: repeat(3, 1fr); }
+  .soft-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .soft-item { min-width: 0; padding: 16px 8px; overflow-wrap: anywhere; }
 }
 
 /* ── Animate on scroll utility ── */
@@ -1583,4 +1584,158 @@ footer p { font-size: 0.85rem; color: var(--text-dim); }
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ════════════════════════ VISUAL POLISH ════════════════════════ */
+:root {
+  --border-strong: rgba(123,145,255,0.3);
+  --surface-hover: rgba(79,110,247,0.1);
+}
+body[data-theme="light"] {
+  --border-strong: rgba(49,116,241,0.32);
+  --surface-hover: rgba(49,116,241,0.08);
+}
+
+button,
+a,
+.project-card,
+.tef-card,
+.timeline-content,
+.about-card,
+.skill-category,
+.soft-item,
+.bts-card,
+.edu-card,
+.logo-item,
+.contact-item,
+.project-tags span,
+.timeline-tags span,
+.btn-expand,
+.language-toggle {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.project-card,
+.tef-card,
+.timeline-content,
+.about-card,
+.skill-category,
+.soft-skills,
+.bts-card,
+.edu-card,
+.contact-form,
+.contact-item,
+.logo-item {
+  border-color: var(--border-strong);
+}
+
+body[data-theme="light"] .project-card,
+body[data-theme="light"] .tef-card,
+body[data-theme="light"] .timeline-content,
+body[data-theme="light"] .about-card,
+body[data-theme="light"] .skill-category,
+body[data-theme="light"] .soft-skills,
+body[data-theme="light"] .bts-card,
+body[data-theme="light"] .edu-card,
+body[data-theme="light"] .contact-form,
+body[data-theme="light"] .contact-item,
+body[data-theme="light"] .logo-item {
+  border-color: rgba(49,116,241,0.28);
+}
+
+.project-card,
+.tef-card,
+.timeline-content,
+.about-card,
+.skill-category,
+.soft-item,
+.soft-skills,
+.bts-card,
+.edu-card,
+.logo-item,
+.contact-form,
+.project-modal-panel,
+.detail-modal-content {
+  will-change: transform;
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 220ms ease,
+              box-shadow 260ms ease,
+              background 260ms ease;
+}
+
+.project-card:hover,
+.tef-card:hover,
+.timeline-content:hover,
+.about-card:hover,
+.skill-category:hover,
+.soft-item:hover,
+.bts-card:hover,
+.edu-card:hover,
+.logo-item:hover {
+  border-color: var(--accent);
+}
+
+.project-tags,
+.timeline-tags {
+  align-items: center;
+  min-height: 29px;
+}
+.project-tags span,
+.timeline-tags span {
+  white-space: nowrap;
+  border-color: var(--border-strong);
+  transition: color 180ms ease, background 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+.project-tags span:hover,
+.timeline-tags span:hover {
+  background: var(--surface-hover);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.project-detail-trigger {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.project-image-preview,
+.model-viewer-card {
+  border-color: var(--border-strong);
+}
+
+.viewer-hint {
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.detail-modal-content,
+.project-modal-panel {
+  scrollbar-color: var(--accent) transparent;
+  scrollbar-width: thin;
+}
+
+@media (max-width: 768px) {
+  .container { padding-inline: 18px; }
+  .nav-container { padding-inline: 18px; }
+  .nav-actions { gap: 7px; }
+  .language-toggle { min-width: 32px; padding-inline: 6px; }
+  .project-card--visual { height: auto; min-height: 640px; }
+  .project-card-content { min-width: 0; }
+  .project-card h3,
+  .timeline-header h3,
+  .edu-card h3 { overflow-wrap: anywhere; }
+  .project-detail-trigger { max-width: 100%; white-space: normal; text-align: left; }
+  .detail-modal-content,
+  .project-modal-panel { width: min(96%, 680px); padding: 22px 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
