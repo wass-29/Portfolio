@@ -731,13 +731,6 @@ function applyTefLanguage(language) {
   section.querySelector('.highlight-text p').textContent = content.impactBody;
 }
 
-function getTefModalBody(id, language) {
-  const content = tefLanguageContent[language]?.cards[id];
-  if (!content) return null;
-  const heading = language === 'en' ? content.title : content.title;
-  return `<h3>${heading}</h3><p>${content.body}</p>`;
-}
-
 function applyTheme(theme) {
   body.setAttribute('data-theme', theme);
   if (themeToggle) {
@@ -1358,7 +1351,7 @@ function openProjectModal(id) {
   if (!p) return;
   modalTitle.textContent = p.title;
   modalTools.textContent = `Outils : ${p.tools}`;
-  modalBody.innerHTML = getTefModalBody(id, currentLanguage) || p.body;
+  modalBody.innerHTML = p.body;
   translateElement(projectModal, currentLanguage);
   renderProjectAlbum(id);
   translateElement(projectModal, currentLanguage);
