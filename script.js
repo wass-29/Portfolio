@@ -656,6 +656,7 @@ function applyLanguage(language) {
   document.title = currentLanguage === 'en' ? 'Wassim Soussou — Aspiring Engineer' : 'Wassim Soussou — Ingénieur en devenir';
   translateElement(document.body, currentLanguage);
   applyTefLanguage(currentLanguage);
+  applyStaticDetailLanguage(currentLanguage);
   if (languageToggle) {
     window.dispatchEvent(new Event('languagechange'));
     languageToggle.textContent = currentLanguage === 'en' ? 'FR' : 'EN';
@@ -714,6 +715,34 @@ const tefLanguageContent = {
     impactBody: "Ce projet de fond forge ma capacité à manager la complexité à grande échelle. Chaque centimètre compte : c'est de la précision au service d'une infrastructure qui protège et optimise le travail de centaines de techniciens. C'est l'ingénierie de terrain au service du réel."
   }
 };
+
+const detailedEnglishContent = {
+  'tef-context': `<h3>Context</h3><p>The Technicentre Est Européen (TEE) is a critical SNCF facility for heavy maintenance of TGV trainsets. At the heart of this infrastructure is the Wheel Lathe (TEF), a machine that reprofiles wheelsets without removing the train, saving crucial time and cost.</p><h3>Challenge</h3><p>The facilities are aging, and historical drawings no longer always match field reality. To prepare future renovations and integrate new technologies, the technical documentation must be fully updated.</p><h3>Objective</h3><p>Launch a large-scale digitization effort to create a complete digital twin of the installation, enabling future maintenance operations to be simulated and validated safely.</p>`,
+  'tef-mission': `<h3>Context</h3><p>Creating a digital twin requires a reliable database. More than 17 historical topographic drawings had to be decoded, cross-checked, and converted into intelligent 3D models.</p><h3>The Mission</h3><p>Lead the complete modeling of the TEF. This involved virtually rebuilding the pit and wheel-reprofiling machine, while designing new infrastructure able to accommodate modernized cable and data networks without disrupting existing operations.</p><h3>Result</h3><p>A high-precision CAD model became the TEE team's reference. It validates clearances before physical manufacturing and prevents costly field errors.</p>`,
+  'tef-releves': `<h3>Context</h3><p>Industrial environments are demanding, and theoretical drawings often differ from reality after years of operation and undocumented modifications.</p><h3>Fieldwork</h3><p>Regular visits directly onto the tracks and into the pit enabled meticulous measurement campaigns. The physical installation was compared with the CAD models under development, while technician access and occupational safety constraints were taken into account.</p><h3>Result</h3><p>Millimeter-level adjustment of the 3D model ensured that every modeled or designed part fitted perfectly in the pit without interference with existing piping or cabling.</p>`,
+  'tef-reseau': `<h3>Context</h3><p>To modernize the TEF, new data and power-cable networks must cross the maintenance pit. They must be protected from falling tools and metal chips while providing a safe walking surface for operators.</p><h3>Design & Engineering</h3><p>A 12 m² steel framework was modeled specifically for the pit. It was divided into four subassemblies for easier installation. 50×50 mm square steel tubes provide strength, while removable 1×1 m panels allow rapid access to the conduits below.</p><h3>Result</h3><p>A raised, modular technical floor that meets occupational health and safety requirements and secures the TEE's new network infrastructure.</p>`,
+  'tef-bim': `<h3>Context</h3><p>The railway industry is moving toward Industry 4.0. The 3D model must be more than a drawing: it must be an intelligent model integrating networks, animated machines, and traffic flows.</p><h3>Integration</h3><p>Geometric complexity was managed through multi-level assemblies. Clearance gauges and access requirements were reintegrated to ensure that future maintenance operations remain ergonomic.</p><h3>Objective</h3><p>Provide a reliable digital twin as the foundation for future real-time supervision of TEF sensors. It is a strategic decision-support tool for the Technicentre.</p>`,
+  'tef-competences': `<h3>Context</h3><p>This three-year major project required continuous growth, from basic design to the integration of complex systems in a demanding industrial environment.</p><h3>Technical Skills</h3><p>Advanced expertise in SolidWorks and Fusion 360, including welded fabrication, large assemblies, and industrial drawings compliant with ISO standards.</p><h3>Soft Skills</h3><ul><li><strong>Methodology:</strong> Ability to turn raw data, 2D drawings, and surveys into a coherent 3D system.</li><li><strong>Autonomy:</strong> Priority management, direct communication with supervisors, and deadline ownership throughout a long-term project.</li></ul>`
+};
+
+const academicEnglishContent = {
+  'edu-cesi': `<h3><i class="fas fa-book"></i> Context & Format</h3><p>A general engineering program in <strong>work-study format</strong>: one month at school followed by one month in the company, ensuring a continuous connection between theory and industrial practice.</p><h3><i class="fas fa-cogs"></i> Technical Specialization</h3><p><strong>Mechanical engineering & industrial systems</strong> — a curriculum adapted to modern challenges: advanced CAD, modeling, simulation, robust design, project management, and technical leadership.</p><h3><i class="fas fa-graduation-cap"></i> Modules & Coursework</h3><ul><li>Applied mechanics (Strength of Materials, kinematics, dynamics)</li><li>CAD & simulation (SolidWorks, Fusion 360, finite elements)</li><li>Industrial project management & Agile</li><li>Computerized systems & automation</li><li>Eco-design & sustainable development</li><li>Leadership & technical communication</li><li>Technical English & certifications</li></ul><h3><i class="fas fa-star"></i> Benefits of Work-Study Training</h3><ul><li>Continuous immersion in the company (SNCF TEE)</li><li>Immediate application of theoretical learning</li><li>Financial support for the degree</li><li>A growing professional network</li><li>Credibility with future employers</li></ul><h3><i class="fas fa-compass"></i> Target Career Paths</h3><p>Design/CAD engineer in aerospace, railway, automotive, or the wider industrial sector, with potential progression toward technical management or multi-site project coordination.</p>`,
+  'edu-bts': `<h3><i class="fas fa-fire"></i> The Academic Turning Point</h3><p>The BTS CPI radically transformed my career path. After a conventional academic education, this program showed me what it means to learn <strong>by doing</strong>: concrete projects, hands-on experience, and responsibility.</p><h3><i class="fas fa-toolbox"></i> Mastered Technical Skills</h3><ul><li><strong>CAD:</strong> CATIA V5 and SolidWorks (multi-level assemblies, drawings, tolerances)</li><li><strong>Strength of Materials & Kinematics:</strong> resistance calculations and motion analysis</li><li><strong>Machining & manufacturing:</strong> understanding how to turn CAD into a real part</li><li><strong>Project management:</strong> PDCA, resource management, and deadlines</li><li><strong>Technical communication:</strong> presenting technical projects to non-specialists</li></ul><h3><i class="fas fa-project-diagram"></i> Major Project: EV4 EVLV1</h3><p>A 12-month design project for an <strong>urban electric quadricycle</strong>, covering specifications, detailed design, simulation, and initial dynamic testing.</p><p>It represented 95% of the BTS, and I am immensely proud of it.</p><h3><i class="fas fa-certification"></i> Certifications Earned</h3><ul><li><strong>Linguaskill 3 Skills</strong> (Cambridge) — intermediate technical English</li><li><strong>BTS CPI</strong> — State diploma</li></ul><h3><i class="fas fa-lightbulb"></i> What the BTS Taught Me</h3><p>Engineering is not just theory but a <strong>responsibility</strong>: every millimeter matters, every material has limits, and every project affects real people. I understood that I wanted to continue along this path.</p>`,
+  'edu-bac': `<h3><i class="fas fa-graduation-cap"></i> Context</h3><p>A general academic program at Lycée ENCPB, an elite Parisian school formerly known as Lycée Pierre-Gilles de Gennes, in Saint-Denis.</p><h3><i class="fas fa-calculator"></i> Chosen Specializations</h3><ul><li><strong>Mathematics</strong> — analysis, linear algebra, and statistics</li><li><strong>Physics-Chemistry</strong> — mechanics, electromagnetism, thermodynamics, and organic chemistry</li></ul><h3><i class="fas fa-book"></i> Additional Subjects</h3><ul><li>French (literature & argumentation)</li><li>History-Geography (geopolitical context & general knowledge)</li><li>Modern language (English, German)</li><li>Philosophy (critical thinking)</li><li>Physical Education (physical activity & well-being)</li></ul><h3><i class="fas fa-certificate"></i> PIX Certification</h3><p>Obtained the <strong>PIX certification</strong>, a national French digital-skills certification covering office software, internet use, and basic programming.</p><h3><i class="fas fa-arrow-right"></i> After High School</h3><p>A deliberate decision to pursue a <strong>BTS in Industrial Product Design</strong>, known for its hands-on approach and engineering career opportunities.</p>`
+};
+
+function applyStaticDetailLanguage(language) {
+  Object.entries(academicEnglishContent).forEach(([id, html]) => {
+    const modal = document.querySelector(`#${id} .detail-modal-body`);
+    if (!modal) return;
+    modal.dataset.originalHtml ||= modal.innerHTML;
+    modal.innerHTML = language === 'en' ? html : modal.dataset.originalHtml;
+  });
+  Object.entries(detailedEnglishContent).forEach(([id, html]) => {
+    const modal = document.querySelector(`#project-modal .modal-body`);
+    if (modal && modal.dataset.tefId === id) modal.innerHTML = html;
+  });
+}
 
 function applyTefLanguage(language) {
   const content = tefLanguageContent[language];
@@ -1351,7 +1380,9 @@ function openProjectModal(id) {
   if (!p) return;
   modalTitle.textContent = p.title;
   modalTools.textContent = `Outils : ${p.tools}`;
-  modalBody.innerHTML = p.body;
+  modalBody.innerHTML = currentLanguage === 'en' && detailedEnglishContent[id]
+    ? detailedEnglishContent[id]
+    : p.body;
   translateElement(projectModal, currentLanguage);
   renderProjectAlbum(id);
   translateElement(projectModal, currentLanguage);
