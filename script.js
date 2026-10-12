@@ -931,12 +931,15 @@ function handleSubmit(e) {
   const btn = form.querySelector('button[type="submit"]');
   const success = document.getElementById('form-success');
   const formData = new FormData(form);
+  formData.set('_subject', currentLanguage === 'en' ? 'New portfolio contact' : 'Nouveau message depuis le portfolio');
+  formData.set('_captcha', 'false');
 
   btn.disabled = true;
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours…';
+  btn.innerHTML = currentLanguage === 'en'
+    ? '<i class="fas fa-spinner fa-spin"></i> Sending…'
+    : '<i class="fas fa-spinner fa-spin"></i> Envoi en cours…';
 
-  // Submit to Formspree
-  fetch('https://formspree.io/f/xyzgwvlr', {
+  fetch('https://formsubmit.co/ajax/soussouwassim06@gmail.com', {
     method: 'POST',
     body: formData,
     headers: {
@@ -950,7 +953,9 @@ function handleSubmit(e) {
       form.reset();
       setTimeout(() => {
         btn.style.display = '';
-        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer le message';
+        btn.innerHTML = currentLanguage === 'en'
+          ? '<i class="fas fa-paper-plane"></i> Send message'
+          : '<i class="fas fa-paper-plane"></i> Envoyer le message';
         btn.disabled = false;
         success.classList.add('hidden');
       }, 4000);
@@ -960,10 +965,14 @@ function handleSubmit(e) {
   })
   .catch(error => {
     btn.disabled = false;
-    btn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Erreur d\'envoi';
+    btn.innerHTML = currentLanguage === 'en'
+      ? '<i class="fas fa-exclamation-circle"></i> Sending failed'
+      : '<i class="fas fa-exclamation-circle"></i> Erreur d\'envoi';
     console.error('Erreur:', error);
     setTimeout(() => {
-      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer le message';
+      btn.innerHTML = currentLanguage === 'en'
+        ? '<i class="fas fa-paper-plane"></i> Send message'
+        : '<i class="fas fa-paper-plane"></i> Envoyer le message';
     }, 3000);
   });
 }

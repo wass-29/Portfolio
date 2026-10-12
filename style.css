@@ -865,7 +865,7 @@ body[data-theme="light"] .project-card.featured {
   min-height: 250px;
   margin-top: 0;
 }
-.project-card--prototype .model-viewer { height: 210px; }
+.project-card--prototype .model-viewer { height: 180px; }
 .project-card--prototype > .project-card-content:first-child { flex: 0 0 auto; }
 .project-card--prototype .project-card-details { flex: 1 1 auto; justify-content: flex-start; }
 .project-card--prototype .project-card-details p { margin-top: 4px; }
