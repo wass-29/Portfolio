@@ -1465,6 +1465,12 @@ function openExpModal(expId) {
   if (modal) {
     renderDetailGallery(modal);
     translateElement(modal, currentLanguage);
+    if (expId === 'serveur') {
+      const companyTag = modal.querySelector('.detail-modal-tag');
+      if (companyTag) companyTag.textContent = currentLanguage === 'en'
+        ? 'Saveur & Passions Market — 2021 to Today'
+        : "Saveur et Passions — 2021 à Aujourd'hui";
+    }
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
