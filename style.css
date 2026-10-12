@@ -709,6 +709,10 @@ body[data-theme="light"] .model-viewer {
 }
 .model-viewer canvas { outline: none; }
 .viewer-hint {
+  min-height: 2.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.76rem;
   color: var(--text-muted);
   margin-top: 8px;
