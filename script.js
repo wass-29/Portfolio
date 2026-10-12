@@ -113,6 +113,38 @@ const languagePairs = {
 };
 
 Object.assign(languagePairs, {
+  'Serveur': 'Market Server',
+  'Saveur et Passions': 'Saveur et Passions',
+  'Saveur et Passions — 2021 à Aujourd’hui': 'Saveur et Passions — 2021 to Today',
+  "Saveur et Passions — 2021 à Aujourd'hui": 'Saveur et Passions — 2021 to Today',
+  'Travail du week-end en parallèle des études. Développement d’une vraie aisance relationnelle, d’un sens de l’organisation et d’une capacité à garder son calme sous pression.': 'Weekend work alongside my studies, developing strong interpersonal skills, organization, and the ability to stay calm under pressure.',
+  "Travail du week-end en parallèle des études. Développement d'une vraie aisance relationnelle, d'un sens de l'organisation et d'une capacité à garder son calme sous pression.": 'Weekend work alongside my studies, developing strong interpersonal skills, organization, and the ability to stay calm under pressure.',
+  'Cahier des Charges': 'Specifications',
+  'Cahier des Charges & Spécifications': 'Specifications & Requirements',
+  'Conception Détaillée du Bras Avant': 'Detailed Front-Arm Design',
+  'Cadre fonctionnel': 'Functional framework',
+  'batterie Li-Ion 36V 43Ah': '36V 43Ah Li-Ion battery',
+  'Vitesse max bridée': 'Limited top speed',
+  'Structure aluminium': 'Aluminum structure',
+  'Direction': 'Steering',
+  'suspension': 'suspension',
+  'État final': 'Final status',
+  'Points Clés & Apprentissages': 'Key Takeaways & Learning',
+  'Maîtrise de SolidWorks pour assemblage complexe': 'SolidWorks proficiency for complex assemblies',
+  'Gestion de projet en équipe : PDCA, répartition des tâches': 'Team project management: PDCA and task allocation',
+  'De la théorie CAO aux tests mécaniques réels': 'From CAD theory to real mechanical testing',
+  'Communication d’un projet technique auprès de non-experts': 'Presenting a technical project to non-specialists',
+  "Communication d'un projet technique auprès de non-experts": 'Presenting a technical project to non-specialists',
+  'Plans incomplets': 'Incomplete drawings',
+  'absence de vues, détails dispersés dans archives': 'missing views and details scattered across archives',
+  'Ciné­matique': 'Kinematics',
+  'ressorts de suspension, mouvements relatifs': 'suspension springs and relative motion',
+  'Plan de chasse': 'Wheelset geometry',
+  'géométrie essieu-rails, tolérances critiques': 'wheel-to-rail geometry and critical tolerances',
+  'Bogie TGV M — Assemblage 3D': 'TGV M Bogie — 3D Assembly'
+});
+
+Object.assign(languagePairs, {
   'Mécano-soudure': 'Welded fabrication',
   'Calculs de structure': 'Structural calculations',
   'Instruments de métrologie': 'Metrology instruments',
@@ -736,7 +768,11 @@ function applyStaticDetailLanguage(language) {
     const modal = document.querySelector(`#${id} .detail-modal-body`);
     if (!modal) return;
     modal.dataset.originalHtml ||= modal.innerHTML;
-    modal.innerHTML = language === 'en' ? html : modal.dataset.originalHtml;
+    if (!modal.dataset.galleryHtml) {
+      const gallery = modal.querySelector('.modal-album');
+      modal.dataset.galleryHtml = gallery ? gallery.outerHTML : '';
+    }
+    modal.innerHTML = language === 'en' ? `${html}${modal.dataset.galleryHtml}` : modal.dataset.originalHtml;
   });
   Object.entries(detailedEnglishContent).forEach(([id, html]) => {
     const modal = document.querySelector(`#project-modal .modal-body`);
@@ -1754,4 +1790,5 @@ function init3DViewer(containerId, modelKey) {
 }
 
 window.closeExpModal = closeExpModal;
+window.openEduModal = openEduModal;
 window.closeEduModal = closeEduModal;
